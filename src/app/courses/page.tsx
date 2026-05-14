@@ -24,11 +24,14 @@ import {
   LayoutGrid,
   List,
   CheckCircle,
-  FileBadge
+  FileBadge,
+  X,
+  ChevronDown
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { cn } from "@/lib/utils";
 
 const CATEGORIES = ["الكل", "برمجة", "تحليل بيانات", "محاسبة", "تصميم", "ذكاء اصطناعي", "أمن سيبراني", "إدارة أعمال"];
 const STATUS_FILTERS = ["الكل", "الأكثر مبيعاً", "جديد", "الأعلى تقييماً"];
@@ -134,6 +137,7 @@ export default function CoursesPage() {
   const [priceFilter, setPriceFilter] = useState("الكل");
   const [certFilter, setCertFilter] = useState("الكل");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
   const filteredCourses = useMemo(() => {
     return ALL_COURSES.filter(course => {
@@ -152,12 +156,27 @@ export default function CoursesPage() {
     });
   }, [activeCategory, statusFilter, priceFilter, certFilter, searchQuery]);
 
+  const activeFiltersCount = [
+    activeCategory !== "الكل",
+    statusFilter !== "الكل",
+    priceFilter !== "الكل",
+    certFilter !== "الكل"
+  ].filter(Boolean).length;
+
+  const resetFilters = () => {
+    setActiveCategory("الكل");
+    setStatusFilter("الكل");
+    setPriceFilter("الكل");
+    setCertFilter("الكل");
+    setSearchQuery("");
+  };
+
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-32 pb-12 bg-primary/5">
+      <section className="pt-32 pb-8 bg-primary/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary mb-4">
@@ -170,79 +189,111 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* Advanced Filters & Search */}
-      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b py-6 shadow-sm">
-        <div className="container mx-auto px-4 space-y-6">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-            {/* Search Box - Expanded */}
-            <div className="relative w-full lg:flex-1">
-              <Input 
-                placeholder="ابحث باسم الكورس، المدرب، أو المجال التعليمي..." 
-                className="h-12 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+      {/* Modern Search & Collapsible Filters */}
+      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm transition-all">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <Input 
+                  placeholder="ابحث باسم الكورس، المدرب، أو المجال..." 
+                  className="h-12 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+              </div>
+              
+              <Button 
+                variant={isFiltersOpen ? "secondary" : "outline"}
+                className={cn(
+                  "h-12 rounded-2xl gap-2 font-headline px-6 shrink-0 border-primary/10",
+                  activeFiltersCount > 0 && !isFiltersOpen && "border-secondary/50 text-secondary"
+                )}
+                onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+              >
+                <Filter className="w-5 h-5" />
+                <span className="hidden sm:inline">تصفية</span>
+                {activeFiltersCount > 0 && (
+                  <Badge variant="secondary" className="mr-1 h-5 min-w-5 flex items-center justify-center rounded-full p-0 bg-secondary text-white border-none text-[10px]">
+                    {activeFiltersCount}
+                  </Badge>
+                )}
+              </Button>
             </div>
 
-            {/* View Toggle */}
-            <div className="flex gap-2 shrink-0">
-              <Button variant="ghost" size="icon" className="rounded-xl text-secondary bg-secondary/10"><LayoutGrid className="w-5 h-5" /></Button>
-              <Button variant="ghost" size="icon" className="rounded-xl text-primary/40"><List className="w-5 h-5" /></Button>
-            </div>
-          </div>
+            {/* Collapsible Filter Grid */}
+            <div className={cn(
+              "overflow-hidden transition-all duration-300 ease-in-out",
+              isFiltersOpen ? "max-h-[500px] opacity-100 py-4" : "max-h-0 opacity-0 py-0"
+            )}>
+              <div className="bg-primary/5 rounded-3xl p-6 border border-primary/10 space-y-6">
+                <div className="flex items-center justify-between">
+                   <h3 className="font-headline font-bold text-primary flex items-center gap-2">
+                     <Filter className="w-4 h-4 text-secondary" />
+                     خيارات التصفية المتقدمة
+                   </h3>
+                   {activeFiltersCount > 0 && (
+                     <Button variant="ghost" size="sm" onClick={resetFilters} className="text-primary/40 text-xs hover:text-destructive">
+                       إعادة تعيين الكل
+                     </Button>
+                   )}
+                </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Category Select */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">المجال التعليمي</label>
-              <Select value={activeCategory} onValueChange={setActiveCategory}>
-                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
-                  <SelectValue placeholder="اختر المجال" />
-                </SelectTrigger>
-                <SelectContent>
-                  {CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {/* Category Select */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">المجال التعليمي</label>
+                    <Select value={activeCategory} onValueChange={setActiveCategory}>
+                      <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white shadow-sm">
+                        <SelectValue placeholder="اختر المجال" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-            {/* Status Select */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">تصنيف الكورسات</label>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
-                  <SelectValue placeholder="اختر التصنيف" />
-                </SelectTrigger>
-                <SelectContent>
-                  {STATUS_FILTERS.map(status => <SelectItem key={status} value={status}>{status}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            </div>
+                  {/* Status Select */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">تصنيف الكورسات</label>
+                    <Select value={statusFilter} onValueChange={setStatusFilter}>
+                      <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white shadow-sm">
+                        <SelectValue placeholder="اختر التصنيف" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {STATUS_FILTERS.map(status => <SelectItem key={status} value={status}>{status}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-            {/* Price Select */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">نوع السعر</label>
-              <Select value={priceFilter} onValueChange={setPriceFilter}>
-                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
-                  <SelectValue placeholder="الكل" />
-                </SelectTrigger>
-                <SelectContent>
-                  {PRICE_FILTERS.map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            </div>
+                  {/* Price Select */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">نوع السعر</label>
+                    <Select value={priceFilter} onValueChange={setPriceFilter}>
+                      <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white shadow-sm">
+                        <SelectValue placeholder="الكل" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {PRICE_FILTERS.map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-            {/* Certificate Select */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">الشهادة</label>
-              <Select value={certFilter} onValueChange={setCertFilter}>
-                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
-                  <SelectValue placeholder="الكل" />
-                </SelectTrigger>
-                <SelectContent>
-                  {CERTIFICATE_FILTERS.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                </SelectContent>
-              </Select>
+                  {/* Certificate Select */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">الشهادة</label>
+                    <Select value={certFilter} onValueChange={setCertFilter}>
+                      <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white shadow-sm">
+                        <SelectValue placeholder="الكل" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {CERTIFICATE_FILTERS.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -255,6 +306,10 @@ export default function CoursesPage() {
             <div className="flex items-center gap-2 text-primary/60">
               <BookOpen className="w-5 h-5 text-secondary" />
               <span className="font-bold">{filteredCourses.length} كورس متاح وفق خياراتك</span>
+            </div>
+            <div className="flex gap-2 shrink-0">
+              <Button variant="ghost" size="icon" className="rounded-xl text-secondary bg-secondary/10"><LayoutGrid className="w-5 h-5" /></Button>
+              <Button variant="ghost" size="icon" className="rounded-xl text-primary/40"><List className="w-5 h-5" /></Button>
             </div>
           </div>
 
@@ -271,13 +326,7 @@ export default function CoursesPage() {
               </div>
               <h3 className="text-xl font-headline font-bold text-primary">لم نجد أي نتائج</h3>
               <p className="text-primary/40">حاول البحث بكلمات مختلفة أو تغيير خيارات التصفية.</p>
-              <Button variant="outline" onClick={() => {
-                setActiveCategory("الكل");
-                setStatusFilter("الكل");
-                setPriceFilter("الكل");
-                setCertFilter("الكل");
-                setSearchQuery("");
-              }}>إعادة تعيين الكل</Button>
+              <Button variant="outline" onClick={resetFilters}>إعادة تعيين الكل</Button>
             </div>
           )}
         </div>
@@ -296,7 +345,7 @@ function CourseListingCard({ course }: { course: any }) {
   const courseImage = PlaceHolderImages.find(img => img.id === course.image);
 
   return (
-    <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full">
+    <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full text-right">
       <div className="relative aspect-video overflow-hidden shrink-0">
         {courseImage?.imageUrl && (
           <Image 
@@ -306,7 +355,7 @@ function CourseListingCard({ course }: { course: any }) {
             className="object-cover group-hover:scale-110 transition-transform duration-700"
           />
         )}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
           <Badge className="bg-secondary text-white border-none shadow-lg">{course.status}</Badge>
           {course.hasCertificate && (
             <Badge className="bg-primary/80 text-white border-none gap-1 py-1">
