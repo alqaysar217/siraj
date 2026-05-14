@@ -4,7 +4,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { 
   Map, 
   ChevronLeft, 
@@ -113,7 +112,7 @@ export default function LearningPathsPage() {
       {/* Paths Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-10">
             {PATHS.map((path) => (
               <PathCard key={path.id} path={path} />
             ))}
@@ -155,9 +154,9 @@ function PathCard({ path }: { path: any }) {
   const pathImage = PlaceHolderImages.find(img => img.id === path.image);
 
   return (
-    <div className="group bg-white rounded-[32px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col md:flex-row">
+    <div className="group bg-white rounded-[24px] md:rounded-[32px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col md:flex-row">
       {/* Visual Part */}
-      <div className="relative md:w-2/5 aspect-video md:aspect-auto overflow-hidden">
+      <div className="relative md:w-2/5 aspect-[16/9] md:aspect-auto overflow-hidden">
         {pathImage?.imageUrl && (
           <Image 
             src={pathImage.imageUrl} 
@@ -167,60 +166,60 @@ function PathCard({ path }: { path: any }) {
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent" />
-        <div className="absolute bottom-6 right-6">
-          <div className="w-12 h-12 bg-secondary rounded-2xl flex items-center justify-center text-white shadow-xl mb-3">
+        <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-xl mb-2 md:mb-3">
             {path.icon}
           </div>
-          <Badge className="bg-white/20 backdrop-blur-md text-white border-white/20">
+          <Badge className="bg-white/20 backdrop-blur-md text-white border-white/20 text-[10px] md:text-xs">
             {path.level}
           </Badge>
         </div>
       </div>
 
       {/* Content Part */}
-      <div className="p-8 md:w-3/5 flex flex-col">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex gap-4">
-            <div className="flex items-center gap-1.5 text-xs text-primary/40">
-              <BookOpen className="w-4 h-4 text-secondary" />
+      <div className="p-5 md:p-8 md:w-3/5 flex flex-col">
+        <div className="flex items-center justify-between mb-3 md:mb-4">
+          <div className="flex gap-3 md:gap-4">
+            <div className="flex items-center gap-1.5 text-[10px] md:text-xs text-primary/40">
+              <BookOpen className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
               <span>{path.coursesCount} كورسات</span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-primary/40">
-              <Clock className="w-4 h-4 text-secondary" />
+            <div className="flex items-center gap-1.5 text-[10px] md:text-xs text-primary/40">
+              <Clock className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
               <span>{path.duration}</span>
             </div>
           </div>
         </div>
 
-        <h3 className="text-2xl font-headline font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+        <h3 className="text-xl md:text-2xl font-headline font-bold text-primary mb-2 md:mb-3 group-hover:text-secondary transition-colors">
           {path.title}
         </h3>
-        <p className="text-sm text-primary/60 leading-relaxed mb-6 line-clamp-2">
+        <p className="text-xs md:text-sm text-primary/60 leading-relaxed mb-4 md:mb-6 line-clamp-2">
           {path.description}
         </p>
 
-        <div className="space-y-4 mb-8">
-          <p className="text-[10px] font-bold text-primary/30 uppercase tracking-widest">خطة المسار</p>
-          <div className="flex flex-wrap gap-2">
+        <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+          <p className="text-[9px] md:text-[10px] font-bold text-primary/30 uppercase tracking-widest">خطة المسار</p>
+          <div className="flex flex-wrap gap-1.5 md:gap-2">
             {path.steps.map((step: string, i: number) => (
-              <div key={i} className="flex items-center gap-2 bg-primary/5 px-3 py-1.5 rounded-full border border-primary/5">
-                <span className="text-[10px] w-4 h-4 bg-secondary text-white rounded-full flex items-center justify-center font-bold">
+              <div key={i} className="flex items-center gap-1.5 md:gap-2 bg-primary/5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border border-primary/5">
+                <span className="text-[9px] md:text-[10px] w-3.5 h-3.5 md:w-4 md:h-4 bg-secondary text-white rounded-full flex items-center justify-center font-bold">
                   {i + 1}
                 </span>
-                <span className="text-xs text-primary/70 font-medium">{step}</span>
+                <span className="text-[10px] md:text-xs text-primary/70 font-medium">{step}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-auto flex items-center justify-between pt-6 border-t border-primary/5">
-          <Button className="rounded-2xl bg-primary hover:bg-secondary text-white px-6 font-headline gap-2 group/btn shadow-lg">
+        <div className="mt-auto flex items-center justify-between pt-4 md:pt-6 border-t border-primary/5">
+          <Button size="sm" className="md:size-default rounded-xl md:rounded-2xl bg-primary hover:bg-secondary text-white px-4 md:px-6 font-headline gap-2 group/btn shadow-lg text-xs md:text-sm">
             ابدأ المسار
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
+            <ArrowLeft className="w-3.5 h-3.5 md:w-4 md:h-4 transition-transform group-hover/btn:-translate-x-1" />
           </Button>
           <div className="flex items-center gap-1 text-secondary">
-             <Award className="w-5 h-5" />
-             <span className="text-xs font-bold">شهادة معتمدة</span>
+             <Award className="w-4 h-4 md:w-5 md:h-5" />
+             <span className="text-[10px] md:text-xs font-bold">شهادة معتمدة</span>
           </div>
         </div>
       </div>
