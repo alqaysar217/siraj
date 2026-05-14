@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Map, Library, GraduationCap, Search, User, Menu } from "lucide-react";
+import { BookOpen, Map, Library, GraduationCap, Search, User, Menu, Home } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -30,11 +30,12 @@ export function Navbar() {
               <span className="text-secondary font-headline font-bold text-xl">S</span>
             </div>
             <span className="text-2xl font-headline font-bold text-primary tracking-tight">
-              SIRAJ<span className="text-secondary">.IO</span>
+              سراج
             </span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
+            <NavLink href="/" icon={<Home className="w-4 h-4" />} label="الرئيسية" />
             <NavLink href="/courses" icon={<BookOpen className="w-4 h-4" />} label="الكورسات" />
             <NavLink href="/learning-paths" icon={<Map className="w-4 h-4" />} label="المسارات" />
             <NavLink href="/books" icon={<Library className="w-4 h-4" />} label="الكتب" />

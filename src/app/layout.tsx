@@ -1,10 +1,11 @@
 
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'SIRAJ.IO — منصة سراج التعليمية',
+  title: 'سراج — منصة سراج التعليمية',
   description: 'منصة سراج التعليمية - تعليم احترافي بلمسة عالمية',
 };
 
