@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -342,18 +342,28 @@ export default function CoursesPage() {
 }
 
 function CourseListingCard({ course }: { course: any }) {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const courseImage = PlaceHolderImages.find(img => img.id === course.image);
 
   return (
     <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full text-right">
       <div className="relative aspect-video overflow-hidden shrink-0">
-        {courseImage?.imageUrl && (
+        {courseImage?.imageUrl ? (
           <Image 
             src={courseImage.imageUrl} 
             alt={course.title} 
             fill 
             className="object-cover group-hover:scale-110 transition-transform duration-700"
           />
+        ) : (
+          <div className="w-full h-full bg-primary/5 flex items-center justify-center">
+             <BookOpen className="w-12 h-12 text-primary/10" />
+          </div>
         )}
         <div className="absolute top-3 right-3 flex flex-col gap-2">
           <Badge className="bg-secondary text-white border-none shadow-lg">{course.status}</Badge>
@@ -399,8 +409,12 @@ function CourseListingCard({ course }: { course: any }) {
               <p className="text-xl font-headline font-bold text-green-600">مجاني</p>
             ) : (
               <>
-                <p className="text-xs text-primary/40 line-through">{(course.price * 1.2).toLocaleString()} ريال</p>
-                <p className="text-xl font-headline font-bold text-primary">{course.price.toLocaleString()} ريال</p>
+                <p className="text-xs text-primary/40 line-through">
+                  {isMounted ? (course.price * 1.2).toLocaleString() : (course.price * 1.2)} ريال
+                </p>
+                <p className="text-xl font-headline font-bold text-primary">
+                  {isMounted ? course.price.toLocaleString() : course.price} ريال
+                </p>
               </>
             )}
           </div>
