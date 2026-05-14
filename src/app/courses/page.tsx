@@ -138,6 +138,7 @@ export default function CoursesPage() {
   const [certFilter, setCertFilter] = useState("الكل");
   const [searchQuery, setSearchQuery] = useState("");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const filteredCourses = useMemo(() => {
     return ALL_COURSES.filter(course => {
@@ -308,15 +309,34 @@ export default function CoursesPage() {
               <span className="font-bold">{filteredCourses.length} كورس متاح وفق خياراتك</span>
             </div>
             <div className="flex gap-2 shrink-0">
-              <Button variant="ghost" size="icon" className="rounded-xl text-secondary bg-secondary/10"><LayoutGrid className="w-5 h-5" /></Button>
-              <Button variant="ghost" size="icon" className="rounded-xl text-primary/40"><List className="w-5 h-5" /></Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className={cn("rounded-xl transition-all", viewMode === "grid" ? "text-secondary bg-secondary/10 shadow-sm" : "text-primary/40")}
+                onClick={() => setViewMode("grid")}
+              >
+                <LayoutGrid className="w-5 h-5" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className={cn("rounded-xl transition-all", viewMode === "list" ? "text-secondary bg-secondary/10 shadow-sm" : "text-primary/40")}
+                onClick={() => setViewMode("list")}
+              >
+                <List className="w-5 h-5" />
+              </Button>
             </div>
           </div>
 
           {filteredCourses.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className={cn(
+              "grid gap-8",
+              viewMode === "grid" 
+                ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
+                : "grid-cols-1"
+            )}>
               {filteredCourses.map((course) => (
-                <CourseListingCard key={course.id} course={course} />
+                <CourseListingCard key={course.id} course={course} viewMode={viewMode} />
               ))}
             </div>
           ) : (
@@ -341,7 +361,7 @@ export default function CoursesPage() {
   );
 }
 
-function CourseListingCard({ course }: { course: any }) {
+function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid" | "list" }) {
   const [isMounted, setIsMounted] = useState(false);
   
   useEffect(() => {
@@ -351,8 +371,15 @@ function CourseListingCard({ course }: { course: any }) {
   const courseImage = PlaceHolderImages.find(img => img.id === course.image);
 
   return (
-    <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full text-right">
-      <div className="relative aspect-video overflow-hidden shrink-0">
+    <div className={cn(
+      "group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex text-right",
+      viewMode === "grid" ? "flex-col h-full" : "flex-col md:flex-row h-auto w-full"
+    )}>
+      {/* Thumbnail */}
+      <div className={cn(
+        "relative overflow-hidden shrink-0",
+        viewMode === "grid" ? "aspect-video w-full" : "aspect-video md:aspect-auto md:w-80"
+      )}>
         {courseImage?.imageUrl ? (
           <Image 
             src={courseImage.imageUrl} 
@@ -376,6 +403,7 @@ function CourseListingCard({ course }: { course: any }) {
         </div>
       </div>
       
+      {/* Content */}
       <div className="p-6 space-y-4 flex flex-col flex-1">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2 py-1 rounded-md">
@@ -388,11 +416,14 @@ function CourseListingCard({ course }: { course: any }) {
           </div>
         </div>
 
-        <h3 className="text-lg font-headline font-bold text-primary leading-snug line-clamp-2 h-14 group-hover:text-secondary transition-colors">
+        <h3 className={cn(
+          "font-headline font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2",
+          viewMode === "grid" ? "text-lg h-14" : "text-xl md:text-2xl h-auto"
+        )}>
           {course.title}
         </h3>
 
-        <div className="flex items-center gap-4 text-xs text-primary/60 border-b border-primary/5 pb-4">
+        <div className="flex flex-wrap items-center gap-4 text-xs text-primary/60 border-b border-primary/5 pb-4">
           <div className="flex items-center gap-1.5">
             <User className="w-3.5 h-3.5" />
             <span>{course.instructor}</span>
@@ -401,9 +432,18 @@ function CourseListingCard({ course }: { course: any }) {
             <Clock className="w-3.5 h-3.5" />
             <span>{course.duration}</span>
           </div>
+          {viewMode === "list" && (
+            <div className="flex items-center gap-1.5">
+               <CheckCircle className="w-3.5 h-3.5 text-secondary" />
+               <span>مستوى {course.level}</span>
+            </div>
+          )}
         </div>
 
-        <div className="mt-auto pt-4 flex items-center justify-between">
+        <div className={cn(
+          "mt-auto flex items-center justify-between",
+          viewMode === "grid" ? "pt-4" : "pt-2"
+        )}>
           <div className="space-y-0.5">
             {course.isFree ? (
               <p className="text-xl font-headline font-bold text-green-600">مجاني</p>
@@ -418,11 +458,14 @@ function CourseListingCard({ course }: { course: any }) {
               </>
             )}
           </div>
-          <Link href={`/courses/${course.id}`}>
-            <Button size="icon" className="rounded-xl bg-primary hover:bg-secondary group/btn">
-              <ArrowLeft className="w-5 h-5 transition-transform group-hover/btn:-translate-x-1" />
-            </Button>
-          </Link>
+          <div className="flex gap-2">
+            <Link href={`/courses/${course.id}`}>
+              <Button size={viewMode === "list" ? "lg" : "icon"} className={cn("rounded-xl bg-primary hover:bg-secondary group/btn", viewMode === "list" && "px-6 gap-2 font-headline")}>
+                {viewMode === "list" && "عرض التفاصيل"}
+                <ArrowLeft className={cn("w-5 h-5 transition-transform group-hover/btn:-translate-x-1", viewMode === "list" && "w-4 h-4")} />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
