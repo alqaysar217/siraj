@@ -1,11 +1,18 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { 
   Search, 
   Filter, 
@@ -15,91 +22,135 @@ import {
   ArrowLeft,
   BookOpen,
   LayoutGrid,
-  List
+  List,
+  CheckCircle,
+  FileBadge
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
-const CATEGORIES = ["الكل", "تطوير الويب", "الذكاء الاصطناعي", "التصميم", "الأمن السيبراني", "إدارة الأعمال"];
+const CATEGORIES = ["الكل", "برمجة", "تحليل بيانات", "محاسبة", "تصميم", "ذكاء اصطناعي", "أمن سيبراني", "إدارة أعمال"];
+const STATUS_FILTERS = ["الكل", "الأكثر مبيعاً", "جديد", "الأعلى تقييماً"];
+const PRICE_FILTERS = ["الكل", "مجاني", "مدفوع"];
+const CERTIFICATE_FILTERS = ["الكل", "شهادة اتمام", "بدون شهادة"];
 
 const ALL_COURSES = [
   {
     id: "web-1",
     title: "تطوير الويب الشامل - Full Stack",
-    category: "تطوير الويب",
+    category: "برمجة",
     level: "مبتدئ",
     instructor: "م. أحمد علي",
     rating: 4.9,
     students: 1240,
     duration: "45 ساعة",
-    price: "45,000 ريال",
-    image: "web-dev-course",
-    badge: "الأكثر مبيعاً"
+    price: 45000,
+    isFree: false,
+    hasCertificate: true,
+    status: "الأكثر مبيعاً",
+    image: "web-dev-course"
   },
   {
     id: "ai-1",
     title: "أساسيات الذكاء الاصطناعي والتعلم الآلي",
-    category: "الذكاء الاصطناعي",
+    category: "ذكاء اصطناعي",
     level: "متوسط",
     instructor: "د. سارة محمود",
     rating: 4.8,
     students: 850,
     duration: "32 ساعة",
-    price: "60,000 ريال",
-    image: "ai-course",
-    badge: "جديد"
+    price: 60000,
+    isFree: false,
+    hasCertificate: true,
+    status: "جديد",
+    image: "ai-course"
+  },
+  {
+    id: "data-1",
+    title: "تحليل البيانات باستخدام Python",
+    category: "تحليل بيانات",
+    level: "مبتدئ",
+    instructor: "خالد السعيد",
+    rating: 4.9,
+    students: 1500,
+    duration: "30 ساعة",
+    price: 0,
+    isFree: true,
+    hasCertificate: true,
+    status: "الأكثر مبيعاً",
+    image: "hero-bg"
   },
   {
     id: "design-1",
     title: "احتراف تصميم واجهات المستخدم UI/UX",
-    category: "التصميم",
+    category: "تصميم",
     level: "مبتدئ",
     instructor: "ليلى حسن",
     rating: 4.7,
     students: 2100,
     duration: "28 ساعة",
-    price: "35,000 ريال",
-    image: "design-course",
-    badge: "الأعلى تقييماً"
+    price: 35000,
+    isFree: false,
+    hasCertificate: true,
+    status: "الأعلى تقييماً",
+    image: "design-course"
+  },
+  {
+    id: "acc-1",
+    title: "المحاسبة المالية لغير المحاسبين",
+    category: "محاسبة",
+    level: "مبتدئ",
+    instructor: "أحمد المنصور",
+    rating: 4.6,
+    students: 420,
+    duration: "15 ساعة",
+    price: 25000,
+    isFree: false,
+    hasCertificate: false,
+    status: "جديد",
+    image: "book-1"
   },
   {
     id: "cyber-1",
     title: "الأمن السيبراني والتحقيق الرقمي",
-    category: "الأمن السيبراني",
+    category: "أمن سيبراني",
     level: "متقدم",
-    instructor: "خالد المنصور",
+    instructor: "عمر الفاروق",
     rating: 4.9,
     students: 540,
     duration: "40 ساعة",
-    price: "55,000 ريال",
-    image: "cyber-course",
-    badge: "احترافي"
-  },
-  {
-    id: "business-1",
-    title: "إدارة المشاريع الرشيقة Agile",
-    category: "إدارة الأعمال",
-    level: "متوسط",
-    instructor: "أمل السعيد",
-    rating: 4.6,
-    students: 920,
-    duration: "20 ساعة",
-    price: "30,000 ريال",
-    image: "hero-bg",
-    badge: "مطلوب"
+    price: 55000,
+    isFree: false,
+    hasCertificate: true,
+    status: "الأكثر مبيعاً",
+    image: "cyber-course"
   }
 ];
 
 export default function CoursesPage() {
   const [activeCategory, setActiveCategory] = useState("الكل");
+  const [statusFilter, setStatusFilter] = useState("الكل");
+  const [priceFilter, setPriceFilter] = useState("الكل");
+  const [certFilter, setCertFilter] = useState("الكل");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredCourses = ALL_COURSES.filter(course => {
-    const matchesCategory = activeCategory === "الكل" || course.category === activeCategory;
-    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredCourses = useMemo(() => {
+    return ALL_COURSES.filter(course => {
+      const matchesCategory = activeCategory === "الكل" || course.category === activeCategory;
+      const matchesStatus = statusFilter === "الكل" || course.status === statusFilter;
+      const matchesPrice = priceFilter === "الكل" || (priceFilter === "مجاني" ? course.isFree : !course.isFree);
+      const matchesCert = certFilter === "الكل" || (certFilter === "شهادة اتمام" ? course.hasCertificate : !course.hasCertificate);
+      
+      const searchLower = searchQuery.toLowerCase();
+      const matchesSearch = 
+        course.title.toLowerCase().includes(searchLower) ||
+        course.instructor.toLowerCase().includes(searchLower) ||
+        course.category.toLowerCase().includes(searchLower);
+
+      return matchesCategory && matchesStatus && matchesPrice && matchesCert && matchesSearch;
+    });
+  }, [activeCategory, statusFilter, priceFilter, certFilter, searchQuery]);
 
   return (
     <main className="min-h-screen bg-background">
@@ -119,36 +170,79 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* Filters & Search */}
-      <section className="sticky top-[72px] z-40 bg-background/80 backdrop-blur-md border-b py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-            {/* Categories */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 no-scrollbar w-full lg:w-auto">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-6 py-2 rounded-xl text-sm font-headline whitespace-nowrap transition-all ${
-                    activeCategory === cat 
-                    ? "bg-secondary text-white shadow-lg shadow-secondary/20" 
-                    : "bg-white border border-primary/5 text-primary/60 hover:bg-primary/5"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            {/* Search Box */}
-            <div className="relative w-full lg:w-96">
+      {/* Advanced Filters & Search */}
+      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b py-6 shadow-sm">
+        <div className="container mx-auto px-4 space-y-6">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            {/* Search Box - Expanded */}
+            <div className="relative w-full lg:flex-1">
               <Input 
-                placeholder="ابحث عن كورس محدد..." 
-                className="h-12 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary"
+                placeholder="ابحث باسم الكورس، المدرب، أو المجال التعليمي..." 
+                className="h-12 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+            </div>
+
+            {/* View Toggle */}
+            <div className="flex gap-2 shrink-0">
+              <Button variant="ghost" size="icon" className="rounded-xl text-secondary bg-secondary/10"><LayoutGrid className="w-5 h-5" /></Button>
+              <Button variant="ghost" size="icon" className="rounded-xl text-primary/40"><List className="w-5 h-5" /></Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Category Select */}
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">المجال التعليمي</label>
+              <Select value={activeCategory} onValueChange={setActiveCategory}>
+                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
+                  <SelectValue placeholder="اختر المجال" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Status Select */}
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">تصنيف الكورسات</label>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
+                  <SelectValue placeholder="اختر التصنيف" />
+                </SelectTrigger>
+                <SelectContent>
+                  {STATUS_FILTERS.map(status => <SelectItem key={status} value={status}>{status}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Price Select */}
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">نوع السعر</label>
+              <Select value={priceFilter} onValueChange={setPriceFilter}>
+                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
+                  <SelectValue placeholder="الكل" />
+                </SelectTrigger>
+                <SelectContent>
+                  {PRICE_FILTERS.map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Certificate Select */}
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold text-primary/40 mr-2 uppercase">الشهادة</label>
+              <Select value={certFilter} onValueChange={setCertFilter}>
+                <SelectTrigger className="h-11 rounded-xl border-primary/10 bg-white">
+                  <SelectValue placeholder="الكل" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CERTIFICATE_FILTERS.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
@@ -159,12 +253,8 @@ export default function CoursesPage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2 text-primary/60">
-              <BookOpen className="w-5 h-5" />
-              <span className="font-bold">{filteredCourses.length} كورس متاح</span>
-            </div>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="icon" className="rounded-xl text-secondary bg-secondary/10"><LayoutGrid className="w-5 h-5" /></Button>
-              <Button variant="ghost" size="icon" className="rounded-xl text-primary/40"><List className="w-5 h-5" /></Button>
+              <BookOpen className="w-5 h-5 text-secondary" />
+              <span className="font-bold">{filteredCourses.length} كورس متاح وفق خياراتك</span>
             </div>
           </div>
 
@@ -180,14 +270,19 @@ export default function CoursesPage() {
                 <Search className="w-10 h-10 text-primary/20" />
               </div>
               <h3 className="text-xl font-headline font-bold text-primary">لم نجد أي نتائج</h3>
-              <p className="text-primary/40">حاول البحث بكلمات مختلفة أو تغيير التصنيف.</p>
-              <Button variant="outline" onClick={() => {setActiveCategory("الكل"); setSearchQuery("");}}>عرض الكل</Button>
+              <p className="text-primary/40">حاول البحث بكلمات مختلفة أو تغيير خيارات التصفية.</p>
+              <Button variant="outline" onClick={() => {
+                setActiveCategory("الكل");
+                setStatusFilter("الكل");
+                setPriceFilter("الكل");
+                setCertFilter("الكل");
+                setSearchQuery("");
+              }}>إعادة تعيين الكل</Button>
             </div>
           )}
         </div>
       </section>
 
-      {/* Footer (Simplified) */}
       <footer className="bg-primary text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <p className="text-white/40 text-sm">© 2024 SIRAJ.IO - جميع الحقوق محفوظة لمنصة سراج.</p>
@@ -201,8 +296,8 @@ function CourseListingCard({ course }: { course: any }) {
   const courseImage = PlaceHolderImages.find(img => img.id === course.image);
 
   return (
-    <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500">
-      <div className="relative aspect-video overflow-hidden">
+    <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full">
+      <div className="relative aspect-video overflow-hidden shrink-0">
         {courseImage?.imageUrl && (
           <Image 
             src={courseImage.imageUrl} 
@@ -211,12 +306,18 @@ function CourseListingCard({ course }: { course: any }) {
             className="object-cover group-hover:scale-110 transition-transform duration-700"
           />
         )}
-        <div className="absolute top-3 left-3">
-          <Badge className="bg-secondary text-white border-none shadow-lg">{course.badge}</Badge>
+        <div className="absolute top-3 left-3 flex flex-col gap-2">
+          <Badge className="bg-secondary text-white border-none shadow-lg">{course.status}</Badge>
+          {course.hasCertificate && (
+            <Badge className="bg-primary/80 text-white border-none gap-1 py-1">
+              <FileBadge className="w-3 h-3" />
+              شهادة
+            </Badge>
+          )}
         </div>
       </div>
       
-      <div className="p-6 space-y-4">
+      <div className="p-6 space-y-4 flex flex-col flex-1">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2 py-1 rounded-md">
             {course.category}
@@ -243,10 +344,16 @@ function CourseListingCard({ course }: { course: any }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2">
+        <div className="mt-auto pt-4 flex items-center justify-between">
           <div className="space-y-0.5">
-            <p className="text-xs text-primary/40 line-through">65,000 ريال</p>
-            <p className="text-xl font-headline font-bold text-primary">{course.price}</p>
+            {course.isFree ? (
+              <p className="text-xl font-headline font-bold text-green-600">مجاني</p>
+            ) : (
+              <>
+                <p className="text-xs text-primary/40 line-through">{(course.price * 1.2).toLocaleString()} ريال</p>
+                <p className="text-xl font-headline font-bold text-primary">{course.price.toLocaleString()} ريال</p>
+              </>
+            )}
           </div>
           <Link href={`/courses/${course.id}`}>
             <Button size="icon" className="rounded-xl bg-primary hover:bg-secondary group/btn">
