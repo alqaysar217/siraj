@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -81,12 +80,14 @@ function BookCard({ book }: { book: any }) {
     <div className="group bg-white rounded-3xl overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-5px] transition-all duration-300">
       <div className="relative aspect-[3/4] overflow-hidden bg-primary/5 p-8">
         <div className="relative w-full h-full shadow-2xl transition-transform duration-500 group-hover:scale-105 group-hover:rotate-2">
-          <Image 
-            src={bookImage?.imageUrl || ""} 
-            alt={book.title} 
-            fill 
-            className="object-cover rounded-md"
-          />
+          {bookImage?.imageUrl && (
+            <Image 
+              src={bookImage.imageUrl} 
+              alt={book.title} 
+              fill 
+              className="object-cover rounded-md"
+            />
+          )}
         </div>
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
           <Button variant="secondary" size="icon" className="rounded-full shadow-lg"><Eye className="w-5 h-5" /></Button>

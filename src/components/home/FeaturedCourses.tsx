@@ -1,10 +1,7 @@
-
-"use client";
-
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Star, Clock, User, BookOpen } from "lucide-react";
+import { Star, Clock, User, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -81,12 +78,14 @@ function CourseCard({ course }: { course: any }) {
   return (
     <Card className="group overflow-hidden rounded-2xl border-primary/5 luxury-shadow hover:translate-y-[-5px] transition-all duration-300">
       <div className="relative h-48 w-full overflow-hidden">
-        <Image 
-          src={courseImage?.imageUrl || ""} 
-          alt={course.title} 
-          fill 
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
-        />
+        {courseImage?.imageUrl && (
+          <Image 
+            src={courseImage.imageUrl} 
+            alt={course.title} 
+            fill 
+            className="object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+        )}
         <div className="absolute top-4 left-4">
           <Badge className="bg-secondary text-white font-headline">{course.badge}</Badge>
         </div>
@@ -124,5 +123,3 @@ function CourseCard({ course }: { course: any }) {
     </Card>
   );
 }
-
-import { ArrowLeft } from "lucide-react";

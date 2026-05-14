@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Navbar } from "@/components/layout/Navbar";
@@ -6,9 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Star, Clock, User, Play, FileText, CheckCircle2, ChevronLeft, Calendar, Globe, Share2, Heart } from "lucide-react";
+import { Star, Clock, User, Play, FileText, CheckCircle2, Calendar, Globe, Share2, Heart, GraduationCap, Card, CardContent } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
@@ -106,7 +104,9 @@ export default function CourseDetailPage() {
                 <TabsContent value="instructor" className="mt-8">
                   <div className="bg-white p-8 rounded-3xl border border-primary/5 luxury-shadow flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-right">
                     <div className="relative w-32 h-32 shrink-0">
-                      <Image src={instructorImage?.imageUrl || ""} alt="Instructor" fill className="object-cover rounded-2xl" />
+                      {instructorImage?.imageUrl && (
+                        <Image src={instructorImage.imageUrl} alt="Instructor" fill className="object-cover rounded-2xl" />
+                      )}
                     </div>
                     <div className="space-y-4">
                       <div>
@@ -130,16 +130,18 @@ export default function CourseDetailPage() {
 
             {/* Sidebar Sticky Card */}
             <div className="lg:sticky lg:top-32 space-y-6">
-              <Card className="rounded-[32px] overflow-hidden luxury-shadow border-primary/5">
+              <div className="rounded-[32px] overflow-hidden luxury-shadow border border-primary/5 bg-white">
                 <div className="relative aspect-video">
-                  <Image src={courseImage?.imageUrl || ""} alt="Thumbnail" fill className="object-cover" />
+                  {courseImage?.imageUrl && (
+                    <Image src={courseImage.imageUrl} alt="Thumbnail" fill className="object-cover" />
+                  )}
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center group cursor-pointer">
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
                       <Play className="w-6 h-6 text-primary fill-current ml-1" />
                     </div>
                   </div>
                 </div>
-                <CardContent className="p-8 space-y-6">
+                <div className="p-8 space-y-6">
                   <div className="space-y-2">
                     <div className="text-4xl font-headline font-bold text-primary">45,000 ريال</div>
                     <div className="text-primary/40 line-through text-sm">60,000 ريال</div>
@@ -164,8 +166,8 @@ export default function CourseDetailPage() {
                     <Button variant="ghost" size="sm" className="text-primary/60"><Share2 className="w-4 h-4 ml-2" /> مشاركة</Button>
                     <Button variant="ghost" size="sm" className="text-primary/60"><Heart className="w-4 h-4 ml-2" /> مفضلة</Button>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -210,5 +212,3 @@ function ModuleItem({ title, lessons, duration }: { title: string; lessons: numb
     </AccordionItem>
   );
 }
-
-import { GraduationCap } from "lucide-react";

@@ -5,18 +5,21 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function Hero() {
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
+  const webDevImage = PlaceHolderImages.find(img => img.id === 'web-dev-course');
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
       {/* Abstract Background Decoration */}
       <div className="absolute top-0 right-0 -z-10 w-full h-full opacity-5">
-        <Image 
-          src={heroImage?.imageUrl || ""} 
-          alt="decoration" 
-          fill 
-          className="object-cover"
-          data-ai-hint={heroImage?.imageHint}
-        />
+        {heroImage?.imageUrl && (
+          <Image 
+            src={heroImage.imageUrl} 
+            alt="decoration" 
+            fill 
+            className="object-cover"
+            data-ai-hint={heroImage.imageHint}
+          />
+        )}
       </div>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-[800px] h-[600px] bg-secondary/5 blur-[120px] rounded-full" />
 
@@ -60,12 +63,14 @@ export function Hero() {
             <div className="relative w-full aspect-square max-w-[500px] mx-auto group">
               <div className="absolute inset-0 bg-secondary/20 rounded-3xl rotate-6 group-hover:rotate-12 transition-transform duration-700" />
               <div className="absolute inset-0 bg-primary rounded-3xl -rotate-3 group-hover:-rotate-6 transition-transform duration-700 shadow-2xl overflow-hidden">
-                <Image 
-                  src={PlaceHolderImages.find(img => img.id === 'web-dev-course')?.imageUrl || ""} 
-                  alt="Siraj Learning" 
-                  fill 
-                  className="object-cover opacity-80"
-                />
+                {webDevImage?.imageUrl && (
+                  <Image 
+                    src={webDevImage.imageUrl} 
+                    alt="Siraj Learning" 
+                    fill 
+                    className="object-cover opacity-80"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent" />
                 <div className="absolute bottom-6 right-6 left-6 p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
                   <div className="flex items-center gap-3">
