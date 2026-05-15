@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Map, Library, GraduationCap, Search, User, Menu, Home, X } from "lucide-react";
+import { BookOpen, Map, Library, GraduationCap, Search, User, Menu, Home, Users, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -33,6 +33,7 @@ export function Navbar() {
     { href: "/courses", icon: <BookOpen className="w-4 h-4" />, label: "الكورسات" },
     { href: "/learning-paths", icon: <Map className="w-4 h-4" />, label: "المسارات" },
     { href: "/books", icon: <Library className="w-4 h-4" />, label: "الكتب" },
+    { href: "/instructors", icon: <Users className="w-4 h-4" />, label: "انضم كمدرب" },
     { href: "/verify", icon: <GraduationCap className="w-4 h-4" />, label: "الشهادات" },
   ];
 
