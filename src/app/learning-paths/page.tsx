@@ -5,222 +5,283 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
-  Map, 
   ChevronLeft, 
-  Clock, 
-  BookOpen, 
-  Award, 
-  CheckCircle2, 
-  ArrowLeft,
-  Terminal,
-  Database,
-  ShieldCheck,
-  Palette
+  Map as MapIcon, 
+  Flag, 
+  Lightbulb, 
+  Code2, 
+  Database, 
+  Rocket, 
+  Terminal, 
+  Layout, 
+  Server, 
+  Cpu,
+  GraduationCap,
+  Sparkles,
+  ArrowRight,
+  Target
 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const PATHS = [
   {
-    id: "path-web",
-    title: "مطور الويب الشامل (Full Stack)",
-    description: "تعلم بناء تطبيقات الويب من الصفر حتى الاحتراف، بدءاً من الواجهات الأمامية وصولاً إلى قواعد البيانات.",
-    coursesCount: 8,
-    duration: "6 أشهر",
-    level: "من مبتدئ إلى محترف",
-    icon: <Terminal className="w-6 h-6" />,
-    color: "bg-blue-500",
-    image: "web-dev-course",
-    steps: ["أساسيات الويب", "احتراف React", "برمجة الـ Backend", "نشر المشاريع"]
+    id: "fullstack",
+    title: "مسار مطور الويب المتكامل",
+    icon: <Terminal className="w-8 h-8" />,
+    description: "رحلة تبدأ من فهم كيف يعمل الإنترنت حتى بناء منصات عالمية.",
+    steps: [
+      {
+        id: 1,
+        title: "نقطة الانطلاق (الأساسيات)",
+        description: "سواء كنت طالباً جامعياً أو هاوياً، هنا تبدأ بفهم أساسيات الحاسوب وكيفية عمل الويب والبروتوكولات.",
+        icon: <Lightbulb className="w-6 h-6" />,
+        level: "بداية الرحلة"
+      },
+      {
+        id: 2,
+        title: "هندسة الواجهات (Frontend)",
+        description: "تعلم HTML5, CSS3 و JavaScript الحديثة. هنا تبني ما يراه المستخدم ويتفاعل معه.",
+        icon: <Layout className="w-6 h-6" />,
+        level: "مستوى 1"
+      },
+      {
+        id: 3,
+        title: "بناء المنطق (React & Next.js)",
+        description: "الانتقال إلى إطارات العمل الحديثة لبناء تطبيقات ويب سريعة وديناميكية.",
+        icon: <Code2 className="w-6 h-6" />,
+        level: "مستوى 2"
+      },
+      {
+        id: 4,
+        title: "الخلفية وقواعد البيانات (Backend)",
+        description: "تعلم Node.js وكيفية تصميم قواعد البيانات وتأمين البيانات.",
+        icon: <Server className="w-6 h-6" />,
+        level: "مستوى 3"
+      },
+      {
+        id: 5,
+        title: "النشر والاحتراف (DevOps)",
+        description: "تعلم رفع مشاريعك على السحابة وإدارتها بشكل احترافي.",
+        icon: <Rocket className="w-6 h-6" />,
+        level: "الهدف النهائي"
+      }
+    ]
   },
   {
-    id: "path-data",
-    title: "خبير تحليل البيانات",
-    description: "استخلص النتائج من البيانات الضخمة باستخدام Python و SQL وأدوات التصور البياني الحديثة.",
-    coursesCount: 6,
-    duration: "4 أشهر",
-    level: "متوسط",
-    icon: <Database className="w-6 h-6" />,
-    color: "bg-green-500",
-    image: "hero-bg",
-    steps: ["مقدمة في البيانات", "إتقان SQL", "التحليل الإحصائي", "Machine Learning"]
-  },
-  {
-    id: "path-cyber",
-    title: "أخصائي الأمن السيبراني",
-    description: "احمِ الأنظمة والشبكات من الهجمات الإلكترونية وتعلم فنون التحقيق الرقمي والاختراق الأخلاقي.",
-    coursesCount: 10,
-    duration: "8 أشهر",
-    level: "متقدم",
-    icon: <ShieldCheck className="w-6 h-6" />,
-    color: "bg-red-500",
-    image: "cyber-course",
-    steps: ["أمن الشبكات", "التشفير", "الاختراق الأخلاقي", "الاستجابة للحوادث"]
-  },
-  {
-    id: "path-design",
-    title: "مصمم واجهات المستخدم UI/UX",
-    description: "انتقل من فهم سيكولوجية المستخدم إلى تصميم واجهات مذهلة وتجارب استخدام سلسة.",
-    coursesCount: 5,
-    duration: "3 أشهر",
-    level: "مبتدئ",
-    icon: <Palette className="w-6 h-6" />,
-    color: "bg-purple-500",
-    image: "design-course",
-    steps: ["مبادئ التصميم", "أبحاث المستخدم", "تصميم النماذج", "اختبار الاستخدام"]
+    id: "ai",
+    title: "مسار مهندس الذكاء الاصطناعي",
+    icon: <Cpu className="w-8 h-8" />,
+    description: "من الرياضيات والمنطق إلى بناء نماذج ذكاء اصطناعي تتنبأ بالمستقبل.",
+    steps: [
+      {
+        id: 1,
+        title: "الأساس الرياضي والبرمجي",
+        description: "فهم الجبر الخطي والاحتمالات مع إتقان لغة Python كأساس قوي.",
+        icon: <Terminal className="w-6 h-6" />,
+        level: "بداية الرحلة"
+      },
+      {
+        id: 2,
+        title: "معالجة البيانات (Data Science)",
+        description: "تعلم كيفية تنظيف وتحليل البيانات الضخمة واستخراج الأنماط.",
+        icon: <Database className="w-6 h-6" />,
+        level: "مستوى 1"
+      },
+      {
+        id: 3,
+        title: "التعلم الآلي (Machine Learning)",
+        description: "بناء النماذج الرياضية التي تتعلم من البيانات وتتخذ القرارات.",
+        icon: <Sparkles className="w-6 h-6" />,
+        level: "مستوى 2"
+      },
+      {
+        id: 4,
+        title: "التعلم العميق (Deep Learning)",
+        description: "فهم الشبكات العصبية وبناء تطبيقات متقدمة مثل التعرف على الصور.",
+        icon: <Cpu className="w-6 h-6" />,
+        level: "الهدف النهائي"
+      }
+    ]
   }
 ];
 
 export default function LearningPathsPage() {
+  const [activePathId, setActivePathId] = useState(PATHS[0].id);
+  const activePath = PATHS.find(p => p.id === activePathId) || PATHS[0];
+
   return (
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-primary/5 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(217,138,30,0.05),transparent)] pointer-events-none" />
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
-            <Badge className="bg-secondary/10 text-secondary border-secondary/20 mb-4 px-4 py-1 text-sm font-headline">
-              خارطة طريقك للنجاح
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-6 leading-tight">
-              المسارات <span className="text-secondary">التعليمية</span>
-            </h1>
-            <p className="text-lg text-primary/60 leading-relaxed mb-8">
-              لا تبحث عن الكورسات بشكل عشوائي. لقد صممنا لك مسارات تعليمية متكاملة تأخذك خطوة بخطوة من البداية وحتى الحصول على وظيفة أحلامك.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 text-primary/40 text-sm">
-                <CheckCircle2 className="w-4 h-4 text-secondary" />
-                <span>مناهج معتمدة</span>
-              </div>
-              <div className="flex items-center gap-2 text-primary/40 text-sm">
-                <CheckCircle2 className="w-4 h-4 text-secondary" />
-                <span>مشاريع تطبيقية</span>
-              </div>
-              <div className="flex items-center gap-2 text-primary/40 text-sm">
-                <CheckCircle2 className="w-4 h-4 text-secondary" />
-                <span>شهادات احترافية</span>
-              </div>
-            </div>
-          </div>
+      {/* Header Section */}
+      <section className="pt-32 pb-12 relative overflow-hidden bg-primary/5">
+        <div className="container mx-auto px-4 text-center">
+          <Badge className="bg-secondary/10 text-secondary border-none px-6 py-1.5 rounded-full text-xs font-headline font-bold mb-6">
+            خارطة طريقك المهنية
+          </Badge>
+          <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-6">
+            استكشف <span className="text-secondary">خارطة</span> النجاح
+          </h1>
+          <p className="text-lg text-primary/60 max-w-2xl mx-auto leading-relaxed">
+            لا تضيع وقتك في البحث العشوائي. اختر تخصصك واتبع الخارطة البصرية التي رسمها لك الخبراء للوصول من الصفر إلى الاحتراف العالمي.
+          </p>
         </div>
       </section>
 
-      {/* Paths Grid */}
-      <section className="py-20">
+      {/* Path Selection Tabs */}
+      <section className="py-8 border-y bg-white sticky top-20 z-40 shadow-sm">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-4">
             {PATHS.map((path) => (
-              <PathCard key={path.id} path={path} />
+              <button
+                key={path.id}
+                onClick={() => setActivePathId(path.id)}
+                className={cn(
+                  "flex items-center gap-3 px-8 py-4 rounded-2xl font-headline font-bold transition-all border-2",
+                  activePathId === path.id 
+                    ? "bg-secondary text-white border-secondary shadow-lg scale-105" 
+                    : "bg-white text-primary/60 border-primary/5 hover:border-secondary/30"
+                )}
+              >
+                <div className={cn(
+                  "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
+                  activePathId === path.id ? "bg-white/20" : "bg-primary/5"
+                )}>
+                  {path.icon}
+                </div>
+                {path.title}
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ/Info Section */}
-      <section className="py-20 bg-primary/5">
-        <div className="container mx-auto px-4 text-center max-w-2xl">
-          <h2 className="text-3xl font-headline font-bold text-primary mb-6">كيف تعمل المسارات؟</h2>
-          <div className="grid gap-6 text-right">
-            <div className="bg-white p-6 rounded-2xl border border-primary/5 luxury-shadow">
-              <h4 className="font-bold text-primary mb-2">1. اختر تخصصك</h4>
-              <p className="text-sm text-primary/60">حدد المجال الذي ترغب في احترافه بناءً على ميولك الشخصية أو متطلبات سوق العمل.</p>
+      {/* The Visual Map */}
+      <section className="py-20 bg-background relative">
+        <div className="container mx-auto px-4 max-w-4xl">
+          
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl font-headline font-bold text-primary">رحلة {activePath.title}</h2>
+            <p className="text-primary/60 max-w-xl mx-auto">{activePath.description}</p>
+          </div>
+
+          <div className="relative">
+            {/* Visual Line for Desktop */}
+            <div className="absolute right-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-secondary/20 via-secondary to-secondary/20 hidden md:block -translate-x-[-2px]" />
+
+            <div className="space-y-12 md:space-y-24 relative">
+              {activePath.steps.map((step, index) => (
+                <div key={step.id} className={cn(
+                  "flex flex-col md:flex-row items-center gap-8 md:gap-16 relative",
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                )}>
+                  {/* Step Content */}
+                  <div className="flex-1 w-full">
+                    <div className={cn(
+                      "bg-white p-8 rounded-[32px] border border-primary/5 luxury-shadow hover:border-secondary/30 transition-all group",
+                      index % 2 === 0 ? "text-right" : "md:text-left"
+                    )}>
+                      <div className={cn(
+                        "flex items-center gap-3 mb-4",
+                        index % 2 === 0 ? "flex-row" : "md:flex-row-reverse"
+                      )}>
+                        <Badge className="bg-secondary/10 text-secondary border-none font-bold text-[10px] px-3">
+                          {step.level}
+                        </Badge>
+                        <span className="text-primary/20 font-headline font-bold text-xl">STEP 0{step.id}</span>
+                      </div>
+                      <h3 className="text-xl font-headline font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-primary/60 leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Visual Node */}
+                  <div className="relative z-10 shrink-0">
+                    <div className="w-20 h-20 bg-white rounded-3xl border-4 border-secondary flex items-center justify-center text-secondary shadow-2xl scale-110 md:scale-125 luxury-shadow">
+                      {step.icon}
+                    </div>
+                    {/* Floating Glow */}
+                    <div className="absolute inset-0 bg-secondary blur-2xl opacity-20 -z-10" />
+                  </div>
+
+                  {/* Empty space for balance in desktop */}
+                  <div className="flex-1 hidden md:block" />
+                </div>
+              ))}
             </div>
-            <div className="bg-white p-6 rounded-2xl border border-primary/5 luxury-shadow">
-              <h4 className="font-bold text-primary mb-2">2. تدرج في المستويات</h4>
-              <p className="text-sm text-primary/60">كل مسار مقسم إلى مراحل، من الأساسيات البسيطة وصولاً إلى التقنيات المتقدمة.</p>
-            </div>
-            <div className="bg-white p-6 rounded-2xl border border-primary/5 luxury-shadow">
-              <h4 className="font-bold text-primary mb-2">3. ابنِ معرض أعمالك</h4>
-              <p className="text-sm text-primary/60">خلال المسار ستقوم بإنجاز مشاريع حقيقية تضاف إلى معرض أعمالك (Portfolio) لتبهر أصحاب العمل.</p>
+
+            {/* Final Target Node */}
+            <div className="mt-20 flex flex-col items-center">
+              <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center text-white shadow-2xl relative">
+                <Target className="w-10 h-10 animate-pulse" />
+                <div className="absolute -top-2 -right-2 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold">وصلت للهدف!</div>
+              </div>
+              <h4 className="mt-6 font-headline font-bold text-primary text-2xl">خبير معتمد</h4>
+              <p className="text-primary/40 text-sm mt-2">أنت الآن جاهز لسوق العمل العالمي</p>
             </div>
           </div>
         </div>
       </section>
 
-      <footer className="bg-primary text-white py-12">
+      {/* Starting Points Section */}
+      <section className="py-24 bg-primary text-white overflow-hidden relative">
+        <div className="absolute top-0 left-0 w-full h-full bg-secondary/5 -z-0" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-headline font-bold mb-6">من أين أبدأ رحلتي؟</h2>
+            <p className="text-white/60 max-w-xl mx-auto">المسارات مصممة لتناسب الجميع، اختر الحالة التي تمثلك حالياً.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-[40px] space-y-6 hover:bg-white/10 transition-all group">
+              <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center text-white shadow-xl">
+                <GraduationCap className="w-8 h-8" />
+              </div>
+              <h3 className="text-2xl font-headline font-bold">أنا طالب جامعي (تخصص تقني)</h3>
+              <p className="text-white/70 leading-relaxed">
+                ركز على سد الفجوة بين الأكاديميا وسوق العمل. خارطة الطريق ستساعدك على تطبيق المفاهيم النظرية في مشاريع حقيقية وربطها بالتقنيات الحديثة.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-3 text-sm text-white/60"><Flag className="w-4 h-4 text-secondary" /> البدء من مستوى 2 في المسار</li>
+                <li className="flex items-center gap-3 text-sm text-white/60"><Flag className="w-4 h-4 text-secondary" /> التركيز على هندسة البرمجيات</li>
+              </ul>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-[40px] space-y-6 hover:bg-white/10 transition-all group">
+              <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center text-white shadow-xl">
+                <Terminal className="w-8 h-8" />
+              </div>
+              <h3 className="text-2xl font-headline font-bold">أنا متعلم ذاتي (من خارج التخصص)</h3>
+              <p className="text-white/70 leading-relaxed">
+                لا تقلق، خارطة الطريق تبدأ معك من تحت الصفر. سنعلمك أساسيات التفكير المنطقي قبل كتابة أول سطر برمج، لنضمن لك أساساً قوياً كالمحترفين.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-3 text-sm text-white/60"><Flag className="w-4 h-4 text-secondary" /> البدء من نقطة الانطلاق الأساسية</li>
+                <li className="flex items-center gap-3 text-sm text-white/60"><Flag className="w-4 h-4 text-secondary" /> التركيز على علوم الحاسوب الأساسية</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-20 text-center">
+            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-12 h-16 rounded-2xl text-xl font-headline shadow-2xl gold-glow group">
+              احجز جلستك الإرشادية الآن
+              <ChevronLeft className="mr-2 w-6 h-6 group-hover:-translate-x-2 transition-transform" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-primary/5 py-12 border-t">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-white/40 text-sm">© 2024 سراج - جميع الحقوق محفوظة لمنصة سراج.</p>
+          <p className="text-primary/40 text-sm font-medium">© 2024 سراج - تمكين العقول العربية من خلال المسارات الموجهة.</p>
         </div>
       </footer>
     </main>
   );
 }
 
-function PathCard({ path }: { path: any }) {
-  const pathImage = PlaceHolderImages.find(img => img.id === path.image);
-
-  return (
-    <div className="group bg-white rounded-[32px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full">
-      {/* Visual Part (Top) */}
-      <div className="relative aspect-video overflow-hidden">
-        {pathImage?.imageUrl && (
-          <Image 
-            src={pathImage.imageUrl} 
-            alt={path.title} 
-            fill 
-            className="object-cover group-hover:scale-110 transition-transform duration-700"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
-        <div className="absolute bottom-4 right-4 flex items-center gap-3">
-          <div className="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center text-white shadow-xl">
-            {path.icon}
-          </div>
-          <Badge className="bg-white/20 backdrop-blur-md text-white border-white/20 text-[10px]">
-            {path.level}
-          </Badge>
-        </div>
-      </div>
-
-      {/* Content Part (Bottom) */}
-      <div className="p-8 flex flex-col flex-1">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex items-center gap-1.5 text-xs text-primary/40 font-medium">
-            <BookOpen className="w-4 h-4 text-secondary" />
-            <span>{path.coursesCount} كورسات</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-xs text-primary/40 font-medium">
-            <Clock className="w-4 h-4 text-secondary" />
-            <span>{path.duration}</span>
-          </div>
-        </div>
-
-        <h3 className="text-2xl font-headline font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
-          {path.title}
-        </h3>
-        <p className="text-sm text-primary/60 leading-relaxed mb-6 line-clamp-2">
-          {path.description}
-        </p>
-
-        <div className="space-y-4 mb-8">
-          <p className="text-[10px] font-bold text-primary/30 uppercase tracking-widest">خارطة المسار</p>
-          <div className="flex flex-wrap gap-2">
-            {path.steps.map((step: string, i: number) => (
-              <div key={i} className="flex items-center gap-2 bg-primary/5 px-3 py-1.5 rounded-full border border-primary/5">
-                <span className="text-[10px] w-4 h-4 bg-secondary text-white rounded-full flex items-center justify-center font-bold">
-                  {i + 1}
-                </span>
-                <span className="text-xs text-primary/70 font-bold">{step}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-auto flex items-center justify-between pt-6 border-t border-primary/5">
-          <Button className="rounded-2xl bg-primary hover:bg-secondary text-white px-6 h-12 font-headline gap-2 group/btn shadow-lg">
-            ابدأ المسار
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
-          </Button>
-          <div className="flex items-center gap-1 text-secondary">
-             <Award className="w-5 h-5" />
-             <span className="text-xs font-bold">شهادة</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
