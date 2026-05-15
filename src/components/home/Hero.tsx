@@ -52,10 +52,10 @@ export function Hero() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-primary/5">
-              <StatItem icon={<Users className="text-secondary" />} value="+10,000" label="طالب نشط" />
-              <StatItem icon={<BookMarked className="text-secondary" />} value="+85" label="كورس احترافي" />
-              <StatItem icon={<Award className="text-secondary" />} value="+15,000" label="شهادة معتمدة" />
-              <StatItem icon={<Star className="text-secondary" />} value="4.9" label="تقييم المنصة" />
+              <StatItem icon={<Users className="w-5 h-5" />} value="+10,000" label="طالب نشط" />
+              <StatItem icon={<BookMarked className="w-5 h-5" />} value="+85" label="كورس احترافي" />
+              <StatItem icon={<Award className="w-5 h-5" />} value="+15,000" label="شهادة معتمدة" />
+              <StatItem icon={<Star className="w-5 h-5 text-secondary fill-current" />} value="4.9" label="تقييم المنصة" />
             </div>
           </div>
 
@@ -94,12 +94,14 @@ export function Hero() {
 
 function StatItem({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-2 text-center lg:text-right">
+      <p className="text-[10px] md:text-xs text-primary/40 font-bold uppercase tracking-wider">{label}</p>
       <div className="flex items-center gap-2 justify-center lg:justify-start">
-        {icon}
-        <span className="text-xl font-bold text-primary">{value}</span>
+        <div className="text-secondary">
+          {icon}
+        </div>
+        <span className="text-xl md:text-2xl font-bold text-primary">{value}</span>
       </div>
-      <p className="text-xs text-primary/60 font-medium">{label}</p>
     </div>
   );
 }
