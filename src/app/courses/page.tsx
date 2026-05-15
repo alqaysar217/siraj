@@ -156,15 +156,17 @@ export default function CoursesPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      <section className="pt-32 pb-8 bg-primary/5">
+      {/* Header Banner Image */}
+      <section className="pt-24 md:pt-32 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl text-center md:text-right">
-            <h1 className="text-3xl md:text-5xl font-headline font-bold text-primary mb-4">
-              اكتشف مهارات <span className="text-secondary">المستقبل</span>
-            </h1>
-            <p className="text-sm md:text-lg text-primary/60">
-              تصفح مجموعتنا المختارة من الكورسات الاحترافية المصممة لتنقلك من الصفر إلى الاحتراف.
-            </p>
+          <div className="relative w-full aspect-[21/9] md:aspect-[3/1] rounded-[32px] overflow-hidden shadow-2xl border border-primary/5 luxury-shadow">
+             <Image 
+               src="/Courses.png" 
+               alt="Courses Banner" 
+               fill 
+               className="object-cover"
+               priority
+             />
           </div>
         </div>
       </section>
