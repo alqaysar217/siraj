@@ -49,7 +49,7 @@ const BANKS = [
   { id: 5, name: "البنك الدولي اليمني", accountName: "منصة سراج التعليمية", accountNumber: "444555666", color: "bg-indigo-600" },
   { id: 6, name: "بنك سبأ الإسلامي", accountName: "منصة سراج التعليمية", accountNumber: "777888999", color: "bg-green-600" },
   { id: 7, name: "بنك الأمل", accountName: "منصة سراج التعليمية", accountNumber: "222333444", color: "bg-sky-600" },
-  { id: 8, name: "بنك القطيبي", accountName: "منصة سراج التعليمية", accountNumber: "999000111", color: "bg-teal-600" },
+  { id: 8, name: "بنك الأمل", accountName: "منصة سراج التعليمية", accountNumber: "222333444", color: "bg-sky-600" },
   { id: 9, name: "مصرف البحرين الشامل", accountName: "منصة سراج التعليمية", accountNumber: "888777666", color: "bg-rose-600" },
   { id: 10, name: "شركة النجم للحوالات", accountName: "أحمد علي محمد", accountNumber: "333222111", color: "bg-amber-600" }
 ];
@@ -60,15 +60,11 @@ export default function BookDetailPage() {
   const [selectedBankId, setSelectedBankId] = useState<string>("1");
   const { toast } = useToast();
 
-  // محاكاة لبيانات المستخدم (سيتم استبدالها لاحقاً ببيانات Auth الحقيقية)
   const [currentUser, setCurrentUser] = useState<{ isLoggedIn: boolean; name?: string } | null>(null);
   
   useEffect(() => {
     setMounted(true);
-    // محاكاة جلب المستخدم
-    // setCurrentUser({ isLoggedIn: true, name: "أحمد علي" }); // مثال لمستخدم مسجل
-    // setCurrentUser({ isLoggedIn: true }); // مثال لمستخدم مسجل بدون اسم
-    setCurrentUser(null); // مثال لزائر
+    setCurrentUser(null);
   }, []);
 
   const getUserDisplayName = () => {
@@ -116,6 +112,11 @@ export default function BookDetailPage() {
             {/* Column 1: Book Info */}
             <div className="lg:col-span-7 space-y-10">
               <div className="space-y-6">
+                <div className="space-y-2">
+                  <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary leading-tight">{book.title}</h1>
+                  <p className="text-xl text-primary/40 font-medium">تأليف الخبير: {book.author}</p>
+                </div>
+                
                 <div className="flex items-center gap-4">
                   <Badge className="bg-secondary/10 text-secondary border-none font-headline px-4 py-1">{book.category}</Badge>
                   <div className="flex items-center gap-1 text-secondary">
@@ -123,9 +124,7 @@ export default function BookDetailPage() {
                     <span className="font-bold text-xl">{mounted ? book.rating.toLocaleString('en-US') : ""}</span>
                   </div>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary leading-tight">{book.title}</h1>
-                <p className="text-xl text-primary/40 font-medium">تأليف الخبير: {book.author}</p>
-                
+
                 <div className="grid grid-cols-3 gap-4">
                    <StatBox icon={<FileText className="w-5 h-5" />} label="الصفحات" value={mounted ? book.pages.toLocaleString('en-US') : ""} />
                    <StatBox icon={<Users className="w-5 h-5" />} label="المبيعات" value={mounted ? book.sales.toLocaleString('en-US') : ""} />
@@ -228,7 +227,6 @@ export default function BookDetailPage() {
                       </div>
 
                       <div className="p-8 space-y-8">
-                        {/* Smart Selection UI */}
                         <div className="space-y-4">
                           <label className="text-sm font-bold text-primary flex items-center gap-2 mr-1">
                             <Banknote className="w-4 h-4 text-secondary" /> اختر البنك أو وسيلة الإيداع
@@ -247,7 +245,6 @@ export default function BookDetailPage() {
                           </Select>
                         </div>
 
-                        {/* Selected Bank Detail Card */}
                         <div className="bg-white p-6 rounded-[28px] border-2 border-primary/5 luxury-shadow flex items-center justify-between animate-in fade-in zoom-in-95 duration-300">
                           <div className="flex items-center gap-5">
                             <div className={`w-16 h-16 ${selectedBank.color} rounded-2xl flex items-center justify-center text-white shadow-xl shrink-0`}>

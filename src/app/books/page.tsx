@@ -73,26 +73,26 @@ function BookCard({ book, mounted }: { book: any; mounted: boolean }) {
         <div className="relative w-full h-full shadow-2xl transition-transform duration-700 group-hover:scale-105 rounded-xl overflow-hidden">
           {bookImage?.imageUrl && <Image src={bookImage.imageUrl} alt={book.title} fill className="object-cover" />}
         </div>
-        <div className="absolute top-8 left-8">
-          <Badge className="bg-secondary text-white font-headline text-[10px] border-none shadow-lg px-3 py-1">{book.category}</Badge>
-        </div>
       </div>
       
       <div className="p-6 space-y-4 flex flex-col flex-1">
+        <div className="space-y-1">
+          <h3 className="text-lg font-headline font-bold text-primary line-clamp-1">{book.title}</h3>
+          <p className="text-xs text-primary/40 font-medium">تأليف: {book.author}</p>
+        </div>
+
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1 text-xs text-secondary font-bold">
-            <Star className="w-3.5 h-3.5 fill-current" />
-            <span>{book.rating.toLocaleString('en-US')}</span>
+          <div className="flex items-center gap-2">
+            <Badge className="bg-secondary/10 text-secondary border-none text-[10px] px-2 py-0.5">{book.category}</Badge>
+            <div className="flex items-center gap-1 text-xs text-secondary font-bold">
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <span>{book.rating.toLocaleString('en-US')}</span>
+            </div>
           </div>
           <div className="flex items-center gap-1 text-[10px] text-primary/40 font-bold">
             <Users className="w-3 h-3" />
             <span>{mounted ? book.sales.toLocaleString('en-US') : ""} طلبوا الكتاب</span>
           </div>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="text-lg font-headline font-bold text-primary line-clamp-1">{book.title}</h3>
-          <p className="text-xs text-primary/40 font-medium">تأليف: {book.author}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 py-3 border-y border-primary/5">
