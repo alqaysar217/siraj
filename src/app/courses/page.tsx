@@ -336,9 +336,9 @@ export default function CoursesPage() {
 
           {filteredCourses.length > 0 ? (
             <div className={cn(
-              "grid gap-8",
+              "grid gap-6",
               viewMode === "grid" 
-                ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
+                ? "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" 
                 : "grid-cols-1"
             )}>
               {filteredCourses.map((course) => (
@@ -379,13 +379,13 @@ function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid"
 
   return (
     <div className={cn(
-      "group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500 flex text-right",
+      "group bg-white rounded-[20px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-5px] transition-all duration-500 flex text-right",
       viewMode === "grid" ? "flex-col h-full" : "flex-col md:flex-row h-auto w-full"
     )}>
       {/* Thumbnail */}
       <div className={cn(
         "relative overflow-hidden shrink-0",
-        viewMode === "grid" ? "aspect-video w-full" : "aspect-video md:aspect-auto md:w-80"
+        viewMode === "grid" ? "aspect-video w-full" : "aspect-video md:aspect-auto md:w-64"
       )}>
         {courseImage?.imageUrl ? (
           <Image 
@@ -396,10 +396,10 @@ function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid"
           />
         ) : (
           <div className="w-full h-full bg-primary/5 flex items-center justify-center">
-             <BookOpen className="w-12 h-12 text-primary/10" />
+             <BookOpen className="w-10 h-10 text-primary/10" />
           </div>
         )}
-        <div className="absolute top-3 right-3 flex flex-col gap-2">
+        <div className="absolute top-2 right-2 flex flex-col gap-1.5 scale-90 origin-top-right">
           <Badge className="bg-secondary text-white border-none shadow-lg">{course.status}</Badge>
           {course.hasCertificate && (
             <Badge className="bg-primary/80 text-white border-none gap-1 py-1">
@@ -410,57 +410,57 @@ function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid"
         </div>
       </div>
       
-      {/* Content Area - Reordered as per user request */}
-      <div className="p-6 space-y-5 flex flex-col flex-1">
+      {/* Content Area */}
+      <div className="p-4 space-y-3.5 flex flex-col flex-1">
         
         {/* Row 1: Course Title */}
         <h3 className={cn(
           "font-headline font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2",
-          viewMode === "grid" ? "text-lg h-14" : "text-xl md:text-2xl h-auto"
+          viewMode === "grid" ? "text-sm h-10" : "text-lg md:text-xl h-auto"
         )}>
           {course.title}
         </h3>
 
         {/* Row 2: Instructor Photo/Name + Category */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-primary/5">
+          <div className="flex items-center gap-2">
+            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-primary/5">
               {instructorImage?.imageUrl && (
                 <Image src={instructorImage.imageUrl} alt={course.instructor} fill className="object-cover" />
               )}
             </div>
             <div className="flex flex-col">
-              <span className="text-xs font-bold text-primary">{course.instructor}</span>
-              <span className="text-[10px] text-primary/40">مدرب معتمد</span>
+              <span className="text-[10px] font-bold text-primary">{course.instructor}</span>
+              <span className="text-[8px] text-primary/40">مدرب معتمد</span>
             </div>
           </div>
-          <Badge variant="secondary" className="bg-secondary/10 text-secondary border-none text-[10px] px-3">
+          <Badge variant="secondary" className="bg-secondary/10 text-secondary border-none text-[9px] px-2 h-5">
             {course.category}
           </Badge>
         </div>
 
         {/* Row 3: Rating + Level + Price */}
-        <div className="flex items-center justify-between py-3 border-y border-primary/5">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 text-xs font-bold text-primary">
-              <Star className="w-3.5 h-3.5 text-secondary fill-current" />
+        <div className="flex items-center justify-between py-2 border-y border-primary/5">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-0.5 text-[10px] font-bold text-primary">
+              <Star className="w-3 h-3 text-secondary fill-current" />
               <span>{course.rating}</span>
             </div>
-            <div className="w-px h-3 bg-primary/10" />
-            <Badge variant="outline" className="text-[10px] border-primary/10 text-primary/60 font-medium">
-              مستوى {course.level}
-            </Badge>
+            <div className="w-px h-2.5 bg-primary/10" />
+            <span className="text-[9px] text-primary/60 font-medium">
+              {course.level}
+            </span>
           </div>
           <div className="text-left">
             {course.isFree ? (
-              <span className="text-lg font-headline font-bold text-green-600">مجاني</span>
+              <span className="text-sm font-headline font-bold text-green-600">مجاني</span>
             ) : (
-              <div className="flex flex-col items-end">
-                <span className="text-[10px] text-primary/30 line-through">
-                  {isMounted ? (course.price * 1.2).toLocaleString() : ""} ريال
+              <div className="flex flex-col items-end leading-tight">
+                <span className="text-[8px] text-primary/30 line-through">
+                  {isMounted ? (course.price * 1.2).toLocaleString() : ""}
                 </span>
-                <span className="text-lg font-headline font-bold text-primary">
-                  {isMounted ? course.price.toLocaleString() : ""} ريال
+                <span className="text-sm font-headline font-bold text-primary">
+                  {isMounted ? course.price.toLocaleString() : ""} ر.س
                 </span>
               </div>
             )}
@@ -468,27 +468,27 @@ function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid"
         </div>
 
         {/* Row 4: Stats (Hours, Lessons, Students) */}
-        <div className="flex items-center justify-between text-[11px] text-primary/60 bg-primary/5 p-3 rounded-xl border border-primary/5">
-          <div className="flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-secondary" />
-            <span className="font-bold">{course.duration}</span>
+        <div className="flex items-center justify-between text-[10px] text-primary/60 bg-primary/5 p-2 rounded-lg border border-primary/5">
+          <div className="flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5 text-secondary" />
+            <span className="font-bold">{course.duration.replace(' ساعة', 'س')}</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <BookOpen className="w-4 h-4 text-secondary" />
-            <span className="font-bold">{course.lessons} درس</span>
+          <div className="flex items-center gap-1">
+            <BookOpen className="w-3.5 h-3.5 text-secondary" />
+            <span className="font-bold">{course.lessons}د</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <User className="w-4 h-4 text-secondary" />
-            <span className="font-bold">{course.students} طالب</span>
+          <div className="flex items-center gap-1">
+            <User className="w-3.5 h-3.5 text-secondary" />
+            <span className="font-bold">{course.students}ط</span>
           </div>
         </div>
 
         {/* Button */}
-        <div className="mt-auto pt-2">
+        <div className="mt-auto pt-1">
           <Link href={`/courses/${course.id}`} className="w-full">
-            <Button size="lg" className="w-full rounded-2xl bg-primary hover:bg-secondary text-white font-headline gap-2 group/btn shadow-md transition-all active:scale-95">
-              تفاصيل الكورس
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
+            <Button size="sm" className="w-full h-9 rounded-xl bg-primary hover:bg-secondary text-white font-headline gap-2 group/btn shadow-sm transition-all active:scale-95 text-[11px]">
+              التفاصيل
+              <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover/btn:-translate-x-1" />
             </Button>
           </Link>
         </div>
