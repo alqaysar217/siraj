@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -116,6 +117,9 @@ export default function InstructorsDirectoryPage() {
 }
 
 function InstructorCard({ instructor }: { instructor: any }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const instImage = PlaceHolderImages.find(img => img.id === instructor.image);
 
   return (
@@ -168,7 +172,7 @@ function InstructorCard({ instructor }: { instructor: any }) {
             </div>
             <div className="flex items-center gap-1">
               <Users className="w-3.5 h-3.5 text-secondary/60" />
-              <span>{instructor.students.toLocaleString()} طالب</span>
+              <span>{mounted ? instructor.students.toLocaleString() : ""} طالب</span>
             </div>
           </div>
           <Link href={`/instructors/${instructor.id}`} className="block">

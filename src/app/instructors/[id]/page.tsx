@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -71,6 +72,9 @@ const INSTRUCTOR_DATA = {
 };
 
 export default function InstructorProfilePage() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const { id } = useParams();
   const instImage = PlaceHolderImages.find(img => img.id === INSTRUCTOR_DATA.image);
 
@@ -130,7 +134,7 @@ export default function InstructorProfilePage() {
               </div>
 
               <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto lg:mr-0 pt-10 border-t border-primary/5">
-                 <BigStatItem icon={<Users className="w-7 h-7" />} label="طالب" value={INSTRUCTOR_DATA.students.toLocaleString()} />
+                 <BigStatItem icon={<Users className="w-7 h-7" />} label="طالب" value={mounted ? INSTRUCTOR_DATA.students.toLocaleString() : ""} />
                  <BigStatItem icon={<BookOpen className="w-7 h-7" />} label="دورة" value={INSTRUCTOR_DATA.coursesCount.toString()} />
                  <BigStatItem icon={<Star className="w-7 h-7" />} label="تقييم" value={INSTRUCTOR_DATA.rating.toString()} />
               </div>
