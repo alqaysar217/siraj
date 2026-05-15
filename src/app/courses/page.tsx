@@ -29,12 +29,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const ALL_COURSES = [
   {
@@ -118,6 +118,7 @@ export default function CoursesPage() {
   const [activeStatus, setActiveStatus] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filteredCourses = useMemo(() => {
     return ALL_COURSES.filter(course => {
@@ -183,9 +184,9 @@ export default function CoursesPage() {
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
             </div>
             
-            {/* Filter Trigger Button */}
-            <Sheet>
-              <SheetTrigger asChild>
+            {/* Filter Trigger Button using Dialog */}
+            <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+              <DialogTrigger asChild>
                 <Button variant="outline" className="h-12 w-full md:w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all">
                   <SlidersHorizontal className="w-5 h-5 text-secondary" />
                   تصفية الكورسات
@@ -195,15 +196,15 @@ export default function CoursesPage() {
                     </Badge>
                   )}
                 </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[320px] sm:w-[400px] font-body flex flex-col h-full bg-white border-none shadow-2xl">
-                <SheetHeader className="text-right border-b pb-6 mb-8 pt-4">
-                  <SheetTitle className="text-2xl font-headline font-bold text-primary">تصفية النتائج</SheetTitle>
-                </SheetHeader>
+              </DialogTrigger>
+              <DialogContent className="w-[90vw] max-w-[500px] rounded-[32px] p-6 font-body bg-white border-none shadow-2xl">
+                <DialogHeader className="text-right border-b pb-4 mb-6">
+                  <DialogTitle className="text-2xl font-headline font-bold text-primary">تصفية النتائج</DialogTitle>
+                </DialogHeader>
                 
-                <div className="space-y-8 flex-1 overflow-y-auto px-1">
+                <div className="space-y-6">
                   {/* Category Select */}
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label className="text-sm font-bold text-primary block">مجال الدراسة</label>
                     <Select value={activeCategory} onValueChange={setActiveCategory}>
                       <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
@@ -219,7 +220,7 @@ export default function CoursesPage() {
                   </div>
 
                   {/* Price Select */}
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label className="text-sm font-bold text-primary block">نوع الدفع</label>
                     <Select value={activePrice} onValueChange={setActivePrice}>
                       <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
@@ -235,7 +236,7 @@ export default function CoursesPage() {
                   </div>
 
                   {/* Certificate Select */}
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label className="text-sm font-bold text-primary block">الشهادة</label>
                     <Select value={activeCert} onValueChange={setActiveCert}>
                       <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
@@ -251,7 +252,7 @@ export default function CoursesPage() {
                   </div>
 
                   {/* Status Select */}
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label className="text-sm font-bold text-primary block">حالة الكورس</label>
                     <Select value={activeStatus} onValueChange={setActiveStatus}>
                       <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
@@ -267,17 +268,15 @@ export default function CoursesPage() {
                   </div>
                 </div>
 
-                <div className="pt-8 border-t flex gap-4 mt-auto pb-4">
-                  <Button variant="outline" className="flex-1 h-12 rounded-xl border-primary/10 font-headline" onClick={resetFilters}>مسح الكل</Button>
-                  <SheetTrigger asChild>
-                    <Button className="flex-1 h-12 rounded-xl bg-secondary text-white font-headline shadow-lg hover:bg-secondary/90">تطبيق</Button>
-                  </SheetTrigger>
+                <div className="pt-8 flex gap-4 mt-6">
+                  <Button variant="outline" className="flex-1 h-12 rounded-xl border-primary/10 font-headline" onClick={() => { resetFilters(); setIsFilterOpen(false); }}>إعادة تعيين</Button>
+                  <Button className="flex-1 h-12 rounded-xl bg-secondary text-white font-headline shadow-lg hover:bg-secondary/90" onClick={() => setIsFilterOpen(false)}>تطبيق الفلاتر</Button>
                 </div>
-              </SheetContent>
-            </Sheet>
+              </DialogContent>
+            </Dialog>
           </div>
           
-          {/* Active Filters Display (Optional but helpful) */}
+          {/* Active Filters Display */}
           {activeFiltersCount > 0 && (
             <div className="mt-4 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-2">
               <span className="text-xs text-primary/40 flex items-center gap-1 ml-2 self-center">الفلاتر النشطة:</span>
