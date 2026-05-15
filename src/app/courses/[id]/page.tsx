@@ -20,8 +20,7 @@ import {
   HelpCircle, 
   Zap,
   Info,
-  Users,
-  StarHalf
+  Users
 } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -37,9 +36,9 @@ export default function CourseDetailPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      {/* 1. غلاف الدورة */}
+      {/* 1. غلاف الدورة - بدون حواف أو مسافات وبحواف 5 بكسل */}
       <div className="pt-[72px]">
-        <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden bg-primary/5 rounded-b-[5px]">
+        <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden bg-primary/5 rounded-[5px]">
           {courseImage?.imageUrl && (
             <Image 
               src={courseImage.imageUrl} 
@@ -55,12 +54,12 @@ export default function CourseDetailPage() {
       <div className="pb-20">
         <div className="container mx-auto px-4 max-w-5xl mt-6">
           
-          {/* 2. اسم الكورس */}
-          <div className="mb-6">
+          {/* 2. اسم الكورس - السطر الأول */}
+          <div className="mb-4">
             <h1 className="text-2xl lg:text-4xl font-headline font-bold text-primary leading-tight">تطوير الويب الشامل - Full Stack Web Development</h1>
           </div>
 
-          {/* 3. المجال والمستوى والتقييم */}
+          {/* 3. المجال والمستوى والتقييم - السطر الثاني */}
           <div className="flex flex-wrap items-center gap-3 mb-6 pb-6 border-b border-primary/5">
             <Badge className="bg-secondary/10 text-secondary border-none font-headline text-xs px-3 py-1">برمجة</Badge>
             <Badge className="bg-primary/5 text-primary/60 border-none font-headline text-xs px-3 py-1">مستوى مبتدئ</Badge>
@@ -71,14 +70,14 @@ export default function CourseDetailPage() {
             </div>
           </div>
 
-          {/* 4. إحصائيات سريعة (أيقونة + رقم + اسم) */}
+          {/* 4. إحصائيات سريعة (أيقونة + رقم + اسم) - السطر الثالث */}
           <div className="grid grid-cols-3 gap-2 mb-8">
             <CompactStat icon={<Clock className="w-4 h-4" />} value="45 ساعة" />
             <CompactStat icon={<BookOpen className="w-4 h-4" />} value="45 درس" />
             <CompactStat icon={<Users className="w-4 h-4" />} value="2,500 طالب" />
           </div>
 
-          {/* 5. قسم السعر والمميزات الفنية */}
+          {/* 5. قسم السعر والمميزات الفنية - السطر الرابع */}
           <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow mb-10">
             <div className="grid md:grid-cols-2 gap-6 items-center">
               <div className="space-y-2">
@@ -97,7 +96,7 @@ export default function CourseDetailPage() {
             </div>
           </div>
 
-          {/* 6. التبويبات مع الأيقونات */}
+          {/* 6. التبويبات مع الأيقونات - ترتيب الجوال */}
           <Tabs defaultValue="overview" className="w-full" dir="rtl">
             <TabsList className="bg-white border p-1 rounded-2xl h-auto flex-wrap justify-start mb-8 luxury-shadow w-full">
               <TabsTrigger value="overview" className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-white px-4 py-3 rounded-xl font-headline transition-all text-xs gap-2">
@@ -113,7 +112,7 @@ export default function CourseDetailPage() {
                 المدرب
               </TabsTrigger>
               <TabsTrigger value="reviews" className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-white px-4 py-3 rounded-xl font-headline transition-all text-xs gap-2">
-                <StarHalf className="w-4 h-4" />
+                <Star className="w-4 h-4" />
                 التقييمات
               </TabsTrigger>
             </TabsList>
@@ -175,7 +174,7 @@ export default function CourseDetailPage() {
             </TabsContent>
           </Tabs>
 
-          {/* 7. قسم الدعوة للانضمام النهائي (حيث يظهر زر الاشتراك بعد القراءة) */}
+          {/* 7. قسم الدعوة للانضمام النهائي */}
           <div className="mt-16 bg-primary rounded-[32px] p-8 md:p-12 text-center text-white relative overflow-hidden">
             <h2 className="text-2xl md:text-3xl font-headline font-bold mb-4">هل أنت جاهز للبدء؟</h2>
             <p className="text-white/70 mb-8 max-w-lg mx-auto text-sm">سجل الآن واحصل على وصول كامل لجميع دروس الكورس، الملفات المصدرية، والشهادة المعتمدة.</p>
