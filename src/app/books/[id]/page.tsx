@@ -17,7 +17,8 @@ import {
   CreditCard,
   Copy,
   ChevronLeft,
-  X
+  X,
+  Banknote
 } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -31,6 +32,13 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
 const BANKS = [
@@ -49,6 +57,7 @@ const BANKS = [
 export default function BookDetailPage() {
   const { id } = useParams();
   const [mounted, setMounted] = useState(false);
+  const [selectedBankId, setSelectedBankId] = useState<string>("1");
   const { toast } = useToast();
   
   useEffect(() => setMounted(true), []);
@@ -65,6 +74,8 @@ export default function BookDetailPage() {
     category: "برمجة"
   };
 
+  const selectedBank = BANKS.find(b => b.id.toString() === selectedBankId) || BANKS[0];
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     toast({
@@ -74,7 +85,7 @@ export default function BookDetailPage() {
   };
 
   const handleWhatsAppRequest = () => {
-    const message = `مرحباً، أنا مهتم بطلب كتاب: ${book.title}\nالسعر: ${book.price.toLocaleString('en-US')} ر.ي\nسأقوم بالإيداع الآن، يرجى تحضير الكتاب.`;
+    const message = `مرحباً، أنا مهتم بطلب كتاب: ${book.title}\nالسعر: ${book.price.toLocaleString('en-US')} ر.ي\nسأقوم بالإيداع في حساب ${selectedBank.name} الآن، يرجى تحضير الكتاب.`;
     window.open(`https://wa.me/967775258830?text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -196,34 +207,50 @@ export default function BookDetailPage() {
                           </DialogClose>
                         </div>
                         <p className="text-white/70 text-sm leading-relaxed">
-                          لإتمام الطلب، يرجى إيداع المبلغ المذكور في أحد حساباتنا البنكية أدناه، ثم إرسال صورة السند عبر الواتساب لتأكيد الطلب.
+                          لإتمام الطلب، يرجى اختيار البنك المفضل لديك، ثم إيداع المبلغ المذكور وإرسال صورة السند عبر الواتساب لتأكيد الطلب.
                         </p>
                       </div>
 
                       <div className="p-8 space-y-8">
-                        <div className="grid gap-4">
-                          {BANKS.map(bank => (
-                            <div key={bank.id} className="bg-white p-5 rounded-2xl border border-primary/5 luxury-shadow flex items-center justify-between group">
-                              <div className="flex items-center gap-4">
-                                <div className={`w-12 h-12 ${bank.color} rounded-xl flex items-center justify-center text-white shadow-lg`}>
-                                  <CreditCard className="w-6 h-6" />
-                                </div>
-                                <div className="text-right">
-                                  <p className="font-headline font-bold text-primary">{bank.name}</p>
-                                  <p className="text-[10px] text-primary/40 font-bold">{bank.accountName}</p>
-                                  <p className="font-headline font-bold text-secondary text-sm">{bank.accountNumber}</p>
-                                </div>
-                              </div>
-                              <Button 
-                                variant="ghost" 
-                                size="icon" 
-                                className="text-primary/20 hover:text-secondary"
-                                onClick={() => copyToClipboard(bank.accountNumber)}
-                              >
-                                <Copy className="w-5 h-5" />
-                              </Button>
+                        {/* Smart Selection UI */}
+                        <div className="space-y-4">
+                          <label className="text-sm font-bold text-primary flex items-center gap-2 mr-1">
+                            <Banknote className="w-4 h-4 text-secondary" /> اختر البنك أو وسيلة الإيداع
+                          </label>
+                          <Select value={selectedBankId} onValueChange={setSelectedBankId}>
+                            <SelectTrigger className="h-14 rounded-2xl bg-white border-primary/10 shadow-sm text-right font-headline text-lg">
+                              <SelectValue placeholder="اختر البنك" />
+                            </SelectTrigger>
+                            <SelectContent className="font-body max-h-60" dir="rtl">
+                              {BANKS.map((bank) => (
+                                <SelectItem key={bank.id} value={bank.id.toString()} className="font-bold py-3">
+                                  {bank.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        {/* Selected Bank Detail Card */}
+                        <div className="bg-white p-6 rounded-[28px] border-2 border-primary/5 luxury-shadow flex items-center justify-between animate-in fade-in zoom-in-95 duration-300">
+                          <div className="flex items-center gap-5">
+                            <div className={`w-16 h-16 ${selectedBank.color} rounded-2xl flex items-center justify-center text-white shadow-xl shrink-0`}>
+                              <CreditCard className="w-8 h-8" />
                             </div>
-                          ))}
+                            <div className="text-right space-y-1">
+                              <p className="font-headline font-bold text-primary text-xl">{selectedBank.name}</p>
+                              <p className="text-[11px] text-primary/50 font-bold">{selectedBank.accountName}</p>
+                              <p className="font-headline font-bold text-secondary text-lg tracking-wider">{selectedBank.accountNumber}</p>
+                            </div>
+                          </div>
+                          <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            className="w-12 h-12 rounded-xl bg-primary/5 text-primary/40 hover:text-secondary hover:bg-secondary/10 transition-all shrink-0"
+                            onClick={() => copyToClipboard(selectedBank.accountNumber)}
+                          >
+                            <Copy className="w-6 h-6" />
+                          </Button>
                         </div>
 
                         <div className="bg-secondary/10 p-6 rounded-3xl border border-secondary/20 space-y-4">
@@ -273,7 +300,7 @@ function ReviewItem({ name, rating, text, date }: { name: string; rating: number
         <p className="font-bold text-primary text-sm">{name}</p>
         <div className="flex items-center gap-0.5">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className={`w-3 h-3 ${i < rating ? 'text-secondary fill-current' : 'text-primary/10'}`} />
+            <Star key={i} className={`w-3.5 h-3.5 ${i < rating ? 'text-secondary fill-current' : 'text-primary/10'}`} />
           ))}
         </div>
       </div>
