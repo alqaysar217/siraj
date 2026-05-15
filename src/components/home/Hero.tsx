@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, BookOpen, Library, Star, Award, MessageCircle } from "lucide-react";
 import Image from "next/image";
@@ -76,19 +75,6 @@ export function Hero() {
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
-              </div>
-              
-              {/* Floating Element */}
-              <div className="absolute -bottom-10 -right-10 bg-white p-6 rounded-[32px] luxury-shadow border border-primary/5 hidden md:block animate-bounce-slow">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
-                    <Award className="w-6 h-6" />
-                  </div>
-                  <div className="text-right">
-                    <p className="font-headline font-bold text-primary">شهادات معتمدة</p>
-                    <p className="text-[10px] text-primary/40 font-bold uppercase">موثقة عالمياً</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
