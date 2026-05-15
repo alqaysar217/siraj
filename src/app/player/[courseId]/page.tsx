@@ -85,8 +85,8 @@ export default function CoursePlayer() {
               </Button>
             )}
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary flex items-center justify-center rounded-lg">
-                <span className="text-secondary font-headline font-bold text-sm">S</span>
+              <div className="relative w-8 h-8 overflow-hidden rounded-lg">
+                <Image src="/siraj.png" alt="سراج" fill className="object-cover" />
               </div>
               <span className="text-lg font-headline font-bold text-primary">سراج</span>
             </Link>

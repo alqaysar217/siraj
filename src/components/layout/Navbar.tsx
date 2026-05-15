@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Map, Library, GraduationCap, Search, User, Menu, Home, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import {
   Sheet,
   SheetContent,
@@ -43,8 +44,8 @@ export function Navbar() {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-xl shadow-lg gold-glow">
-              <span className="text-secondary font-headline font-bold text-xl">S</span>
+            <div className="relative w-10 h-10 overflow-hidden rounded-xl shadow-lg gold-glow">
+              <Image src="/siraj.png" alt="سراج" fill className="object-cover" />
             </div>
             <span className="text-2xl font-headline font-bold text-primary tracking-tight">
               سراج
@@ -83,11 +84,11 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px] font-body [&>button]:hidden">
                 <SheetHeader className="text-right border-b pb-6 mb-6">
-                  <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2">
-                    <div className="w-8 h-8 bg-primary flex items-center justify-center rounded-lg">
-                      <span className="text-secondary font-headline font-bold text-sm">S</span>
-                    </div>
+                  <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2 justify-end">
                     <span>منصة سراج</span>
+                    <div className="relative w-8 h-8 overflow-hidden rounded-lg">
+                      <Image src="/siraj.png" alt="سراج" fill className="object-cover" />
+                    </div>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-4">

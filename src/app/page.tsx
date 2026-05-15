@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/home/Hero";
 import { FeaturedCourses } from "@/components/home/FeaturedCourses";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { 
   Shield, 
   Zap, 
@@ -90,8 +91,8 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-secondary flex items-center justify-center rounded-lg">
-                  <span className="text-primary font-headline font-bold text-lg">S</span>
+                <div className="relative w-8 h-8 overflow-hidden rounded-lg">
+                  <Image src="/siraj.png" alt="سراج" fill className="object-cover" />
                 </div>
                 <span className="text-xl font-headline font-bold">سراج</span>
               </div>
