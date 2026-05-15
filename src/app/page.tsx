@@ -67,7 +67,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. مجالاتنا التعليمية (في المنتصف كما طلبت) */}
+      {/* 2. مجالاتنا التعليمية */}
       <section className="py-24 bg-primary/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 space-y-4">
@@ -131,7 +131,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. التعريف بالمنصة (رسالة، رؤية، أهداف) */}
+      {/* 6. التعريف بالمنصة */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -191,7 +191,7 @@ export default function Home() {
             <p className="text-white/70 text-lg mb-12 max-w-2xl mx-auto">انضم إلى آلاف الطلاب الذين غيروا مسارهم المهني مع سراج. سجل اليوم واحصل على وصول غير محدود لأفضل الكورسات.</p>
             <div className="flex flex-wrap items-center justify-center gap-6">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-12 h-16 rounded-2xl font-headline text-xl shadow-2xl gold-glow transition-all active:scale-95">سجل الآن مجاناً</Button>
-              <Button size="lg" variant="outline" className="border-white/20 hover:bg-white/5 text-white px-10 h-16 rounded-2xl font-headline text-xl">تواصل مع مستشار</Button>
+              <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white hover:text-primary px-10 h-16 rounded-2xl font-headline text-xl transition-all">تواصل مع مستشار</Button>
             </div>
           </div>
         </div>

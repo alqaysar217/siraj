@@ -50,7 +50,7 @@ export function Hero() {
                 </Button>
               </Link>
               <Button size="lg" variant="outline" className="border-secondary text-secondary bg-white hover:bg-secondary/5 px-10 h-16 rounded-[24px] text-xl font-headline shadow-xl transition-all group">
-                تحدث مع مستشار
+                تواصل مع مستشار
                 <MessageCircle className="mr-3 w-6 h-6 group-hover:scale-110 transition-transform" />
               </Button>
             </div>
