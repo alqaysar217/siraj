@@ -1,10 +1,20 @@
 
-
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/home/Hero";
 import { FeaturedCourses } from "@/components/home/FeaturedCourses";
 import { Button } from "@/components/ui/button";
-import { Shield, Zap, Globe, Heart } from "lucide-react";
+import { 
+  Shield, 
+  Zap, 
+  Globe, 
+  Heart, 
+  Laptop, 
+  Bot, 
+  Palette, 
+  Lock, 
+  BarChart3, 
+  Banknote 
+} from "lucide-react";
 
 export default function Home() {
   return (
@@ -50,12 +60,12 @@ export default function Home() {
             <p className="text-primary/60 max-w-xl mx-auto">نغطي أهم التخصصات المطلوبة في سوق العمل الحديث.</p>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
-            <CategoryCard title="تطوير الويب" courses={24} icon="💻" />
-            <CategoryCard title="الذكاء الاصطناعي" courses={12} icon="🤖" />
-            <CategoryCard title="التصميم الإبداعي" courses={18} icon="🎨" />
-            <CategoryCard title="الأمن السيبراني" courses={9} icon="🔒" />
-            <CategoryCard title="إدارة الأعمال" courses={15} icon="📊" />
-            <CategoryCard title="المحاسبة والمالية" courses={11} icon="💰" />
+            <CategoryCard title="تطوير الويب" courses={24} icon={<Laptop className="w-8 h-8" />} />
+            <CategoryCard title="الذكاء الاصطناعي" courses={12} icon={<Bot className="w-8 h-8" />} />
+            <CategoryCard title="التصميم الإبداعي" courses={18} icon={<Palette className="w-8 h-8" />} />
+            <CategoryCard title="الأمن السيبراني" courses={9} icon={<Lock className="w-8 h-8" />} />
+            <CategoryCard title="إدارة الأعمال" courses={15} icon={<BarChart3 className="w-8 h-8" />} />
+            <CategoryCard title="المحاسبة والمالية" courses={11} icon={<Banknote className="w-8 h-8" />} />
           </div>
         </div>
       </section>
@@ -141,11 +151,13 @@ function FeatureItem({ icon, title, description }: { icon: React.ReactNode; titl
   );
 }
 
-function CategoryCard({ title, courses, icon }: { title: string; courses: number; icon: string }) {
+function CategoryCard({ title, courses, icon }: { title: string; courses: number; icon: React.ReactNode }) {
   return (
-    <div className="bg-white border border-primary/5 luxury-shadow p-6 rounded-2xl hover:border-secondary/20 hover:translate-y-[-4px] transition-all cursor-pointer group text-right">
-      <div className="text-4xl mb-4 grayscale group-hover:grayscale-0 transition-all">{icon}</div>
-      <h3 className="text-lg font-headline font-bold text-primary mb-1">{title}</h3>
+    <div className="bg-white border border-primary/5 luxury-shadow p-8 rounded-3xl hover:border-secondary/20 hover:translate-y-[-4px] transition-all cursor-pointer group text-right">
+      <div className="w-14 h-14 bg-primary/5 rounded-2xl flex items-center justify-center text-primary/40 group-hover:bg-secondary/10 group-hover:text-secondary transition-all mb-6">
+        {icon}
+      </div>
+      <h3 className="text-xl font-headline font-bold text-primary mb-2">{title}</h3>
       <p className="text-sm text-primary/40">{courses} دورة تدريبية</p>
     </div>
   );
