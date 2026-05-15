@@ -156,9 +156,9 @@ export default function CoursesPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      {/* Header Banner Image - Starts exactly after Navbar */}
-      <section className="pt-[80px] w-full overflow-hidden bg-white">
-        <div className="relative w-full aspect-[21/9] md:aspect-[25/7]">
+      {/* Header Banner Image - Fixed spacing and height */}
+      <section className="pt-[92px] w-full overflow-hidden bg-white">
+        <div className="relative w-full aspect-[16/6] md:aspect-[5/1]">
            <Image 
              src="/Courses.png" 
              alt="Courses Banner" 
