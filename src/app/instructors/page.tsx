@@ -241,15 +241,15 @@ function InstructorCard({ instructor }: { instructor: any }) {
           <div className="flex items-center justify-between mb-5 text-[10px] text-primary/40 font-bold px-1">
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 text-secondary fill-current" />
-              <span>{instructor.rating} تقييم</span>
+              <span>{instructor.rating.toString()} تقييم</span>
             </div>
             <div className="flex items-center gap-1">
               <BookOpen className="w-3.5 h-3.5 text-secondary/60" />
-              <span>{instructor.courses} دورة</span>
+              <span>{instructor.courses.toString()} دورة</span>
             </div>
             <div className="flex items-center gap-1">
               <Users className="w-3.5 h-3.5 text-secondary/60" />
-              <span>{mounted ? instructor.students.toLocaleString() : ""} طالب</span>
+              <span>{mounted ? instructor.students.toLocaleString('en-US') : ""} طالب</span>
             </div>
           </div>
           <Link href={`/instructors/${instructor.id}`} className="block">

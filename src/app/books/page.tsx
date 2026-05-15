@@ -67,7 +67,7 @@ function BookCard({ book }: { book: any }) {
       <div className="p-4 md:p-6 space-y-4">
         <div className="flex items-center justify-between">
           <Badge className="bg-secondary/10 text-secondary border-none text-[9px] md:text-[10px]">{book.category}</Badge>
-          <div className="flex items-center gap-1 text-xs text-primary/40"><Star className="w-3 h-3 text-secondary fill-current" /> {book.rating}</div>
+          <div className="flex items-center gap-1 text-xs text-primary/40"><Star className="w-3 h-3 text-secondary fill-current" /> {book.rating.toString()}</div>
         </div>
         <h3 className="text-sm md:text-lg font-headline font-bold text-primary line-clamp-1">{book.title}</h3>
         <div className="flex items-center justify-between pt-4 border-t border-primary/5">

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Play, Users, BookMarked, Award, Star, GraduationCap } from "lucide-react";
 import Image from "next/image";

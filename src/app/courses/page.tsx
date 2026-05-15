@@ -192,7 +192,7 @@ export default function CoursesPage() {
                   تصفية الكورسات
                   {activeFiltersCount > 0 && (
                     <Badge className="bg-secondary text-white w-6 h-6 p-0 flex items-center justify-center rounded-full text-xs font-bold border-none">
-                      {activeFiltersCount}
+                      {activeFiltersCount.toString()}
                     </Badge>
                   )}
                 </Button>
@@ -294,7 +294,7 @@ export default function CoursesPage() {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2 text-primary/60 text-xs font-bold">
               <BookOpen className="w-4 h-4 text-secondary" />
-              <span>تم العثور على {filteredCourses.length} كورس</span>
+              <span>تم العثور على {filteredCourses.length.toString()} كورس</span>
             </div>
             <div className="flex gap-1">
               <Button variant="ghost" size="icon" onClick={() => setViewMode("grid")} className={cn("h-8 w-8", viewMode === "grid" ? "text-secondary" : "text-primary/30")}>
@@ -382,14 +382,14 @@ function CourseListingCard({ course }: { course: any }) {
         <div className="flex items-center justify-between py-4 border-y border-primary/5">
           <div className="flex items-center gap-1 text-sm font-bold text-secondary">
             <Star className="w-4 h-4 fill-current" />
-            <span>{course.rating}</span>
+            <span>{course.rating.toString()}</span>
           </div>
           <div className="text-left flex flex-col items-end">
             {course.oldPrice && (
-              <span className="text-[10px] text-primary/30 line-through leading-none mb-1.5">{mounted ? course.oldPrice.toLocaleString() : ""} ر.ي</span>
+              <span className="text-[10px] text-primary/30 line-through leading-none mb-1.5">{mounted ? course.oldPrice.toLocaleString('en-US') : ""} ر.ي</span>
             )}
             <span className="text-lg font-headline font-bold text-secondary leading-none">
-              {course.price === 0 ? "مجاني" : mounted ? `${course.price.toLocaleString()} ر.ي` : ""}
+              {course.price === 0 ? "مجاني" : mounted ? `${course.price.toLocaleString('en-US')} ر.ي` : ""}
             </span>
           </div>
         </div>
@@ -401,11 +401,11 @@ function CourseListingCard({ course }: { course: any }) {
           </div>
           <div className="flex flex-col items-center gap-1.5 border-x border-primary/10">
             <BookOpen className="w-3.5 h-3.5 text-secondary" />
-            <span>{course.lessons} درس</span>
+            <span>{course.lessons.toString()} درس</span>
           </div>
           <div className="flex flex-col items-center gap-1.5">
             <User className="w-3.5 h-3.5 text-secondary" />
-            <span>{course.students}</span>
+            <span>{course.students.toLocaleString('en-US')}</span>
           </div>
         </div>
 
