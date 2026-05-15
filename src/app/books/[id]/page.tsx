@@ -125,10 +125,10 @@ export default function BookDetailPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-3 md:gap-4">
                    <StatBox icon={<FileText className="w-5 h-5" />} label="الصفحات" value={mounted ? book.pages.toLocaleString('en-US') : ""} />
                    <StatBox icon={<Users className="w-5 h-5" />} label="المبيعات" value={mounted ? book.sales.toLocaleString('en-US') : ""} />
-                   <StatBox icon={<BookOpen className="w-5 h-5" />} label="النسخة" value="ورقية فاخرة" />
+                   <StatBox icon={<BookOpen className="w-5 h-5" />} label="النسخة" value="ورقية" />
                 </div>
               </div>
 
@@ -231,18 +231,17 @@ export default function BookDetailPage() {
                           <label className="text-sm font-bold text-primary flex items-center gap-2 mr-1">
                             <Banknote className="w-4 h-4 text-secondary" /> اختر البنك أو وسيلة الإيداع
                           </label>
-                          <Select value={selectedBankId} onValueChange={setSelectedBankId}>
-                            <SelectTrigger className="h-14 rounded-2xl bg-white border-primary/10 shadow-sm text-left font-headline text-lg" dir="ltr">
-                              <SelectValue placeholder="اختر البنك" />
-                            </SelectTrigger>
-                            <SelectContent className="font-body max-h-60" dir="rtl">
-                              {BANKS.map((bank) => (
-                                <SelectItem key={bank.id} value={bank.id.toString()} className="font-bold py-3">
-                                  {bank.name}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
+                          <select 
+                            value={selectedBankId} 
+                            onChange={(e) => setSelectedBankId(e.target.value)}
+                            className="w-full h-14 rounded-2xl bg-white border-primary/10 shadow-sm text-right px-4 font-headline text-lg outline-none focus:ring-2 focus:ring-secondary/20 transition-all appearance-none cursor-pointer"
+                          >
+                            {BANKS.map((bank) => (
+                              <option key={bank.id} value={bank.id.toString()}>
+                                {bank.name}
+                              </option>
+                            ))}
+                          </select>
                         </div>
 
                         <div className="bg-white p-6 rounded-[28px] border-2 border-primary/5 luxury-shadow flex items-center justify-between animate-in fade-in zoom-in-95 duration-300">
@@ -300,17 +299,17 @@ export default function BookDetailPage() {
 
 function StatBox({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-white p-4 rounded-2xl border border-primary/5 luxury-shadow text-center space-y-2">
-      <div className="text-secondary flex justify-center">{icon}</div>
-      <p className="text-[10px] text-primary/30 font-bold uppercase">{label}</p>
-      <p className="font-headline font-bold text-primary text-sm">{value}</p>
+    <div className="bg-white p-3 md:p-4 rounded-xl md:rounded-2xl border border-primary/5 luxury-shadow text-center space-y-1 md:space-y-2">
+      <div className="text-secondary flex justify-center scale-90 md:scale-100">{icon}</div>
+      <p className="text-[9px] md:text-[10px] text-primary/30 font-bold uppercase">{label}</p>
+      <p className="font-headline font-bold text-primary text-xs md:text-sm">{value}</p>
     </div>
   );
 }
 
 function ReviewItem({ name, rating, text, date }: { name: string; rating: number; text: string; date: string }) {
   return (
-    <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow space-y-3">
+    <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow space-y-3 text-right">
       <div className="flex items-center justify-between">
         <p className="font-bold text-primary text-sm">{name}</p>
         <div className="flex items-center gap-0.5">
@@ -320,7 +319,9 @@ function ReviewItem({ name, rating, text, date }: { name: string; rating: number
         </div>
       </div>
       <p className="text-xs text-primary/60 italic leading-relaxed">"{text}"</p>
-      <p className="text-[10px] text-primary/20 text-left">{date}</p>
+      <div className="flex justify-end">
+        <p className="text-[10px] text-primary/20">{date}</p>
+      </div>
     </div>
   );
 }
