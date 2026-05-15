@@ -59,8 +59,23 @@ export default function BookDetailPage() {
   const [mounted, setMounted] = useState(false);
   const [selectedBankId, setSelectedBankId] = useState<string>("1");
   const { toast } = useToast();
+
+  // محاكاة لبيانات المستخدم (سيتم استبدالها لاحقاً ببيانات Auth الحقيقية)
+  const [currentUser, setCurrentUser] = useState<{ isLoggedIn: boolean; name?: string } | null>(null);
   
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    // محاكاة جلب المستخدم
+    // setCurrentUser({ isLoggedIn: true, name: "أحمد علي" }); // مثال لمستخدم مسجل
+    // setCurrentUser({ isLoggedIn: true }); // مثال لمستخدم مسجل بدون اسم
+    setCurrentUser(null); // مثال لزائر
+  }, []);
+
+  const getUserDisplayName = () => {
+    if (!currentUser) return "زائر";
+    if (currentUser.isLoggedIn && !currentUser.name) return "مستخدم بلا اسم";
+    return currentUser.name || "مستخدم";
+  };
 
   const bookImage = PlaceHolderImages.find(img => img.id === 'book-1');
   const book = {
@@ -85,7 +100,8 @@ export default function BookDetailPage() {
   };
 
   const handleWhatsAppRequest = () => {
-    const message = `مرحباً، أنا مهتم بطلب كتاب: ${book.title}\nالسعر: ${book.price.toLocaleString('en-US')} ر.ي\nسأقوم بالإيداع في حساب ${selectedBank.name} الآن، يرجى تحضير الكتاب.`;
+    const userName = getUserDisplayName();
+    const message = `مرحباً، أنا مهتم بطلب كتاب: ${book.title}\nالسعر: ${book.price.toLocaleString('en-US')} ر.ي\nالمرسل: ${userName}\nسأقوم بالإيداع في حساب ${selectedBank.name} الآن، يرجى تحضير الكتاب.`;
     window.open(`https://wa.me/967775258830?text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -104,7 +120,7 @@ export default function BookDetailPage() {
                   <Badge className="bg-secondary/10 text-secondary border-none font-headline px-4 py-1">{book.category}</Badge>
                   <div className="flex items-center gap-1 text-secondary">
                     <Star className="w-5 h-5 fill-current" />
-                    <span className="font-bold text-xl">{book.rating.toLocaleString('en-US')}</span>
+                    <span className="font-bold text-xl">{mounted ? book.rating.toLocaleString('en-US') : ""}</span>
                   </div>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary leading-tight">{book.title}</h1>
@@ -218,7 +234,7 @@ export default function BookDetailPage() {
                             <Banknote className="w-4 h-4 text-secondary" /> اختر البنك أو وسيلة الإيداع
                           </label>
                           <Select value={selectedBankId} onValueChange={setSelectedBankId}>
-                            <SelectTrigger className="h-14 rounded-2xl bg-white border-primary/10 shadow-sm text-right font-headline text-lg">
+                            <SelectTrigger className="h-14 rounded-2xl bg-white border-primary/10 shadow-sm text-left font-headline text-lg" dir="ltr">
                               <SelectValue placeholder="اختر البنك" />
                             </SelectTrigger>
                             <SelectContent className="font-body max-h-60" dir="rtl">
@@ -258,8 +274,12 @@ export default function BookDetailPage() {
                              <MessageCircle className="w-5 h-5" /> ملاحظة هامة
                           </h4>
                           <p className="text-xs text-primary/70 leading-relaxed font-bold">
-                            يجب إرسال صورة سند الإيداع أو الحوالة إلى رقم الواتساب الخاص بالمنصة <span className="text-secondary">(967-775258830)</span> مع ذكر اسمك والمدينة لتوصيل الكتاب.
+                            يجب إرسال صورة سند الإيداع أو الحوالة إلى رقم الواتساب الخاص بالمنصة <span className="text-secondary">(967-775258830)</span> لتأكيد الطلب.
                           </p>
+                          <div className="flex items-center gap-2 p-3 bg-white/50 rounded-xl text-[11px] font-bold text-primary/60">
+                             <CheckCircle2 className="w-4 h-4 text-secondary" />
+                             طلبك سيتم باسم: <span className="text-primary">{getUserDisplayName()}</span>
+                          </div>
                           <Button 
                             className="w-full h-14 bg-secondary text-white rounded-xl font-headline text-lg gap-2 gold-glow"
                             onClick={handleWhatsAppRequest}
@@ -270,8 +290,6 @@ export default function BookDetailPage() {
                       </div>
                     </DialogContent>
                   </Dialog>
-
-                  <p className="text-xs text-primary/30 font-bold">التوصيل متاح لجميع المحافظات خلال 48 ساعة</p>
                 </div>
               </div>
             </div>
