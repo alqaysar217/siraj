@@ -41,12 +41,13 @@ const CERTIFICATE_FILTERS = ["الكل", "شهادة اتمام", "بدون شه
 const ALL_COURSES = [
   {
     id: "web-1",
-    title: "تطوير الويب الشامل - Full Stack",
+    title: "تطوير الويب الشامل - Full Stack Web Development",
     category: "برمجة",
     level: "مبتدئ",
     instructor: "م. أحمد علي",
     rating: 4.9,
     students: 1240,
+    lessons: 45,
     duration: "45 ساعة",
     price: 45000,
     isFree: false,
@@ -62,6 +63,7 @@ const ALL_COURSES = [
     instructor: "د. سارة محمود",
     rating: 4.8,
     students: 850,
+    lessons: 32,
     duration: "32 ساعة",
     price: 60000,
     isFree: false,
@@ -71,12 +73,13 @@ const ALL_COURSES = [
   },
   {
     id: "data-1",
-    title: "تحليل البيانات باستخدام Python",
+    title: "تحليل البيانات باستخدام Python والتحليل الإحصائي",
     category: "تحليل بيانات",
     level: "مبتدئ",
     instructor: "خالد السعيد",
     rating: 4.9,
     students: 1500,
+    lessons: 30,
     duration: "30 ساعة",
     price: 0,
     isFree: true,
@@ -86,12 +89,13 @@ const ALL_COURSES = [
   },
   {
     id: "design-1",
-    title: "احتراف تصميم واجهات المستخدم UI/UX",
+    title: "احتراف تصميم واجهات المستخدم UI/UX الحديثة",
     category: "تصميم",
     level: "مبتدئ",
     instructor: "ليلى حسن",
     rating: 4.7,
     students: 2100,
+    lessons: 28,
     duration: "28 ساعة",
     price: 35000,
     isFree: false,
@@ -101,12 +105,13 @@ const ALL_COURSES = [
   },
   {
     id: "acc-1",
-    title: "المحاسبة المالية لغير المحاسبين",
+    title: "المحاسبة المالية المتقدمة لغير المحاسبين",
     category: "محاسبة",
     level: "مبتدئ",
     instructor: "أحمد المنصور",
     rating: 4.6,
     students: 420,
+    lessons: 15,
     duration: "15 ساعة",
     price: 25000,
     isFree: false,
@@ -116,12 +121,13 @@ const ALL_COURSES = [
   },
   {
     id: "cyber-1",
-    title: "الأمن السيبراني والتحقيق الرقمي",
+    title: "الأمن السيبراني والتحقيق الرقمي المتقدم",
     category: "أمن سيبراني",
     level: "متقدم",
     instructor: "عمر الفاروق",
     rating: 4.9,
     students: 540,
+    lessons: 40,
     duration: "40 ساعة",
     price: 55000,
     isFree: false,
@@ -354,7 +360,7 @@ export default function CoursesPage() {
 
       <footer className="bg-primary text-white py-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-white/40 text-sm">© 2024 SIRAJ.IO - جميع الحقوق محفوظة لمنصة سراج.</p>
+          <p className="text-white/40 text-sm">© 2024 سراج - جميع الحقوق محفوظة لمنصة سراج.</p>
         </div>
       </footer>
     </main>
@@ -369,6 +375,7 @@ function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid"
   }, []);
 
   const courseImage = PlaceHolderImages.find(img => img.id === course.image);
+  const instructorImage = PlaceHolderImages.find(img => img.id === 'instructor-1');
 
   return (
     <div className={cn(
@@ -403,19 +410,10 @@ function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid"
         </div>
       </div>
       
-      {/* Content */}
-      <div className="p-6 space-y-4 flex flex-col flex-1">
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2 py-1 rounded-md">
-            {course.category}
-          </span>
-          <div className="flex items-center gap-1 text-xs text-primary/40">
-            <Star className="w-3 h-3 text-secondary fill-current" />
-            <span className="font-bold text-primary/80">{course.rating}</span>
-            <span>({course.students})</span>
-          </div>
-        </div>
-
+      {/* Content Area - Reordered as per user request */}
+      <div className="p-6 space-y-5 flex flex-col flex-1">
+        
+        {/* Row 1: Course Title */}
         <h3 className={cn(
           "font-headline font-bold text-primary leading-snug group-hover:text-secondary transition-colors line-clamp-2",
           viewMode === "grid" ? "text-lg h-14" : "text-xl md:text-2xl h-auto"
@@ -423,49 +421,76 @@ function CourseListingCard({ course, viewMode }: { course: any; viewMode: "grid"
           {course.title}
         </h3>
 
-        <div className="flex flex-wrap items-center gap-4 text-xs text-primary/60 border-b border-primary/5 pb-4">
-          <div className="flex items-center gap-1.5">
-            <User className="w-3.5 h-3.5" />
-            <span>{course.instructor}</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5" />
-            <span>{course.duration}</span>
-          </div>
-          {viewMode === "list" && (
-            <div className="flex items-center gap-1.5">
-               <CheckCircle className="w-3.5 h-3.5 text-secondary" />
-               <span>مستوى {course.level}</span>
+        {/* Row 2: Instructor Photo/Name + Category */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-primary/5">
+              {instructorImage?.imageUrl && (
+                <Image src={instructorImage.imageUrl} alt={course.instructor} fill className="object-cover" />
+              )}
             </div>
-          )}
+            <div className="flex flex-col">
+              <span className="text-xs font-bold text-primary">{course.instructor}</span>
+              <span className="text-[10px] text-primary/40">مدرب معتمد</span>
+            </div>
+          </div>
+          <Badge variant="secondary" className="bg-secondary/10 text-secondary border-none text-[10px] px-3">
+            {course.category}
+          </Badge>
         </div>
 
-        <div className={cn(
-          "mt-auto flex items-center justify-between",
-          viewMode === "grid" ? "pt-4" : "pt-2"
-        )}>
-          <div className="space-y-0.5">
+        {/* Row 3: Rating + Level + Price */}
+        <div className="flex items-center justify-between py-3 border-y border-primary/5">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 text-xs font-bold text-primary">
+              <Star className="w-3.5 h-3.5 text-secondary fill-current" />
+              <span>{course.rating}</span>
+            </div>
+            <div className="w-px h-3 bg-primary/10" />
+            <Badge variant="outline" className="text-[10px] border-primary/10 text-primary/60 font-medium">
+              مستوى {course.level}
+            </Badge>
+          </div>
+          <div className="text-left">
             {course.isFree ? (
-              <p className="text-xl font-headline font-bold text-green-600">مجاني</p>
+              <span className="text-lg font-headline font-bold text-green-600">مجاني</span>
             ) : (
-              <>
-                <p className="text-xs text-primary/40 line-through">
-                  {isMounted ? (course.price * 1.2).toLocaleString() : (course.price * 1.2)} ريال
-                </p>
-                <p className="text-xl font-headline font-bold text-primary">
-                  {isMounted ? course.price.toLocaleString() : course.price} ريال
-                </p>
-              </>
+              <div className="flex flex-col items-end">
+                <span className="text-[10px] text-primary/30 line-through">
+                  {isMounted ? (course.price * 1.2).toLocaleString() : ""} ريال
+                </span>
+                <span className="text-lg font-headline font-bold text-primary">
+                  {isMounted ? course.price.toLocaleString() : ""} ريال
+                </span>
+              </div>
             )}
           </div>
-          <div className="flex gap-2">
-            <Link href={`/courses/${course.id}`}>
-              <Button size={viewMode === "list" ? "lg" : "icon"} className={cn("rounded-xl bg-primary hover:bg-secondary group/btn", viewMode === "list" && "px-6 gap-2 font-headline")}>
-                {viewMode === "list" && "عرض التفاصيل"}
-                <ArrowLeft className={cn("w-5 h-5 transition-transform group-hover/btn:-translate-x-1", viewMode === "list" && "w-4 h-4")} />
-              </Button>
-            </Link>
+        </div>
+
+        {/* Row 4: Stats (Hours, Lessons, Students) */}
+        <div className="flex items-center justify-between text-[11px] text-primary/60 bg-primary/5 p-3 rounded-xl border border-primary/5">
+          <div className="flex items-center gap-1.5">
+            <Clock className="w-4 h-4 text-secondary" />
+            <span className="font-bold">{course.duration}</span>
           </div>
+          <div className="flex items-center gap-1.5">
+            <BookOpen className="w-4 h-4 text-secondary" />
+            <span className="font-bold">{course.lessons} درس</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <User className="w-4 h-4 text-secondary" />
+            <span className="font-bold">{course.students} طالب</span>
+          </div>
+        </div>
+
+        {/* Button */}
+        <div className="mt-auto pt-2">
+          <Link href={`/courses/${course.id}`} className="w-full">
+            <Button size="lg" className="w-full rounded-2xl bg-primary hover:bg-secondary text-white font-headline gap-2 group/btn shadow-md transition-all active:scale-95">
+              تفاصيل الكورس
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
