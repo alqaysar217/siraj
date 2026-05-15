@@ -12,8 +12,8 @@ const BOOKS = [
     title: "موسوعة تطوير الويب الحديثة",
     author: "د. خالد السعيد",
     category: "برمجة",
-    price: "12,000 ريال يمني",
-    oldPrice: "15,000 ريال",
+    price: "12,000 ر.ي",
+    oldPrice: "15,000 ر.ي",
     rating: 4.9,
     sales: 450,
     image: "book-1"
@@ -23,7 +23,7 @@ const BOOKS = [
     title: "خوارزميات وهياكل البيانات",
     author: "م. سارة المفلحي",
     category: "علوم حاسوب",
-    price: "8,500 ريال يمني",
+    price: "8,500 ر.ي",
     rating: 4.7,
     sales: 320,
     image: "book-2"
@@ -43,7 +43,7 @@ export default function BooksPage() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {BOOKS.map((book) => (
               <BookCard key={book.id} book={book} />
             ))}
@@ -59,19 +59,19 @@ function BookCard({ book }: { book: any }) {
 
   return (
     <div className="group bg-white rounded-3xl overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-5px] transition-all duration-300">
-      <div className="relative aspect-[3/4] overflow-hidden bg-primary/5 p-8">
+      <div className="relative aspect-[3/4] overflow-hidden bg-primary/5 p-4 md:p-8">
         <div className="relative w-full h-full shadow-2xl transition-transform duration-500 group-hover:scale-105">
           {bookImage?.imageUrl && <Image src={bookImage.imageUrl} alt={book.title} fill className="object-cover rounded-md" />}
         </div>
       </div>
-      <div className="p-6 space-y-4">
+      <div className="p-4 md:p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <Badge className="bg-secondary/10 text-secondary border-none text-[10px]">{book.category}</Badge>
+          <Badge className="bg-secondary/10 text-secondary border-none text-[9px] md:text-[10px]">{book.category}</Badge>
           <div className="flex items-center gap-1 text-xs text-primary/40"><Star className="w-3 h-3 text-secondary fill-current" /> {book.rating}</div>
         </div>
-        <h3 className="text-lg font-headline font-bold text-primary line-clamp-1">{book.title}</h3>
+        <h3 className="text-sm md:text-lg font-headline font-bold text-primary line-clamp-1">{book.title}</h3>
         <div className="flex items-center justify-between pt-4 border-t border-primary/5">
-          <div className="font-headline font-bold text-secondary text-lg">{book.price}</div>
+          <div className="font-headline font-bold text-secondary text-base md:text-lg">{book.price}</div>
         </div>
       </div>
     </div>

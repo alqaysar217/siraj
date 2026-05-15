@@ -17,7 +17,7 @@ const COURSES = [
     rating: 4.9,
     students: 1240,
     duration: "45 ساعة",
-    price: "45,000 ريال يمني",
+    price: "45,000 ر.ي",
     image: "web-dev-course",
     badge: "الأكثر مبيعاً"
   },
@@ -30,7 +30,7 @@ const COURSES = [
     rating: 4.8,
     students: 850,
     duration: "32 ساعة",
-    price: "60,000 ريال يمني",
+    price: "60,000 ر.ي",
     image: "ai-course",
     badge: "جديد"
   }
