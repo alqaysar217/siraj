@@ -97,15 +97,6 @@ export default function InstructorProfilePage() {
                     <Image src={instImage.imageUrl} alt={INSTRUCTOR_DATA.name} fill className="object-cover" priority />
                   )}
                 </div>
-                <div className="absolute -bottom-6 -right-6 bg-white p-5 rounded-[32px] shadow-2xl border border-primary/5 luxury-shadow flex items-center gap-4 animate-bounce-slow">
-                   <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
-                      <ShieldCheck className="w-7 h-7" />
-                   </div>
-                   <div>
-                     <p className="text-[10px] text-primary/40 font-bold uppercase tracking-wider">الحالة</p>
-                     <p className="text-sm font-headline font-bold text-primary">مدرب معتمد</p>
-                   </div>
-                </div>
               </div>
             </div>
 
