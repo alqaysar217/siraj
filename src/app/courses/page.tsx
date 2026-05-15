@@ -157,8 +157,8 @@ export default function CoursesPage() {
           </div>
 
           <div className={cn(
-            "grid gap-4",
-            viewMode === "grid" ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" : "grid-cols-1"
+            "grid gap-6",
+            viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"
           )}>
             {filteredCourses.map((course) => (
               <CourseListingCard key={course.id} course={course} />
@@ -178,59 +178,68 @@ function CourseListingCard({ course }: { course: any }) {
   const instructorImage = PlaceHolderImages.find(img => img.id === 'instructor-1');
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-4px] transition-all duration-300 flex flex-col text-right">
+    <div className="group bg-white rounded-2xl overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-4px] transition-all duration-300 flex flex-col text-right h-full">
       <div className="relative aspect-video shrink-0 overflow-hidden">
         {courseImage?.imageUrl && (
           <Image src={courseImage.imageUrl} alt={course.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
         )}
       </div>
       
-      <div className="p-4 space-y-4 flex flex-col flex-1">
+      <div className="p-5 space-y-5 flex flex-col flex-1">
         {/* السطر الأول: العنوان */}
-        <h3 className="font-headline font-bold text-primary leading-tight text-xs h-9 line-clamp-2">{course.title}</h3>
+        <h3 className="font-headline font-bold text-primary leading-tight text-sm line-clamp-2 h-10">{course.title}</h3>
         
         {/* السطر الثاني: المدرب والمجال */}
         <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <div className="relative w-6 h-6 rounded-full overflow-hidden border border-primary/5">
+          <div className="flex items-center gap-3">
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-primary/5">
               {instructorImage?.imageUrl && <Image src={instructorImage.imageUrl} alt="Instructor" fill className="object-cover" />}
             </div>
             <div className="flex flex-col">
-              <span className="text-[9px] font-bold text-primary leading-none">{course.instructor}</span>
-              <span className="text-[7px] text-primary/40 font-medium leading-none mt-0.5">مدرب معتمد</span>
+              <span className="text-[11px] font-bold text-primary leading-none">{course.instructor}</span>
+              <span className="text-[9px] text-primary/40 font-medium leading-none mt-1">مدرب معتمد</span>
             </div>
           </div>
-          <Badge className="bg-secondary/10 text-secondary border-none text-[8px] h-4 px-1.5">{course.category}</Badge>
+          <Badge className="bg-secondary/10 text-secondary border-none text-[9px] h-5 px-2">{course.category}</Badge>
         </div>
 
         {/* السطر الثالث: التقييم، المستوى والسعر */}
-        <div className="flex items-center justify-between py-2 border-y border-primary/5">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-0.5 text-[9px] font-bold text-secondary">
-              <Star className="w-3 h-3 fill-current" />
+        <div className="flex items-center justify-between py-3 border-y border-primary/5">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 text-[11px] font-bold text-secondary">
+              <Star className="w-3.5 h-3.5 fill-current" />
               <span>{course.rating}</span>
             </div>
-            <span className="text-[8px] text-primary/40 font-medium">{course.level}</span>
+            <span className="text-[10px] text-primary/40 font-medium">{course.level}</span>
           </div>
           <div className="text-left flex flex-col items-end">
             {course.oldPrice && (
-              <span className="text-[8px] text-primary/30 line-through leading-none">{mounted ? course.oldPrice.toLocaleString() : ""} ر.ي</span>
+              <span className="text-[9px] text-primary/30 line-through leading-none mb-1">{mounted ? course.oldPrice.toLocaleString() : ""} ر.ي</span>
             )}
-            <span className="text-[10px] font-headline font-bold text-secondary leading-none">
+            <span className="text-sm font-headline font-bold text-secondary leading-none">
               {course.price === 0 ? "مجاني" : mounted ? `${course.price.toLocaleString()} ر.ي` : ""}
             </span>
           </div>
         </div>
 
         {/* السطر الأخير: الإحصائيات الفنية */}
-        <div className="flex items-center justify-between text-[8px] text-primary/50 bg-primary/5 p-1.5 rounded-lg font-bold">
-          <div className="flex items-center gap-1"><Clock className="w-2.5 h-2.5" /> {course.duration}</div>
-          <div className="flex items-center gap-1"><BookOpen className="w-2.5 h-2.5" /> {course.lessons} درس</div>
-          <div className="flex items-center gap-1"><User className="w-2.5 h-2.5" /> {course.students}</div>
+        <div className="grid grid-cols-3 gap-1 text-[9px] text-primary/50 bg-primary/5 p-2 rounded-xl font-bold text-center">
+          <div className="flex flex-col items-center gap-1">
+            <Clock className="w-3 h-3 text-secondary" />
+            <span>{course.duration}</span>
+          </div>
+          <div className="flex flex-col items-center gap-1 border-x border-primary/10">
+            <BookOpen className="w-3 h-3 text-secondary" />
+            <span>{course.lessons} درس</span>
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <User className="w-3 h-3 text-secondary" />
+            <span>{course.students} طالب</span>
+          </div>
         </div>
 
         <Link href={`/courses/${course.id}`} className="mt-auto">
-          <Button size="sm" className="w-full h-8 rounded-lg bg-primary hover:bg-secondary text-white font-headline text-[10px]">تفاصيل الكورس</Button>
+          <Button size="sm" className="w-full h-10 rounded-xl bg-primary hover:bg-secondary text-white font-headline text-xs transition-colors">تفاصيل الكورس</Button>
         </Link>
       </div>
     </div>
