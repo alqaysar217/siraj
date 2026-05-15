@@ -39,53 +39,53 @@ export default function CourseDetailPage() {
       <div className="pb-20">
         <div className="container mx-auto px-4 max-w-5xl mt-8">
           
-          {/* 2. بطاقة تفاصيل الكورس الأساسية */}
-          <div className="space-y-8 mb-12">
-            <div className="space-y-4">
-              <div className="flex flex-wrap gap-2">
-                <Badge className="bg-secondary/10 text-secondary border-none font-headline">برمجة</Badge>
-                <Badge className="bg-primary/5 text-primary/60 border-none font-headline">مستوى مبتدئ</Badge>
-              </div>
-              <h1 className="text-3xl lg:text-5xl font-headline font-bold text-primary leading-tight">تطوير الويب الشامل - Full Stack Web Development</h1>
-            </div>
+          {/* 2. الترتيب المطلوب: السطر الأول (اسم الكورس) */}
+          <div className="mb-8">
+            <h1 className="text-3xl lg:text-5xl font-headline font-bold text-primary leading-tight">تطوير الويب الشامل - Full Stack Web Development</h1>
+          </div>
 
-            <div className="bg-white p-8 rounded-[20px] border border-primary/5 luxury-shadow flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-secondary">
-                  <Star className="w-6 h-6 fill-current" />
-                  <span className="font-bold text-3xl">4.9</span>
-                  <span className="text-primary/40 text-sm mr-1">(1,240 تقييم من الطلاب)</span>
-                </div>
-                <p className="text-primary/70 font-medium">انضم لرحلة تعليمية تأخذك من الصفر حتى سوق العمل العالمي.</p>
-              </div>
-              <div className="text-center md:text-left shrink-0">
-                <div className="text-primary/30 line-through text-sm mb-1">60,000 ريال يمني</div>
-                <div className="text-4xl lg:text-5xl font-headline font-bold text-secondary">45,000 ريال يمني</div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-12 h-16 rounded-2xl text-xl font-headline shadow-lg gold-glow grow md:grow-0">
-                سجل الآن في الكورس
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary/10 h-16 rounded-2xl font-headline px-8">
-                <Share2 className="w-5 h-5 ml-2" /> 
-                مشاركة الكورس
-              </Button>
+          {/* السطر الثاني: المجال والمستوى والتقييم */}
+          <div className="flex flex-wrap items-center gap-4 mb-6 pb-6 border-b border-primary/5">
+            <Badge className="bg-secondary/10 text-secondary border-none font-headline px-4 py-1">برمجة</Badge>
+            <Badge className="bg-primary/5 text-primary/60 border-none font-headline px-4 py-1">مستوى مبتدئ</Badge>
+            <div className="flex items-center gap-1.5 text-secondary mr-auto">
+              <Star className="w-5 h-5 fill-current" />
+              <span className="font-bold text-xl">4.9</span>
+              <span className="text-primary/40 text-xs mr-1">(1,240 تقييم من الطلاب)</span>
             </div>
           </div>
 
-          {/* 3. إحصائيات تقنية (تحت بطاقة التفاصيل) */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
+          {/* السطر الثالث: عدد الساعات والدروس والطلاب */}
+          <div className="grid grid-cols-3 gap-4 mb-8">
             <QuickStat icon={<Clock />} label="مدة الكورس" value="45 ساعة" />
             <QuickStat icon={<BookOpen />} label="الدروس" value="45 درس" />
             <QuickStat icon={<User />} label="الطلاب" value="2,500 طالب" />
-            <QuickStat icon={<GraduationCap />} label="الشهادة" value="معتمدة" />
-            <QuickStat icon={<Globe />} label="اللغة" value="العربية" />
-            <QuickStat icon={<HelpCircle />} label="الدعم" value="أسئلة وأجوبة" />
           </div>
 
-          {/* 4. التبويبات التفصيلية (نظرة عامة، منهج، مدرب، مراجعات) */}
+          {/* السطر الرابع: السعر القديم والجديد والشهادة والأسئلة ولغة الكورس */}
+          <div className="bg-white p-8 rounded-[32px] border border-primary/5 luxury-shadow mb-12">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-4">
+                 <div className="flex flex-col">
+                    <span className="text-primary/30 line-through text-sm">60,000 ريال يمني</span>
+                    <span className="text-4xl lg:text-5xl font-headline font-bold text-secondary">45,000 ريال يمني</span>
+                 </div>
+                 <div className="flex flex-wrap gap-4 pt-4">
+                    <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-10 h-14 rounded-2xl text-lg font-headline shadow-lg gold-glow">سجل الآن</Button>
+                    <Button size="lg" variant="outline" className="border-primary/10 h-14 rounded-2xl font-headline px-6"><Share2 className="w-5 h-5" /></Button>
+                 </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 border-r md:pr-8 border-primary/5">
+                <MiniStat icon={<GraduationCap />} label="الشهادة" value="معتمدة" />
+                <MiniStat icon={<HelpCircle />} label="أسئلة الوحدات" value="120 سؤال" />
+                <MiniStat icon={<Globe />} label="اللغة" value="العربية" />
+                <MiniStat icon={<Zap />} label="الدعم" value="مباشر" />
+              </div>
+            </div>
+          </div>
+
+          {/* 3. التبويبات التفصيلية (نظرة عامة، منهج، مدرب، مراجعات) */}
           <Tabs defaultValue="overview" className="w-full" dir="rtl">
             <TabsList className="bg-white border p-1 rounded-2xl h-auto flex-wrap justify-start mb-8 luxury-shadow">
               <TabsTrigger value="overview" className="data-[state=active]:bg-secondary data-[state=active]:text-white px-8 py-3 rounded-xl font-headline transition-all">نظرة عامة</TabsTrigger>
@@ -111,13 +111,6 @@ export default function CourseDetailPage() {
                       <span className="text-primary/70">{item}</span>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              <div className="space-y-4 px-2">
-                <h3 className="text-2xl font-headline font-bold text-primary">وصف الكورس</h3>
-                <div className="text-primary/70 leading-relaxed space-y-4">
-                  <p>هذا الكورس هو دليلك الشامل للدخول إلى عالم تطوير الويب. لقد صممنا هذا المنهج ليكون عملياً بنسبة 100%، حيث ستقوم ببناء أكثر من 5 مشاريع حقيقية خلال فترة تعلمك.</p>
                 </div>
               </div>
             </TabsContent>
@@ -150,7 +143,6 @@ export default function CourseDetailPage() {
                       <MessageCircle className="w-4 h-4" />
                       تواصل مع المدرب
                     </Button>
-                    <Button variant="outline" className="rounded-xl font-headline h-12 px-6 border-primary/10">عرض جميع الكورسات</Button>
                   </div>
                 </div>
               </div>
@@ -161,15 +153,10 @@ export default function CourseDetailPage() {
                 <ReviewItem name="علي عبدالله" rating={5} comment="كورس جبار ومفيد جداً، الشرح مبسط والمشاريع العملية ساعدتني كثيراً في الفهم." date="منذ شهر" />
                 <ReviewItem name="سارة محمد" rating={4} comment="المحتوى غني جداً، المدرب يشرح بالتفصيل الممل وهذا شيء ممتاز للمبتدئين." date="منذ أسبوعين" />
               </div>
-              <div className="bg-primary/5 p-8 rounded-[32px] text-center space-y-4">
-                <h4 className="font-headline font-bold text-primary">هل لديك رأي حول الكورس؟</h4>
-                <p className="text-sm text-primary/60">آراء الطلاب تساعد الآخرين في معرفة جودة المحتوى وفائدة المسار.</p>
-                <Button variant="outline" className="rounded-xl border-primary/20 font-headline h-12">إضافة تقييم ومراجعة</Button>
-              </div>
             </TabsContent>
           </Tabs>
 
-          {/* 5. قسم التسجيل النهائي */}
+          {/* 4. قسم الدعوة للانضمام النهائي */}
           <div className="mt-24 bg-primary rounded-[48px] p-10 md:p-16 text-center text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] -mr-32 -mt-32" />
             <h2 className="text-3xl md:text-4xl font-headline font-bold mb-6">هل أنت جاهز لبدء رحلة الاحتراف؟</h2>
@@ -185,10 +172,22 @@ export default function CourseDetailPage() {
 
 function QuickStat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-white p-4 rounded-2xl border border-primary/5 luxury-shadow flex flex-col items-center justify-center text-center gap-1 group hover:border-secondary/20 transition-colors">
+    <div className="bg-white p-6 rounded-2xl border border-primary/5 luxury-shadow flex flex-col items-center justify-center text-center gap-1 group hover:border-secondary/20 transition-colors">
       <div className="text-secondary mb-1 group-hover:scale-110 transition-transform">{icon}</div>
       <span className="text-[10px] text-primary/40 font-bold uppercase tracking-tight">{label}</span>
-      <span className="text-sm font-headline font-bold text-primary">{value}</span>
+      <span className="text-lg font-headline font-bold text-primary">{value}</span>
+    </div>
+  );
+}
+
+function MiniStat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="flex items-center gap-3 p-3 rounded-xl bg-primary/5">
+      <div className="text-secondary">{icon}</div>
+      <div className="flex flex-col">
+        <span className="text-[9px] text-primary/40 font-bold">{label}</span>
+        <span className="text-xs font-headline font-bold text-primary">{value}</span>
+      </div>
     </div>
   );
 }
