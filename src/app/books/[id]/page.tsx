@@ -175,8 +175,8 @@ export default function BookDetailPage() {
                 </TabsContent>
 
                 <TabsContent value="reviews" className="animate-in fade-in slide-in-from-bottom-2 grid md:grid-cols-2 gap-6">
-                  <ReviewItem name="علي سالم" rating={5} text="كتاب ممتاز جداً، الشرح فيه متسلسل ومنطقي وسهل الفهم." date="قبل شهر" />
-                  <ReviewItem name="سارة محمد" rating={5} text="أفضل مرجع ورقي لاقتناءه في مكتبتي البرمجية." date="قبل أسبوعين" />
+                  <ReviewItem name="علي سالم" rating={5} text="كتاب ممتاز جداً، الشرح فيه متسلسل ومنطقي وسهل الفهم." date="منذ شهر" />
+                  <ReviewItem name="سارة محمد" rating={5} text="أفضل مرجع ورقي لاقتناءه في مكتبتي البرمجية." date="منذ أسبوعين" />
                 </TabsContent>
               </Tabs>
             </div>
@@ -303,19 +303,24 @@ function StatBox({ icon, label, value }: { icon: React.ReactNode; label: string;
 
 function ReviewItem({ name, rating, text, date }: { name: string; rating: number; text: string; date: string }) {
   return (
-    <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow space-y-3 text-right">
+    <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow space-y-4 text-right">
       <div className="flex items-center justify-between">
-        <p className="font-bold text-primary text-sm">{name}</p>
-        <div className="flex items-center gap-0.5">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary font-bold text-lg">
+            {name[0]}
+          </div>
+          <div className="text-right">
+            <p className="text-sm font-bold text-primary">{name}</p>
+            <p className="text-[10px] text-primary/40">{date}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1">
           {[...Array(5)].map((_, i) => (
             <Star key={i} className={`w-3.5 h-3.5 ${i < rating ? 'text-secondary fill-current' : 'text-primary/10'}`} />
           ))}
         </div>
       </div>
-      <p className="text-xs text-primary/60 italic leading-relaxed">"{text}"</p>
-      <div className="flex justify-end">
-        <p className="text-[10px] text-primary/20">{date}</p>
-      </div>
+      <p className="text-sm text-primary/70 leading-relaxed italic">"{text}"</p>
     </div>
   );
 }

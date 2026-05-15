@@ -49,7 +49,7 @@ const INSTRUCTOR_DATA = {
       category: "برمجة",
       level: "مستوى مبتدئ",
       rating: 4.9,
-      students: 2500,
+      students: 1240,
       lessons: 45,
       duration: "45 ساعة",
       price: 45000,
@@ -63,9 +63,9 @@ const INSTRUCTOR_DATA = {
       category: "برمجة",
       level: "مستوى متوسط",
       rating: 4.8,
-      students: 1800,
-      lessons: 30,
-      duration: "30 ساعة",
+      students: 850,
+      lessons: 32,
+      duration: "32 ساعة",
       price: 30000,
       oldPrice: 38000,
       image: "hero-bg",
@@ -173,9 +173,9 @@ export default function InstructorProfilePage() {
                    </div>
                    آراء الطلاب والتقييمات
                 </h2>
-                <div className="grid gap-4">
+                <div className="grid gap-6">
                   {INSTRUCTOR_DATA.reviews.map((review, i) => (
-                    <ReviewCard key={i} review={review} />
+                    <ReviewItem key={i} review={review} />
                   ))}
                 </div>
                 <Button variant="ghost" className="w-full h-14 rounded-[20px] border-2 border-dashed border-primary/10 text-primary/40 font-headline hover:bg-primary/5 transition-all">عرض جميع التقييمات</Button>
@@ -295,26 +295,26 @@ function CourseListingCard({ course }: { course: any }) {
   );
 }
 
-function ReviewCard({ review }: { review: any }) {
+function ReviewItem({ review }: { review: any }) {
   return (
-    <div className="bg-primary/5 p-5 rounded-[20px] border border-transparent hover:border-secondary/10 transition-all space-y-3">
+    <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow space-y-4 text-right">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary font-bold text-lg shadow-sm">
+          <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary font-bold text-lg">
             {review.name[0]}
           </div>
-          <div>
-            <p className="text-xs font-headline font-bold text-primary">{review.name}</p>
+          <div className="text-right">
+            <p className="text-sm font-bold text-primary">{review.name}</p>
             <p className="text-[10px] text-primary/40">{review.date}</p>
           </div>
         </div>
-        <div className="flex items-center gap-0.5 bg-white px-2 py-1 rounded-lg border border-primary/5 shadow-sm">
+        <div className="flex items-center gap-1">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className={`w-2.5 h-2.5 ${i < review.rating ? 'text-secondary fill-current' : 'text-primary/10'}`} />
+            <Star key={i} className={`w-3.5 h-3.5 ${i < review.rating ? 'text-secondary fill-current' : 'text-primary/10'}`} />
           ))}
         </div>
       </div>
-      <p className="text-[11px] text-primary/70 leading-relaxed italic font-body">"{review.comment}"</p>
+      <p className="text-sm text-primary/70 leading-relaxed italic">"{review.comment}"</p>
     </div>
   );
 }

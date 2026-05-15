@@ -364,13 +364,13 @@ function ModuleItem({ title, lessons, duration }: { title: string; lessons: numb
 
 function ReviewItem({ name, rating, comment, date }: { name: string; rating: number; comment: string; date: string }) {
   return (
-    <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow space-y-4">
+    <div className="bg-white p-6 rounded-[24px] border border-primary/5 luxury-shadow space-y-4 text-right">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary font-bold text-lg">
             {name[0]}
           </div>
-          <div>
+          <div className="text-right">
             <p className="text-sm font-bold text-primary">{name}</p>
             <p className="text-[10px] text-primary/40">{date}</p>
           </div>
