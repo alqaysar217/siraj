@@ -21,7 +21,8 @@ import {
   ShieldCheck,
   Calendar,
   Share2,
-  MessageCircle
+  MessageCircle,
+  Clock
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,19 +51,29 @@ const INSTRUCTOR_DATA = {
       id: "web-1",
       title: "تطوير الويب الشامل - Full Stack Web Development",
       category: "برمجة",
+      level: "مستوى مبتدئ",
       rating: 4.9,
       students: 2500,
+      lessons: 45,
+      duration: "45 ساعة",
+      price: 45000,
+      oldPrice: 54000,
       image: "web-dev-course",
-      price: "45,000 ر.ي"
+      instructor: "م. أحمد علي"
     },
     {
       id: "js-adv",
       title: "إتقان JavaScript من الصفر إلى الاحتراف",
       category: "برمجة",
+      level: "مستوى متوسط",
       rating: 4.8,
       students: 1800,
+      lessons: 30,
+      duration: "30 ساعة",
+      price: 30000,
+      oldPrice: 38000,
       image: "hero-bg",
-      price: "30,000 ر.ي"
+      instructor: "م. أحمد علي"
     }
   ],
   reviews: [
@@ -83,7 +94,7 @@ export default function InstructorProfilePage() {
       <Navbar />
 
       {/* Modern Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+      <section className="relative pt-32 pb-16 md:pt-48 md:pb-32 overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full bg-primary/5 -z-20" />
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -101,33 +112,33 @@ export default function InstructorProfilePage() {
             </div>
 
             {/* Instructor Info Column */}
-            <div className="lg:col-span-7 space-y-8 text-center lg:text-right">
-              <div className="space-y-4">
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-right">
+              <div className="space-y-3">
                 <Badge className="bg-secondary/10 text-secondary border-none px-6 py-2 rounded-full text-xs font-headline font-bold">ملف مدرب احترافي</Badge>
-                <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary leading-tight">{INSTRUCTOR_DATA.name}</h1>
-                <p className="text-xl md:text-2xl text-secondary font-medium">{INSTRUCTOR_DATA.title}</p>
+                <h1 className="text-3xl md:text-5xl font-headline font-bold text-primary leading-tight">{INSTRUCTOR_DATA.name}</h1>
+                <p className="text-lg md:text-xl text-secondary font-medium">{INSTRUCTOR_DATA.title}</p>
               </div>
               
-              <p className="text-lg text-primary/60 max-w-2xl mx-auto lg:mr-0 leading-relaxed font-body">
+              <p className="text-base md:text-lg text-primary/60 max-w-2xl mx-auto lg:mr-0 leading-relaxed font-body">
                 {INSTRUCTOR_DATA.bio}
               </p>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                <SocialLink icon={<Linkedin className="w-6 h-6" />} href={INSTRUCTOR_DATA.social.linkedin} />
-                <SocialLink icon={<Instagram className="w-6 h-6" />} href={INSTRUCTOR_DATA.social.instagram} />
-                <SocialLink icon={<Facebook className="w-6 h-6" />} href={INSTRUCTOR_DATA.social.facebook} />
-                <SocialLink icon={<MessageCircle className="w-6 h-6" />} href={INSTRUCTOR_DATA.social.whatsapp} />
-                <div className="h-12 w-px bg-primary/10 mx-2 hidden md:block" />
-                <Button className="rounded-2xl bg-primary text-white font-headline gap-3 h-14 px-8 shadow-xl hover:bg-secondary transition-all">
-                  <Mail className="w-5 h-5" />
+                <SocialLink icon={<Linkedin className="w-5 h-5" />} href={INSTRUCTOR_DATA.social.linkedin} />
+                <SocialLink icon={<Instagram className="w-5 h-5" />} href={INSTRUCTOR_DATA.social.instagram} />
+                <SocialLink icon={<Facebook className="w-5 h-5" />} href={INSTRUCTOR_DATA.social.facebook} />
+                <SocialLink icon={<MessageCircle className="w-5 h-5" />} href={INSTRUCTOR_DATA.social.whatsapp} />
+                <div className="h-10 w-px bg-primary/10 mx-2 hidden md:block" />
+                <Button className="rounded-2xl bg-primary text-white font-headline gap-3 h-12 px-6 shadow-xl hover:bg-secondary transition-all">
+                  <Mail className="w-4 h-4" />
                   تواصل عبر البريد
                 </Button>
               </div>
 
-              <div className="grid grid-cols-3 gap-3 md:gap-8 max-w-2xl mx-auto lg:mr-0 pt-10 border-t border-primary/5">
-                 <BigStatItem icon={<Users className="w-5 h-5 md:w-7 md:h-7" />} label="طالب" value={mounted ? INSTRUCTOR_DATA.students.toLocaleString() : ""} />
-                 <BigStatItem icon={<BookOpen className="w-5 h-5 md:w-7 md:h-7" />} label="دورة" value={INSTRUCTOR_DATA.coursesCount.toString()} />
-                 <BigStatItem icon={<Star className="w-5 h-5 md:w-7 md:h-7" />} label="تقييم" value={INSTRUCTOR_DATA.rating.toString()} />
+              <div className="grid grid-cols-3 gap-3 md:gap-8 max-w-2xl mx-auto lg:mr-0 pt-8 border-t border-primary/5">
+                 <BigStatItem icon={<Users className="w-5 h-5 md:w-6 md:h-6" />} label="طالب" value={mounted ? INSTRUCTOR_DATA.students.toLocaleString() : ""} />
+                 <BigStatItem icon={<BookOpen className="w-5 h-5 md:w-6 md:h-6" />} label="دورة" value={INSTRUCTOR_DATA.coursesCount.toString()} />
+                 <BigStatItem icon={<Star className="w-5 h-5 md:w-6 md:h-6" />} label="تقييم" value={INSTRUCTOR_DATA.rating.toString()} />
               </div>
             </div>
 
@@ -136,75 +147,63 @@ export default function InstructorProfilePage() {
       </section>
 
       {/* Content Section */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-12 gap-16">
+          <div className="grid lg:grid-cols-12 gap-12">
             
             {/* Main Content: Courses & Reviews */}
-            <div className="lg:col-span-8 space-y-20">
+            <div className="lg:col-span-8 space-y-16">
               
               {/* Instructor Courses Grid */}
-              <div className="space-y-10">
-                <div className="flex items-center justify-between border-b pb-6">
-                  <h2 className="text-3xl font-headline font-bold text-primary flex items-center gap-4">
-                    <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
-                      <Play className="w-6 h-6" />
+              <div className="space-y-8">
+                <div className="flex items-center justify-between border-b pb-4">
+                  <h2 className="text-2xl font-headline font-bold text-primary flex items-center gap-3">
+                    <div className="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary">
+                      <Play className="w-5 h-5" />
                     </div>
                     دورات المدرب
                   </h2>
-                  <Badge variant="outline" className="border-primary/10 px-4 py-1.5 rounded-xl font-bold">{INSTRUCTOR_DATA.courses.length} دورة نشطة</Badge>
                 </div>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-6">
                   {INSTRUCTOR_DATA.courses.map(course => (
-                    <InstructorCourseCard key={course.id} course={course} />
+                    <CourseListingCard key={course.id} course={course} />
                   ))}
                 </div>
               </div>
 
               {/* Students Reviews Section */}
-              <div className="space-y-10">
-                <h2 className="text-3xl font-headline font-bold text-primary flex items-center gap-4">
-                   <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
-                    <Star className="w-6 h-6 fill-current" />
+              <div className="space-y-8">
+                <h2 className="text-2xl font-headline font-bold text-primary flex items-center gap-3">
+                   <div className="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary">
+                    <Star className="w-5 h-5 fill-current" />
                    </div>
                    آراء الطلاب والتقييمات
                 </h2>
-                <div className="grid gap-6">
+                <div className="grid gap-4">
                   {INSTRUCTOR_DATA.reviews.map((review, i) => (
                     <ReviewCard key={i} review={review} />
                   ))}
                 </div>
-                <Button variant="ghost" className="w-full h-16 rounded-[24px] border-2 border-dashed border-primary/10 text-primary/40 font-headline hover:bg-primary/5 hover:border-secondary/20 transition-all">عرض جميع التقييمات</Button>
+                <Button variant="ghost" className="w-full h-14 rounded-[20px] border-2 border-dashed border-primary/10 text-primary/40 font-headline hover:bg-primary/5 transition-all">عرض جميع التقييمات</Button>
               </div>
 
             </div>
 
             {/* Professional Sidebar */}
             <div className="lg:col-span-4 space-y-8">
-              <div className="sticky top-32 space-y-8">
+              <div className="sticky top-32 space-y-6">
                 
                 {/* Achievements Card */}
-                <div className="bg-primary/5 rounded-[40px] p-8 border border-primary/5 space-y-8 luxury-shadow relative overflow-hidden">
+                <div className="bg-primary/5 rounded-[32px] p-6 border border-primary/5 space-y-6 luxury-shadow relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-1 bg-secondary" />
-                  <h3 className="font-headline font-bold text-primary text-2xl">إنجازات تعليمية</h3>
-                  <div className="space-y-4">
-                    <Achievement icon={<Award className="w-5 h-5 text-secondary" />} text="خبير معتمد من منصة سراج" />
-                    <Achievement icon={<CheckCircle2 className="w-5 h-5 text-secondary" />} text="أكثر من 500 ساعة تدريبية" />
-                    <Achievement icon={<Users className="w-5 h-5 text-secondary" />} text="مشرف على مشاريع تخرج عالمية" />
-                    <Achievement icon={<Calendar className="w-5 h-5 text-secondary" />} text="انضم للمنصة منذ 3 سنوات" />
+                  <h3 className="font-headline font-bold text-primary text-xl">إنجازات تعليمية</h3>
+                  <div className="space-y-3">
+                    <Achievement icon={<Award className="w-4 h-4 text-secondary" />} text="خبير معتمد من منصة سراج" />
+                    <Achievement icon={<CheckCircle2 className="w-4 h-4 text-secondary" />} text="أكثر من 500 ساعة تدريبية" />
+                    <Achievement icon={<Users className="w-4 h-4 text-secondary" />} text="مشرف على مشاريع تخرج" />
+                    <Achievement icon={<Calendar className="w-4 h-4 text-secondary" />} text="انضم منذ 3 سنوات" />
                   </div>
-                  <Button size="lg" className="w-full h-16 bg-secondary hover:bg-secondary/90 text-white rounded-2xl font-headline shadow-xl gold-glow text-lg transition-transform active:scale-95">طلب استشارة خاصة</Button>
-                </div>
-
-                {/* Quick Info Card */}
-                <div className="bg-white rounded-[32px] p-6 border border-primary/5 luxury-shadow flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary/40">
-                      <Share2 className="w-5 h-5" />
-                    </div>
-                    <span className="font-headline font-bold text-primary">شارك الملف</span>
-                  </div>
-                  <Button variant="ghost" size="icon" className="rounded-xl"><ArrowLeft className="w-5 h-5" /></Button>
+                  <Button size="lg" className="w-full h-14 bg-secondary hover:bg-secondary/90 text-white rounded-xl font-headline shadow-xl gold-glow text-base transition-transform active:scale-95">طلب استشارة خاصة</Button>
                 </div>
 
               </div>
@@ -214,7 +213,7 @@ export default function InstructorProfilePage() {
         </div>
       </section>
 
-      <footer className="bg-primary text-white py-16">
+      <footer className="bg-primary text-white py-12">
         <div className="container mx-auto px-4 text-center">
            <p className="text-white/40 text-sm font-medium">© 2024 سراج - تمكين العقول العربية. جميع الحقوق محفوظة.</p>
         </div>
@@ -225,7 +224,7 @@ export default function InstructorProfilePage() {
 
 function SocialLink({ icon, href }: { icon: React.ReactNode; href: string }) {
   return (
-    <Link href={href} className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center text-primary/40 hover:text-secondary hover:translate-y-[-6px] transition-all border border-primary/5 luxury-shadow shadow-lg group">
+    <Link href={href} className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-primary/40 hover:text-secondary hover:translate-y-[-4px] transition-all border border-primary/5 luxury-shadow shadow-md group">
       <div className="group-hover:scale-110 transition-transform">{icon}</div>
     </Link>
   );
@@ -233,44 +232,72 @@ function SocialLink({ icon, href }: { icon: React.ReactNode; href: string }) {
 
 function BigStatItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-white p-3 md:p-6 rounded-2xl md:rounded-[32px] border border-primary/5 luxury-shadow text-center group hover:border-secondary/30 transition-all flex flex-col items-center justify-center">
-      <div className="text-secondary mb-2 md:mb-4 group-hover:scale-110 transition-transform">{icon}</div>
-      <p className="text-base md:text-3xl font-headline font-bold text-primary leading-none">{value}</p>
-      <p className="hidden md:block text-[11px] text-primary/40 font-bold uppercase tracking-widest mt-1">{label}</p>
+    <div className="bg-white p-2 md:p-5 rounded-xl md:rounded-[24px] border border-primary/5 luxury-shadow text-center group hover:border-secondary/30 transition-all flex flex-col items-center justify-center">
+      <div className="text-secondary mb-1 md:mb-2 group-hover:scale-110 transition-transform">{icon}</div>
+      <p className="text-sm md:text-2xl font-headline font-bold text-primary leading-none">{value}</p>
+      <p className="hidden md:block text-[9px] text-primary/40 font-bold uppercase tracking-widest mt-1">{label}</p>
     </div>
   );
 }
 
-function InstructorCourseCard({ course }: { course: any }) {
+function CourseListingCard({ course }: { course: any }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const courseImage = PlaceHolderImages.find(img => img.id === course.image);
+  const instructorImage = PlaceHolderImages.find(img => img.id === 'instructor-1');
+
   return (
-    <div className="group bg-white rounded-[40px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-8px] transition-all duration-500">
-      <div className="relative aspect-video overflow-hidden">
+    <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-6px] transition-all duration-300 flex flex-col text-right h-full">
+      <div className="relative aspect-video shrink-0 overflow-hidden">
         {courseImage?.imageUrl && (
-          <Image src={courseImage.imageUrl} alt={course.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+          <Image src={courseImage.imageUrl} alt={course.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
         )}
-        <div className="absolute top-4 right-4">
-          <Badge className="bg-white/90 backdrop-blur-md text-primary border-none text-[10px] font-bold px-4 py-1.5 rounded-full">دورة متميزة</Badge>
+        <div className="absolute bottom-4 left-4">
+           <Badge className="bg-black/50 backdrop-blur-md text-white border-none text-[9px] px-2 py-0.5">{course.level}</Badge>
         </div>
       </div>
-      <div className="p-8 space-y-6">
-        <div className="flex items-center justify-between">
-          <Badge className="bg-primary/5 text-primary/60 border-none text-[10px] font-bold px-4 py-1.5 rounded-lg">{course.category}</Badge>
-          <div className="flex items-center gap-1.5 text-xs text-secondary font-bold">
-            <Star className="w-4 h-4 fill-current" />
+      
+      <div className="p-5 space-y-4 flex flex-col flex-1">
+        <h3 className="font-headline font-bold text-primary leading-tight text-sm line-clamp-2 h-10">{course.title}</h3>
+        
+        <div className="flex items-center justify-between gap-2">
+          <Badge className="bg-primary/5 text-primary/60 border-none text-[9px] h-6 px-3 rounded-lg">{course.category}</Badge>
+          <div className="flex items-center gap-1 text-xs font-bold text-secondary">
+            <Star className="w-3.5 h-3.5 fill-current" />
             <span>{course.rating}</span>
           </div>
         </div>
-        <h4 className="text-xl font-headline font-bold text-primary leading-tight h-14 line-clamp-2">{course.title}</h4>
-        <div className="flex items-center justify-between pt-6 border-t border-primary/5">
-          <span className="text-2xl font-headline font-bold text-secondary">{course.price}</span>
-          <Link href={`/courses/${course.id}`}>
-            <Button variant="ghost" size="sm" className="font-headline text-primary/60 gap-2 group/btn hover:text-secondary hover:bg-secondary/5 rounded-xl px-4">
-              التفاصيل
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
-            </Button>
-          </Link>
+
+        <div className="flex items-center justify-between py-3 border-y border-primary/5">
+          <div className="text-left flex flex-col items-start">
+             <span className="text-[lg] font-headline font-bold text-secondary leading-none">
+              {course.price === 0 ? "مجاني" : mounted ? `${course.price.toLocaleString()} ر.ي` : ""}
+            </span>
+            {course.oldPrice && (
+              <span className="text-[9px] text-primary/30 line-through leading-none mt-1">{mounted ? course.oldPrice.toLocaleString() : ""} ر.ي</span>
+            )}
+          </div>
         </div>
+
+        <div className="grid grid-cols-3 gap-1 text-[9px] text-primary/50 bg-primary/5 p-2 rounded-xl font-bold text-center">
+          <div className="flex flex-col items-center gap-1">
+            <Clock className="w-3 h-3 text-secondary" />
+            <span>{course.duration}</span>
+          </div>
+          <div className="flex flex-col items-center gap-1 border-x border-primary/10">
+            <BookOpen className="w-3 h-3 text-secondary" />
+            <span>{course.lessons} درس</span>
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <Users className="w-3 h-3 text-secondary" />
+            <span>{course.students}</span>
+          </div>
+        </div>
+
+        <Link href={`/courses/${course.id}`} className="mt-auto">
+          <Button size="sm" className="w-full h-10 rounded-xl bg-primary hover:bg-secondary text-white font-headline text-xs shadow-md">تفاصيل الكورس</Button>
+        </Link>
       </div>
     </div>
   );
@@ -278,35 +305,36 @@ function InstructorCourseCard({ course }: { course: any }) {
 
 function ReviewCard({ review }: { review: any }) {
   return (
-    <div className="bg-primary/5 p-8 rounded-[40px] border border-transparent hover:border-secondary/20 transition-all space-y-6">
+    <div className="bg-primary/5 p-5 rounded-[24px] border border-transparent hover:border-secondary/10 transition-all space-y-3">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-5">
-          <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary font-bold text-2xl shadow-md border border-primary/5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary font-bold text-lg shadow-sm">
             {review.name[0]}
           </div>
           <div>
-            <p className="text-xl font-headline font-bold text-primary">{review.name}</p>
-            <p className="text-xs text-primary/40 font-medium">{review.date}</p>
+            <p className="text-sm font-headline font-bold text-primary">{review.name}</p>
+            <p className="text-[10px] text-primary/40">{review.date}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 bg-white px-4 py-2 rounded-2xl border border-primary/5 shadow-sm">
+        <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-lg border border-primary/5 shadow-sm">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'text-secondary fill-current' : 'text-primary/10'}`} />
+            <Star key={i} className={`w-3 h-3 ${i < review.rating ? 'text-secondary fill-current' : 'text-primary/10'}`} />
           ))}
         </div>
       </div>
-      <p className="text-lg text-primary/70 leading-relaxed italic font-body">"{review.comment}"</p>
+      <p className="text-xs text-primary/70 leading-relaxed italic font-body">"{review.comment}"</p>
     </div>
   );
 }
 
 function Achievement({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="flex items-center gap-5 p-5 bg-white rounded-[24px] border border-primary/5 hover:border-secondary/20 transition-all shadow-sm group">
-      <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+    <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-primary/5 hover:border-secondary/20 transition-all shadow-sm group">
+      <div className="w-8 h-8 bg-primary/5 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
         {icon}
       </div>
-      <span className="text-sm text-primary/70 font-bold">{text}</span>
+      <span className="text-[11px] text-primary/70 font-bold truncate">{text}</span>
     </div>
   );
 }
+
