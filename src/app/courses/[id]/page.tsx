@@ -21,7 +21,8 @@ import {
   Zap,
   Info,
   Users,
-  ShieldCheck
+  ShieldCheck,
+  Calendar
 } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -171,14 +172,13 @@ export default function CourseDetailPage() {
                   
                   <div className="space-y-3">
                     <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white h-14 rounded-2xl text-xl font-headline shadow-xl gold-glow">انضم للكورس الآن</Button>
-                    <p className="text-center text-[10px] text-primary/40">ضمان استرجاع الأموال خلال 14 يوم</p>
                   </div>
 
                   <div className="pt-6 border-t border-primary/5 space-y-3">
                     <p className="text-xs font-bold text-primary">يتضمن الكورس:</p>
                     <ul className="space-y-2">
                       <li className="flex items-center gap-2 text-xs text-primary/70">
-                        <Play className="w-4 h-4 text-secondary" /> وصول كامل مدى الحياة
+                        <Calendar className="w-4 h-4 text-secondary" /> وصول للمحتوى لفترة محدودة
                       </li>
                       <li className="flex items-center gap-2 text-xs text-primary/70">
                         <FileText className="w-4 h-4 text-secondary" /> مصادر وملفات قابلة للتحميل
