@@ -32,13 +32,6 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
 const BANKS = [
@@ -49,9 +42,9 @@ const BANKS = [
   { id: 5, name: "البنك الدولي اليمني", accountName: "منصة سراج التعليمية", accountNumber: "444555666", color: "bg-indigo-600" },
   { id: 6, name: "بنك سبأ الإسلامي", accountName: "منصة سراج التعليمية", accountNumber: "777888999", color: "bg-green-600" },
   { id: 7, name: "بنك الأمل", accountName: "منصة سراج التعليمية", accountNumber: "222333444", color: "bg-sky-600" },
-  { id: 8, name: "بنك الأمل", accountName: "منصة سراج التعليمية", accountNumber: "222333444", color: "bg-sky-600" },
-  { id: 9, name: "مصرف البحرين الشامل", accountName: "منصة سراج التعليمية", accountNumber: "888777666", color: "bg-rose-600" },
-  { id: 10, name: "شركة النجم للحوالات", accountName: "أحمد علي محمد", accountNumber: "333222111", color: "bg-amber-600" }
+  { id: 8, name: "مصرف البحرين الشامل", accountName: "منصة سراج التعليمية", accountNumber: "888777666", color: "bg-rose-600" },
+  { id: 9, name: "شركة النجم للحوالات", accountName: "أحمد علي محمد", accountNumber: "333222111", color: "bg-amber-600" },
+  { id: 10, name: "بنك القطيبي", accountName: "منصة سراج التعليمية", accountNumber: "999000111", color: "bg-blue-800" }
 ];
 
 export default function BookDetailPage() {
@@ -64,6 +57,7 @@ export default function BookDetailPage() {
   
   useEffect(() => {
     setMounted(true);
+    // Simulation of user fetching logic
     setCurrentUser(null);
   }, []);
 
@@ -132,8 +126,8 @@ export default function BookDetailPage() {
                 </div>
               </div>
 
-              <Tabs defaultValue="overview" className="w-full">
-                <TabsList className="bg-white border p-1 rounded-2xl h-auto flex-wrap justify-start mb-8 luxury-shadow w-full">
+              <Tabs defaultValue="overview" className="w-full" dir="rtl">
+                <TabsList className="bg-white border p-1 rounded-2xl h-auto flex-wrap justify-start mb-8 luxury-shadow w-full" dir="rtl">
                   <TabsTrigger value="overview" className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-white px-4 py-3 rounded-xl font-headline text-xs gap-2">
                     <Info className="w-4 h-4" /> نظرة عامة
                   </TabsTrigger>
