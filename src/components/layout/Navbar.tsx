@@ -33,7 +33,7 @@ export function Navbar() {
     { href: "/courses", icon: <BookOpen className="w-4 h-4" />, label: "الكورسات" },
     { href: "/learning-paths", icon: <Map className="w-4 h-4" />, label: "المسارات" },
     { href: "/books", icon: <Library className="w-4 h-4" />, label: "الكتب" },
-    { href: "/instructors", icon: <Users className="w-4 h-4" />, label: "انضم كمدرب" },
+    { href: "/instructors", icon: <Users className="w-4 h-4" />, label: "المدربين" },
     { href: "/verify", icon: <GraduationCap className="w-4 h-4" />, label: "الشهادات" },
   ];
 
