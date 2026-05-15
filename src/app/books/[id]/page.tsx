@@ -17,7 +17,7 @@ import {
   CreditCard,
   Copy,
   ChevronLeft,
-  ArrowRight
+  X
 } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -29,6 +29,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 
@@ -182,11 +183,18 @@ export default function BookDetailPage() {
                         <CreditCard className="w-6 h-6" /> اطلب الكتاب الآن
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-[32px] p-0 border-none bg-background font-body" dir="rtl">
+                    <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-[32px] p-0 border-none bg-background font-body [&>button]:hidden" dir="rtl">
                       <div className="sticky top-0 bg-primary p-8 text-white z-10">
-                        <DialogHeader>
-                          <DialogTitle className="text-3xl font-headline font-bold mb-2">طريقة الدفع والطلب</DialogTitle>
-                        </DialogHeader>
+                        <div className="flex items-start justify-between mb-4">
+                          <DialogHeader className="text-right">
+                            <DialogTitle className="text-3xl font-headline font-bold">طريقة الدفع والطلب</DialogTitle>
+                          </DialogHeader>
+                          <DialogClose asChild>
+                            <Button variant="ghost" size="icon" className="text-white/50 hover:text-white hover:bg-white/10 rounded-full h-10 w-10">
+                              <X className="w-6 h-6" />
+                            </Button>
+                          </DialogClose>
+                        </div>
                         <p className="text-white/70 text-sm leading-relaxed">
                           لإتمام الطلب، يرجى إيداع المبلغ المذكور في أحد حساباتنا البنكية أدناه، ثم إرسال صورة السند عبر الواتساب لتأكيد الطلب.
                         </p>
