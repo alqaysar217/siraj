@@ -16,8 +16,10 @@ import {
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -72,50 +74,56 @@ export function Navbar() {
             </Link>
           </div>
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden text-primary">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] font-body">
-              <SheetHeader className="text-right border-b pb-6 mb-6">
-                <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2 justify-end">
-                  <span>منصة سراج</span>
-                  <div className="w-8 h-8 bg-primary flex items-center justify-center rounded-lg">
-                    <span className="text-secondary font-headline font-bold text-sm">S</span>
+          {mounted ? (
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="lg:hidden text-primary">
+                  <Menu className="w-6 h-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] font-body">
+                <SheetHeader className="text-right border-b pb-6 mb-6">
+                  <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2 justify-end">
+                    <span>منصة سراج</span>
+                    <div className="w-8 h-8 bg-primary flex items-center justify-center rounded-lg">
+                      <span className="text-secondary font-headline font-bold text-sm">S</span>
+                    </div>
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-4">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center gap-4 p-4 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
+                    >
+                      <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
+                        {link.icon}
+                      </span>
+                      <span className="font-headline font-bold">{link.label}</span>
+                    </Link>
+                  ))}
+                  
+                  <div className="grid gap-3 mt-8 pt-8 border-t">
+                    <Link href="/signup">
+                      <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-12 rounded-xl font-headline shadow-md">
+                        ابدأ التعلم الآن
+                      </Button>
+                    </Link>
+                    <Link href="/login">
+                      <Button variant="outline" className="w-full h-12 rounded-xl font-headline border-primary/10">
+                        تسجيل الدخول
+                      </Button>
+                    </Link>
                   </div>
-                </SheetTitle>
-              </SheetHeader>
-              <div className="flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="flex items-center gap-4 p-4 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
-                  >
-                    <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
-                      {link.icon}
-                    </span>
-                    <span className="font-headline font-bold">{link.label}</span>
-                  </Link>
-                ))}
-                
-                <div className="grid gap-3 mt-8 pt-8 border-t">
-                  <Link href="/signup">
-                    <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-12 rounded-xl font-headline shadow-md">
-                      ابدأ التعلم الآن
-                    </Button>
-                  </Link>
-                  <Link href="/login">
-                    <Button variant="outline" className="w-full h-12 rounded-xl font-headline border-primary/10">
-                      تسجيل الدخول
-                    </Button>
-                  </Link>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          ) : (
+            <Button variant="ghost" size="icon" className="lg:hidden text-primary">
+              <Menu className="w-6 h-6" />
+            </Button>
+          )}
         </div>
       </div>
     </nav>
