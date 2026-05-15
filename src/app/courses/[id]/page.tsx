@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Star, Clock, User, Play, FileText, CheckCircle2, Globe, Share2, GraduationCap, MessageCircle, BookOpen, HelpCircle, ArrowLeft } from "lucide-react";
+import { Star, Clock, User, Play, FileText, CheckCircle2, Globe, Share2, GraduationCap, MessageCircle, BookOpen, HelpCircle, ArrowLeft, Zap } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -24,15 +24,7 @@ export default function CourseDetailPage() {
       <div className="pt-24 lg:pt-32 pb-20">
         <div className="container mx-auto px-4 max-w-5xl">
           
-          {/* 1. العنوان والغلاف المصمم */}
-          <div className="space-y-6 mb-8">
-            <div className="flex flex-wrap gap-2">
-              <Badge className="bg-secondary/10 text-secondary border-none font-headline">برمجة</Badge>
-              <Badge className="bg-primary/5 text-primary/60 border-none font-headline">مستوى مبتدئ</Badge>
-            </div>
-            <h1 className="text-3xl lg:text-5xl font-headline font-bold text-primary leading-tight">تطوير الويب الشامل - Full Stack Web Development</h1>
-          </div>
-
+          {/* 1. غلاف الدورة - أول عنصر */}
           <div className="relative aspect-video rounded-[32px] overflow-hidden luxury-shadow mb-10 border border-primary/5 bg-primary/5">
             {courseImage?.imageUrl && (
               <Image 
@@ -45,7 +37,16 @@ export default function CourseDetailPage() {
             )}
           </div>
 
-          {/* 2. بيانات الكورس والسعر */}
+          {/* 2. العنوان والتفاصيل الأساسية */}
+          <div className="space-y-6 mb-8">
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-secondary/10 text-secondary border-none font-headline">برمجة</Badge>
+              <Badge className="bg-primary/5 text-primary/60 border-none font-headline">مستوى مبتدئ</Badge>
+            </div>
+            <h1 className="text-3xl lg:text-5xl font-headline font-bold text-primary leading-tight">تطوير الويب الشامل - Full Stack Web Development</h1>
+          </div>
+
+          {/* 3. بيانات السعر والاشتراك */}
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-white p-8 rounded-[32px] border border-primary/5 luxury-shadow flex flex-col md:flex-row items-center justify-between gap-6">
@@ -92,7 +93,7 @@ export default function CourseDetailPage() {
             </div>
           </div>
 
-          {/* 3. إحصائيات تقنية */}
+          {/* 4. إحصائيات تقنية */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             <QuickStat icon={<Clock />} label="مدة الكورس" value="45 ساعة" />
             <QuickStat icon={<BookOpen />} label="الدروس" value="45 درس" />
@@ -102,7 +103,7 @@ export default function CourseDetailPage() {
             <QuickStat icon={<HelpCircle />} label="الدعم" value="أسئلة وأجوبة" />
           </div>
 
-          {/* 4. التبويبات التفصيلية */}
+          {/* 5. التبويبات التفصيلية */}
           <Tabs defaultValue="overview" className="w-full" dir="rtl">
             <TabsList className="bg-white border p-1 rounded-2xl h-auto flex-wrap justify-start mb-8 luxury-shadow">
               <TabsTrigger value="overview" className="data-[state=active]:bg-secondary data-[state=active]:text-white px-8 py-3 rounded-xl font-headline transition-all">نظرة عامة</TabsTrigger>
@@ -186,7 +187,7 @@ export default function CourseDetailPage() {
             </TabsContent>
           </Tabs>
 
-          {/* 5. Final CTA */}
+          {/* 6. Final CTA */}
           <div className="mt-20 bg-primary rounded-[48px] p-10 md:p-16 text-center text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] -mr-32 -mt-32" />
             <h2 className="text-3xl md:text-4xl font-headline font-bold mb-6">هل أنت جاهز للتحول المهني؟</h2>
@@ -197,25 +198,6 @@ export default function CourseDetailPage() {
         </div>
       </div>
     </main>
-  );
-}
-
-function Zap({ className }: { className?: string }) {
-  return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
-      className={className}
-    >
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
   );
 }
 
