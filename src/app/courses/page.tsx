@@ -8,22 +8,26 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { 
   Search, 
-  Filter, 
   Star, 
   Clock, 
   User, 
   BookOpen,
   LayoutGrid,
   List,
-  CheckCircle2,
-  X,
-  ChevronDown,
-  SlidersHorizontal
+  SlidersHorizontal,
+  X
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Sheet,
   SheetContent,
@@ -102,25 +106,25 @@ const ALL_COURSES = [
   }
 ];
 
-const CATEGORIES = ["الكل", "برمجة", "ذكاء اصطناعي", "تحليل بيانات", "تصميم"];
-const PRICE_FILTERS = ["الكل", "مجاني", "مدفوع"];
-const CERT_FILTERS = ["الكل", "بشهادة", "بدون شهادة"];
-const STATUS_FILTERS = ["الكل", "جديد", "الأكثر مبيعاً", "الأعلى تقييماً"];
+const CATEGORIES = ["برمجة", "ذكاء اصطناعي", "تحليل بيانات", "تصميم"];
+const PRICE_TYPES = ["مجاني", "مدفوع"];
+const CERT_STATUS = ["بشهادة", "بدون شهادة"];
+const COURSE_STATUS = ["جديد", "الأكثر مبيعاً", "الأعلى تقييماً"];
 
 export default function CoursesPage() {
-  const [activeCategory, setActiveCategory] = useState("الكل");
-  const [activePrice, setActivePrice] = useState("الكل");
-  const [activeCert, setActiveCert] = useState("الكل");
-  const [activeStatus, setActiveStatus] = useState("الكل");
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [activePrice, setActivePrice] = useState("all");
+  const [activeCert, setActiveCert] = useState("all");
+  const [activeStatus, setActiveStatus] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const filteredCourses = useMemo(() => {
     return ALL_COURSES.filter(course => {
-      const matchesCategory = activeCategory === "الكل" || course.category === activeCategory;
-      const matchesPrice = activePrice === "الكل" || (activePrice === "مجاني" ? course.isFree : !course.isFree);
-      const matchesCert = activeCert === "الكل" || (activeCert === "بشهادة" ? course.hasCertificate : !course.hasCertificate);
-      const matchesStatus = activeStatus === "الكل" || course.status === activeStatus;
+      const matchesCategory = activeCategory === "all" || course.category === activeCategory;
+      const matchesPrice = activePrice === "all" || (activePrice === "مجاني" ? course.isFree : !course.isFree);
+      const matchesCert = activeCert === "all" || (activeCert === "بشهادة" ? course.hasCertificate : !course.hasCertificate);
+      const matchesStatus = activeStatus === "all" || course.status === activeStatus;
       
       const searchLower = searchQuery.toLowerCase();
       const matchesSearch = 
@@ -133,18 +137,18 @@ export default function CoursesPage() {
   }, [activeCategory, activePrice, activeCert, activeStatus, searchQuery]);
 
   const resetFilters = () => {
-    setActiveCategory("الكل");
-    setActivePrice("الكل");
-    setActiveCert("الكل");
-    setActiveStatus("الكل");
+    setActiveCategory("all");
+    setActivePrice("all");
+    setActiveCert("all");
+    setActiveStatus("all");
     setSearchQuery("");
   };
 
   const activeFiltersCount = [
-    activeCategory !== "الكل",
-    activePrice !== "الكل",
-    activeCert !== "الكل",
-    activeStatus !== "الكل"
+    activeCategory !== "all",
+    activePrice !== "all",
+    activeCert !== "all",
+    activeStatus !== "all"
   ].filter(Boolean).length;
 
   return (
@@ -164,132 +168,125 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* Search & Main Filter Bar */}
+      {/* Search & Combined Filter Button */}
       <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-1">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            {/* Search Bar */}
+            <div className="relative w-full">
               <Input 
-                placeholder="ابحث باسم الكورس، المدرب..." 
-                className="h-11 rounded-xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
+                placeholder="ابحث باسم الكورس أو المجال..." 
+                className="h-12 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
             </div>
             
-            <div className="flex gap-2">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" className="h-11 rounded-xl border-primary/10 gap-2 font-headline bg-white shrink-0">
-                    <SlidersHorizontal className="w-4 h-4 text-secondary" />
-                    فلاتر متقدمة
-                    {activeFiltersCount > 0 && (
-                      <Badge className="bg-secondary text-white w-5 h-5 p-0 flex items-center justify-center rounded-full text-[10px]">
-                        {activeFiltersCount}
-                      </Badge>
-                    )}
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[400px] font-body overflow-y-auto">
-                  <SheetHeader className="text-right border-b pb-4 mb-6">
-                    <SheetTitle className="text-xl font-headline font-bold text-primary">تصفية النتائج</SheetTitle>
-                  </SheetHeader>
-                  
-                  <div className="space-y-8">
-                    {/* Category Filter */}
-                    <div className="space-y-4">
-                      <h4 className="font-headline font-bold text-primary text-sm">مجال الدراسة</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {CATEGORIES.map((cat) => (
-                          <FilterBadge 
-                            key={cat} 
-                            label={cat} 
-                            active={activeCategory === cat} 
-                            onClick={() => setActiveCategory(cat)} 
-                          />
+            {/* Filter Trigger Button */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="h-12 w-full md:w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all">
+                  <SlidersHorizontal className="w-5 h-5 text-secondary" />
+                  تصفية الكورسات
+                  {activeFiltersCount > 0 && (
+                    <Badge className="bg-secondary text-white w-6 h-6 p-0 flex items-center justify-center rounded-full text-xs font-bold border-none">
+                      {activeFiltersCount}
+                    </Badge>
+                  )}
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[320px] sm:w-[400px] font-body flex flex-col h-full bg-white border-none shadow-2xl">
+                <SheetHeader className="text-right border-b pb-6 mb-8 pt-4">
+                  <SheetTitle className="text-2xl font-headline font-bold text-primary">تصفية النتائج</SheetTitle>
+                </SheetHeader>
+                
+                <div className="space-y-8 flex-1 overflow-y-auto px-1">
+                  {/* Category Select */}
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-primary block">مجال الدراسة</label>
+                    <Select value={activeCategory} onValueChange={setActiveCategory}>
+                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                        <SelectValue placeholder="اختر المجال" />
+                      </SelectTrigger>
+                      <SelectContent className="font-body" dir="rtl">
+                        <SelectItem value="all">كل المجالات</SelectItem>
+                        {CATEGORIES.map(cat => (
+                          <SelectItem key={cat} value={cat}>{cat}</SelectItem>
                         ))}
-                      </div>
-                    </div>
-
-                    {/* Price Filter */}
-                    <div className="space-y-4">
-                      <h4 className="font-headline font-bold text-primary text-sm">نوع الدفع</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {PRICE_FILTERS.map((p) => (
-                          <FilterBadge 
-                            key={p} 
-                            label={p} 
-                            active={activePrice === p} 
-                            onClick={() => setActivePrice(p)} 
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Certificate Filter */}
-                    <div className="space-y-4">
-                      <h4 className="font-headline font-bold text-primary text-sm">الشهادة</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {CERT_FILTERS.map((c) => (
-                          <FilterBadge 
-                            key={c} 
-                            label={c} 
-                            active={activeCert === c} 
-                            onClick={() => setActiveCert(c)} 
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Status Filter */}
-                    <div className="space-y-4">
-                      <h4 className="font-headline font-bold text-primary text-sm">حالة الكورس</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {STATUS_FILTERS.map((s) => (
-                          <FilterBadge 
-                            key={s} 
-                            label={s} 
-                            active={activeStatus === s} 
-                            onClick={() => setActiveStatus(s)} 
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="pt-6 border-t flex gap-4">
-                      <Button className="flex-1 bg-primary text-white font-headline" onClick={resetFilters}>مسح الكل</Button>
-                      <SheetTrigger asChild>
-                        <Button className="flex-1 bg-secondary text-white font-headline">تطبيق</Button>
-                      </SheetTrigger>
-                    </div>
+                      </SelectContent>
+                    </Select>
                   </div>
-                </SheetContent>
-              </Sheet>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Categories Horizontal Scroll (Mobile Optimization) */}
-      <section className="py-4 border-b bg-white overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={cn(
-                  "whitespace-nowrap px-6 py-2 rounded-full text-xs font-headline transition-all border",
-                  activeCategory === cat 
-                    ? "bg-secondary text-white border-secondary shadow-md" 
-                    : "bg-primary/5 text-primary/60 border-transparent hover:border-primary/10"
-                )}
-              >
-                {cat}
-              </button>
-            ))}
+                  {/* Price Select */}
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-primary block">نوع الدفع</label>
+                    <Select value={activePrice} onValueChange={setActivePrice}>
+                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                        <SelectValue placeholder="اختر نوع الدفع" />
+                      </SelectTrigger>
+                      <SelectContent className="font-body" dir="rtl">
+                        <SelectItem value="all">الكل</SelectItem>
+                        {PRICE_TYPES.map(type => (
+                          <SelectItem key={type} value={type}>{type}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Certificate Select */}
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-primary block">الشهادة</label>
+                    <Select value={activeCert} onValueChange={setActiveCert}>
+                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                        <SelectValue placeholder="شهادة إتمام؟" />
+                      </SelectTrigger>
+                      <SelectContent className="font-body" dir="rtl">
+                        <SelectItem value="all">الكل</SelectItem>
+                        {CERT_STATUS.map(status => (
+                          <SelectItem key={status} value={status}>{status}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Status Select */}
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold text-primary block">حالة الكورس</label>
+                    <Select value={activeStatus} onValueChange={setActiveStatus}>
+                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                        <SelectValue placeholder="جديد أو مميز؟" />
+                      </SelectTrigger>
+                      <SelectContent className="font-body" dir="rtl">
+                        <SelectItem value="all">الكل</SelectItem>
+                        {COURSE_STATUS.map(s => (
+                          <SelectItem key={s} value={s}>{s}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="pt-8 border-t flex gap-4 mt-auto pb-4">
+                  <Button variant="outline" className="flex-1 h-12 rounded-xl border-primary/10 font-headline" onClick={resetFilters}>مسح الكل</Button>
+                  <SheetTrigger asChild>
+                    <Button className="flex-1 h-12 rounded-xl bg-secondary text-white font-headline shadow-lg hover:bg-secondary/90">تطبيق</Button>
+                  </SheetTrigger>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
+          
+          {/* Active Filters Display (Optional but helpful) */}
+          {activeFiltersCount > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-2">
+              <span className="text-xs text-primary/40 flex items-center gap-1 ml-2 self-center">الفلاتر النشطة:</span>
+              {activeCategory !== "all" && <ActiveFilterBadge label={activeCategory} onClear={() => setActiveCategory("all")} />}
+              {activePrice !== "all" && <ActiveFilterBadge label={activePrice} onClear={() => setActivePrice("all")} />}
+              {activeCert !== "all" && <ActiveFilterBadge label={activeCert} onClear={() => setActiveCert("all")} />}
+              {activeStatus !== "all" && <ActiveFilterBadge label={activeStatus} onClear={() => setActiveStatus("all")} />}
+            </div>
+          )}
         </div>
       </section>
 
@@ -312,7 +309,7 @@ export default function CoursesPage() {
 
           {filteredCourses.length > 0 ? (
             <div className={cn(
-              "grid gap-6",
+              "grid gap-8",
               viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"
             )}>
               {filteredCourses.map((course) => (
@@ -326,7 +323,7 @@ export default function CoursesPage() {
               </div>
               <h3 className="text-xl font-headline font-bold text-primary mb-2">لا توجد نتائج</h3>
               <p className="text-primary/60 mb-8">لم نجد أي كورسات تطابق اختياراتك الحالية.</p>
-              <Button onClick={resetFilters} variant="outline" className="font-headline border-primary/10">إعادة تعيين الفلاتر</Button>
+              <Button onClick={resetFilters} variant="outline" className="font-headline border-primary/10 rounded-xl px-8 h-12">إعادة تعيين الفلاتر</Button>
             </div>
           )}
         </div>
@@ -335,19 +332,12 @@ export default function CoursesPage() {
   );
 }
 
-function FilterBadge({ label, active, onClick }: { label: string, active: boolean, onClick: () => void }) {
+function ActiveFilterBadge({ label, onClear }: { label: string, onClear: () => void }) {
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "px-4 py-2 rounded-xl text-xs font-bold transition-all border",
-        active 
-          ? "bg-secondary/10 text-secondary border-secondary/20" 
-          : "bg-primary/5 text-primary/40 border-transparent hover:border-primary/5"
-      )}
-    >
+    <Badge className="bg-secondary/10 text-secondary border-secondary/20 font-bold text-[10px] gap-1 px-3 py-1 hover:bg-secondary/20 transition-colors">
       {label}
-    </button>
+      <X className="w-3 h-3 cursor-pointer hover:text-primary transition-colors" onClick={onClear} />
+    </Badge>
   );
 }
 
@@ -359,69 +349,69 @@ function CourseListingCard({ course }: { course: any }) {
   const instructorImage = PlaceHolderImages.find(img => img.id === 'instructor-1');
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-4px] transition-all duration-300 flex flex-col text-right h-full">
+    <div className="group bg-white rounded-[24px] overflow-hidden border border-primary/5 luxury-shadow hover:translate-y-[-6px] transition-all duration-300 flex flex-col text-right h-full">
       <div className="relative aspect-video shrink-0 overflow-hidden">
         {courseImage?.imageUrl && (
           <Image src={courseImage.imageUrl} alt={course.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
         )}
         {course.status && (
-          <div className="absolute top-3 right-3">
-            <Badge className="bg-secondary text-white font-headline text-[10px] px-2 py-0.5 border-none">{course.status}</Badge>
+          <div className="absolute top-4 right-4">
+            <Badge className="bg-secondary text-white font-headline text-[10px] px-3 py-1 border-none shadow-lg">{course.status}</Badge>
           </div>
         )}
+        <div className="absolute bottom-4 left-4">
+           <Badge className="bg-black/50 backdrop-blur-md text-white border-none text-[9px] px-2 py-0.5">{course.level}</Badge>
+        </div>
       </div>
       
-      <div className="p-5 space-y-5 flex flex-col flex-1">
-        <h3 className="font-headline font-bold text-primary leading-tight text-sm line-clamp-2 h-10">{course.title}</h3>
+      <div className="p-6 space-y-6 flex flex-col flex-1">
+        <h3 className="font-headline font-bold text-primary leading-tight text-base line-clamp-2 h-12">{course.title}</h3>
         
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-3">
-            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-primary/5">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-primary/5 shadow-sm">
               {instructorImage?.imageUrl && <Image src={instructorImage.imageUrl} alt="Instructor" fill className="object-cover" />}
             </div>
             <div className="flex flex-col">
-              <span className="text-[11px] font-bold text-primary leading-none">{course.instructor}</span>
-              <span className="text-[9px] text-primary/40 font-medium leading-none mt-1">مدرب معتمد</span>
+              <span className="text-xs font-bold text-primary leading-none">{course.instructor}</span>
+              <span className="text-[10px] text-primary/40 font-medium leading-none mt-1.5">مدرب معتمد</span>
             </div>
           </div>
-          <Badge className="bg-secondary/10 text-secondary border-none text-[9px] h-5 px-2">{course.category}</Badge>
+          <Badge className="bg-primary/5 text-primary/60 border-none text-[10px] h-6 px-3 rounded-lg">{course.category}</Badge>
         </div>
 
-        <div className="flex items-center justify-between py-3 border-y border-primary/5">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 text-[11px] font-bold text-secondary">
-              <Star className="w-3.5 h-3.5 fill-current" />
-              <span>{course.rating}</span>
-            </div>
-            <span className="text-[10px] text-primary/40 font-medium">{course.level}</span>
+        <div className="flex items-center justify-between py-4 border-y border-primary/5">
+          <div className="flex items-center gap-1 text-sm font-bold text-secondary">
+            <Star className="w-4 h-4 fill-current" />
+            <span>{course.rating}</span>
           </div>
           <div className="text-left flex flex-col items-end">
             {course.oldPrice && (
-              <span className="text-[9px] text-primary/30 line-through leading-none mb-1">{mounted ? course.oldPrice.toLocaleString() : ""} ر.ي</span>
+              <span className="text-[10px] text-primary/30 line-through leading-none mb-1.5">{mounted ? course.oldPrice.toLocaleString() : ""} ر.ي</span>
             )}
-            <span className="text-sm font-headline font-bold text-secondary leading-none">
+            <span className="text-lg font-headline font-bold text-secondary leading-none">
               {course.price === 0 ? "مجاني" : mounted ? `${course.price.toLocaleString()} ر.ي` : ""}
             </span>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-1 text-[9px] text-primary/50 bg-primary/5 p-2 rounded-xl font-bold text-center">
-          <div className="flex flex-col items-center gap-1">
-            <Clock className="w-3 h-3 text-secondary" />
+        <div className="grid grid-cols-3 gap-2 text-[10px] text-primary/50 bg-primary/5 p-3 rounded-2xl font-bold text-center">
+          <div className="flex flex-col items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5 text-secondary" />
             <span>{course.duration}</span>
           </div>
-          <div className="flex flex-col items-center gap-1 border-x border-primary/10">
-            <BookOpen className="w-3 h-3 text-secondary" />
+          <div className="flex flex-col items-center gap-1.5 border-x border-primary/10">
+            <BookOpen className="w-3.5 h-3.5 text-secondary" />
             <span>{course.lessons} درس</span>
           </div>
-          <div className="flex flex-col items-center gap-1">
-            <User className="w-3 h-3 text-secondary" />
-            <span>{course.students} طالب</span>
+          <div className="flex flex-col items-center gap-1.5">
+            <User className="w-3.5 h-3.5 text-secondary" />
+            <span>{course.students}</span>
           </div>
         </div>
 
-        <Link href={`/courses/${course.id}`} className="mt-auto">
-          <Button size="sm" className="w-full h-10 rounded-xl bg-primary hover:bg-secondary text-white font-headline text-xs transition-colors">تفاصيل الكورس</Button>
+        <Link href={`/courses/${course.id}`} className="mt-auto pt-2">
+          <Button size="sm" className="w-full h-12 rounded-xl bg-primary hover:bg-secondary text-white font-headline text-sm transition-all active:scale-[0.98] shadow-md hover:shadow-lg">تفاصيل الكورس</Button>
         </Link>
       </div>
     </div>
