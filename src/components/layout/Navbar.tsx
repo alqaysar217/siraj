@@ -84,11 +84,11 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px] font-body [&>button]:hidden">
                 <SheetHeader className="text-right border-b pb-6 mb-6">
-                  <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2 justify-end">
-                    <span>منصة سراج</span>
+                  <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2">
                     <div className="relative w-8 h-8 overflow-hidden rounded-lg">
                       <Image src="/siraj.png" alt="سراج" fill className="object-cover" />
                     </div>
+                    <span>منصة سراج</span>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-4">
