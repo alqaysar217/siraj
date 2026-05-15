@@ -197,7 +197,6 @@ export default function InstructorProfilePage() {
                     <Achievement icon={<Users className="w-4 h-4 text-secondary" />} text="مشرف على مشاريع تخرج" />
                     <Achievement icon={<Clock className="w-4 h-4 text-secondary" />} text="انضم منذ 3 سنوات" />
                   </div>
-                  <Button size="lg" className="w-full h-14 bg-secondary hover:bg-secondary/90 text-white rounded-xl font-headline shadow-xl gold-glow text-base transition-transform active:scale-95">طلب استشارة خاصة</Button>
                 </div>
 
               </div>
@@ -284,7 +283,7 @@ function CourseListingCard({ course }: { course: any }) {
           </div>
           <div className="flex flex-col items-center gap-1">
             <Users className="w-3 h-3 text-secondary" />
-            <span>{course.students.toLocaleString('en-US')}</span>
+            <span>{mounted ? course.students.toLocaleString('en-US') : ""}</span>
           </div>
         </div>
 
