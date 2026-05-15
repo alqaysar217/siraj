@@ -6,7 +6,6 @@ import Link from "next/link";
 
 export function Hero() {
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
-  const webDevImage = PlaceHolderImages.find(img => img.id === 'web-dev-course');
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-primary/5">
@@ -66,14 +65,12 @@ export function Hero() {
             <div className="relative w-full aspect-square max-w-[550px] mx-auto group">
               <div className="absolute inset-0 bg-secondary/20 rounded-[60px] rotate-6 group-hover:rotate-12 transition-transform duration-700" />
               <div className="absolute inset-0 bg-primary rounded-[60px] -rotate-3 group-hover:-rotate-6 transition-transform duration-700 shadow-[0_20px_50px_rgba(42,18,11,0.2)] overflow-hidden border-8 border-white">
-                {webDevImage?.imageUrl && (
-                  <Image 
-                    src={webDevImage.imageUrl} 
-                    alt="Siraj Learning" 
-                    fill 
-                    className="object-cover"
-                  />
-                )}
+                <Image 
+                  src="/home.png" 
+                  alt="Siraj Learning" 
+                  fill 
+                  className="object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
               </div>
             </div>
