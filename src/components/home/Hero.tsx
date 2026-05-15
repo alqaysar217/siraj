@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Play, Users, BookMarked, Award, Star, GraduationCap } from "lucide-react";
+import { ArrowLeft, Users, BookOpen, Library, Star, GraduationCap, Award } from "lucide-react";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Link from "next/link";
@@ -58,9 +58,9 @@ export function Hero() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-primary/5">
-              <StatItem icon={<Users className="w-5 h-5" />} value="+10,000" label="طالب نشط" />
-              <StatItem icon={<BookMarked className="w-5 h-5" />} value="+85" label="كورس احترافي" />
-              <StatItem icon={<Award className="w-5 h-5" />} value="+15,000" label="شهادة معتمدة" />
+              <StatItem icon={<Users className="w-5 h-5" />} value="+10,000" label="طالب" />
+              <StatItem icon={<BookOpen className="w-5 h-5" />} value="+85" label="كورس" />
+              <StatItem icon={<Library className="w-5 h-5" />} value="+120" label="كتاب" />
               <StatItem icon={<Star className="w-5 h-5 text-secondary fill-current" />} value="4.9" label="تقييم المنصة" />
             </div>
           </div>
