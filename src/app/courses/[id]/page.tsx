@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Star, Clock, User, Play, FileText, CheckCircle2, Globe, Share2, GraduationCap, MessageCircle, BookOpen, HelpCircle } from "lucide-react";
+import { Star, Clock, User, Play, FileText, CheckCircle2, Globe, Share2, GraduationCap, MessageCircle, BookOpen, HelpCircle, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import Link from "next/link";
 
 export default function CourseDetailPage() {
   const { id } = useParams();
@@ -20,52 +21,78 @@ export default function CourseDetailPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      <div className="pt-20 lg:pt-24 pb-20">
+      <div className="pt-24 lg:pt-32 pb-20">
         <div className="container mx-auto px-4 max-w-5xl">
           
-          {/* 1. الغلاف (صورة الكورس) - البداية */}
-          <div className="relative aspect-video rounded-[32px] overflow-hidden luxury-shadow mb-8 border border-primary/5">
-            {courseImage?.imageUrl && (
-              <Image src={courseImage.imageUrl} alt="Thumbnail" fill className="object-cover" />
-            )}
-            <div className="absolute inset-0 bg-black/20 flex items-center justify-center group cursor-pointer">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                <Play className="w-6 h-6 md:w-8 md:h-8 text-primary fill-current mr-1" />
-              </div>
+          {/* 1. العنوان والغلاف المصمم */}
+          <div className="space-y-6 mb-8">
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-secondary/10 text-secondary border-none font-headline">برمجة</Badge>
+              <Badge className="bg-primary/5 text-primary/60 border-none font-headline">مستوى مبتدئ</Badge>
             </div>
+            <h1 className="text-3xl lg:text-5xl font-headline font-bold text-primary leading-tight">تطوير الويب الشامل - Full Stack Web Development</h1>
           </div>
 
-          {/* 2. تفاصيل الكورس الأساسية (الاسم، السعر، التقييم) */}
-          <div className="space-y-6 mb-10">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="space-y-3">
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-secondary/10 text-secondary border-none font-headline">برمجة</Badge>
-                  <Badge className="bg-primary/5 text-primary/60 border-none font-headline">مستوى مبتدئ</Badge>
+          <div className="relative aspect-video rounded-[32px] overflow-hidden luxury-shadow mb-10 border border-primary/5 bg-primary/5">
+            {courseImage?.imageUrl && (
+              <Image 
+                src={courseImage.imageUrl} 
+                alt="Course Cover" 
+                fill 
+                className="object-cover"
+                priority
+              />
+            )}
+          </div>
+
+          {/* 2. بيانات الكورس والسعر */}
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-white p-8 rounded-[32px] border border-primary/5 luxury-shadow flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-secondary">
+                    <Star className="w-5 h-5 fill-current" />
+                    <span className="font-bold text-2xl">4.9</span>
+                    <span className="text-primary/40 text-sm mr-1">(1,240 تقييم من الطلاب)</span>
+                  </div>
+                  <p className="text-primary/60">هذا الكورس هو الأكثر طلباً في مجال البرمجة لهذا العام.</p>
                 </div>
-                <h1 className="text-3xl lg:text-5xl font-headline font-bold text-primary">تطوير الويب الشامل - Full Stack Web Development</h1>
+                <div className="text-center md:text-left shrink-0">
+                  <div className="text-primary/30 line-through text-sm mb-1">60,000 ريال يمني</div>
+                  <div className="text-4xl font-headline font-bold text-secondary">45,000 ريال يمني</div>
+                </div>
               </div>
               
-              <div className="bg-white p-6 rounded-3xl luxury-shadow border border-primary/5 flex flex-col items-center md:items-end gap-2 shrink-0">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-headline font-bold text-secondary">45,000 ريال يمني</span>
-                  <span className="text-primary/30 line-through text-sm">60,000 ريال</span>
-                </div>
-                <div className="flex items-center gap-1 text-secondary">
-                  <Star className="w-4 h-4 fill-current" />
-                  <span className="font-bold text-lg">4.9</span>
-                  <span className="text-primary/40 text-xs mr-1">(1,240 تقييم)</span>
-                </div>
+              <div className="flex flex-wrap gap-4">
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-12 h-16 rounded-2xl text-xl font-headline shadow-lg gold-glow grow md:grow-0">
+                  سجل الآن في الكورس
+                </Button>
+                <Button size="lg" variant="outline" className="border-primary/10 h-16 rounded-2xl font-headline px-8">
+                  <Share2 className="w-5 h-5 ml-2" /> 
+                  مشاركة
+                </Button>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-10 h-14 rounded-2xl text-lg font-headline shadow-lg gold-glow grow md:grow-0">سجل الآن في الكورس</Button>
-              <Button size="lg" variant="outline" className="border-primary/10 h-14 rounded-2xl font-headline px-8"><Share2 className="w-4 h-4 ml-2" /> مشاركة</Button>
+            <div className="space-y-4">
+              <div className="bg-primary rounded-[32px] p-8 text-white luxury-shadow h-full flex flex-col justify-center">
+                <h3 className="text-xl font-headline font-bold mb-4 flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-secondary" />
+                  ماذا يميز هذا الكورس؟
+                </h3>
+                <ul className="space-y-3">
+                  {["وصول مدى الحياة", "شهادة معتمدة", "دعم فني مباشر", "تحديثات مستمرة"].map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-white/80 text-sm">
+                      <CheckCircle2 className="w-4 h-4 text-secondary" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
-          {/* 3. إحصائيات تقنية (عدد الدروس، الساعات، الطلاب، الشهادة) */}
+          {/* 3. إحصائيات تقنية */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             <QuickStat icon={<Clock />} label="مدة الكورس" value="45 ساعة" />
             <QuickStat icon={<BookOpen />} label="الدروس" value="45 درس" />
@@ -75,7 +102,7 @@ export default function CourseDetailPage() {
             <QuickStat icon={<HelpCircle />} label="الدعم" value="أسئلة وأجوبة" />
           </div>
 
-          {/* 4. التبويبات (نظرة عامة، المنهج، المدرب، المراجعات) */}
+          {/* 4. التبويبات التفصيلية */}
           <Tabs defaultValue="overview" className="w-full" dir="rtl">
             <TabsList className="bg-white border p-1 rounded-2xl h-auto flex-wrap justify-start mb-8 luxury-shadow">
               <TabsTrigger value="overview" className="data-[state=active]:bg-secondary data-[state=active]:text-white px-8 py-3 rounded-xl font-headline transition-all">نظرة عامة</TabsTrigger>
@@ -122,7 +149,7 @@ export default function CourseDetailPage() {
 
             <TabsContent value="instructor" className="animate-in fade-in slide-in-from-bottom-2">
               <div className="bg-white p-8 rounded-[32px] border border-primary/5 luxury-shadow flex flex-col md:flex-row gap-8 items-center md:items-start">
-                <div className="relative w-32 h-32 shrink-0">
+                <div className="relative w-32 h-32 shrink-0 shadow-xl">
                   {instructorImage?.imageUrl && (
                     <Image src={instructorImage.imageUrl} alt="Instructor" fill className="object-cover rounded-[24px]" />
                   )}
@@ -159,7 +186,7 @@ export default function CourseDetailPage() {
             </TabsContent>
           </Tabs>
 
-          {/* 5. Final CTA Section */}
+          {/* 5. Final CTA */}
           <div className="mt-20 bg-primary rounded-[48px] p-10 md:p-16 text-center text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] -mr-32 -mt-32" />
             <h2 className="text-3xl md:text-4xl font-headline font-bold mb-6">هل أنت جاهز للتحول المهني؟</h2>
@@ -170,6 +197,25 @@ export default function CourseDetailPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+function Zap({ className }: { className?: string }) {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}
+    >
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
   );
 }
 
