@@ -94,13 +94,13 @@ export function Hero() {
 
 function StatItem({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
   return (
-    <div className="space-y-2 text-center lg:text-right">
-      <p className="text-[10px] md:text-xs text-primary/40 font-bold uppercase tracking-wider">{label}</p>
-      <div className="flex items-center gap-2 justify-center lg:justify-start">
-        <div className="text-secondary">
+    <div className="space-y-1 text-center lg:text-right group">
+      <h4 className="text-lg md:text-xl font-headline font-bold text-primary group-hover:text-secondary transition-colors duration-300">{label}</h4>
+      <div className="flex items-center gap-2 justify-center lg:justify-start text-primary/60">
+        <div className="text-secondary/70">
           {icon}
         </div>
-        <span className="text-xl md:text-2xl font-bold text-primary">{value}</span>
+        <span className="text-sm md:text-base font-bold">{value}</span>
       </div>
     </div>
   );
