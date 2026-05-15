@@ -124,10 +124,10 @@ export default function InstructorProfilePage() {
                 </Button>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto lg:mr-0 pt-10 border-t border-primary/5">
-                 <BigStatItem icon={<Users className="w-7 h-7" />} label="طالب" value={mounted ? INSTRUCTOR_DATA.students.toLocaleString() : ""} />
-                 <BigStatItem icon={<BookOpen className="w-7 h-7" />} label="دورة" value={INSTRUCTOR_DATA.coursesCount.toString()} />
-                 <BigStatItem icon={<Star className="w-7 h-7" />} label="تقييم" value={INSTRUCTOR_DATA.rating.toString()} />
+              <div className="grid grid-cols-3 gap-3 md:gap-8 max-w-2xl mx-auto lg:mr-0 pt-10 border-t border-primary/5">
+                 <BigStatItem icon={<Users className="w-5 h-5 md:w-7 md:h-7" />} label="طالب" value={mounted ? INSTRUCTOR_DATA.students.toLocaleString() : ""} />
+                 <BigStatItem icon={<BookOpen className="w-5 h-5 md:w-7 md:h-7" />} label="دورة" value={INSTRUCTOR_DATA.coursesCount.toString()} />
+                 <BigStatItem icon={<Star className="w-5 h-5 md:w-7 md:h-7" />} label="تقييم" value={INSTRUCTOR_DATA.rating.toString()} />
               </div>
             </div>
 
@@ -233,10 +233,10 @@ function SocialLink({ icon, href }: { icon: React.ReactNode; href: string }) {
 
 function BigStatItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-white p-6 rounded-[32px] border border-primary/5 luxury-shadow text-center group hover:border-secondary/30 transition-all">
-      <div className="text-secondary flex justify-center mb-4 group-hover:scale-110 transition-transform">{icon}</div>
-      <p className="text-2xl md:text-3xl font-headline font-bold text-primary">{value}</p>
-      <p className="text-[11px] text-primary/40 font-bold uppercase tracking-widest mt-1">{label}</p>
+    <div className="bg-white p-3 md:p-6 rounded-2xl md:rounded-[32px] border border-primary/5 luxury-shadow text-center group hover:border-secondary/30 transition-all flex flex-col items-center justify-center">
+      <div className="text-secondary mb-2 md:mb-4 group-hover:scale-110 transition-transform">{icon}</div>
+      <p className="text-base md:text-3xl font-headline font-bold text-primary leading-none">{value}</p>
+      <p className="hidden md:block text-[11px] text-primary/40 font-bold uppercase tracking-widest mt-1">{label}</p>
     </div>
   );
 }
