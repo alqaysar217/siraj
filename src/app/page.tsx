@@ -103,6 +103,7 @@ export default function Home() {
               <ul className="space-y-3 text-white/60 text-sm">
                 <li><a href="/courses" className="hover:text-secondary transition-colors">الكورسات</a></li>
                 <li><a href="/books" className="hover:text-secondary transition-colors">الكتب التعليمية</a></li>
+                <li><a href="/elite" className="hover:text-secondary transition-colors">نادي النخبة</a></li>
                 <li><a href="/verify" className="hover:text-secondary transition-colors">التحقق من الشهادات</a></li>
               </ul>
             </div>
