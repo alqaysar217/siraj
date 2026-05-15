@@ -156,18 +156,16 @@ export default function CoursesPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      {/* Header Banner Image */}
-      <section className="pt-24 md:pt-32 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="relative w-full aspect-[21/9] md:aspect-[3/1] rounded-[32px] overflow-hidden shadow-2xl border border-primary/5 luxury-shadow">
-             <Image 
-               src="/Courses.png" 
-               alt="Courses Banner" 
-               fill 
-               className="object-cover"
-               priority
-             />
-          </div>
+      {/* Header Banner Image - Full Width & No Padding Top */}
+      <section className="pt-[72px] overflow-hidden">
+        <div className="relative w-full aspect-[21/9] md:aspect-[25/7]">
+           <Image 
+             src="/Courses.png" 
+             alt="Courses Banner" 
+             fill 
+             className="object-cover"
+             priority
+           />
         </div>
       </section>
 
