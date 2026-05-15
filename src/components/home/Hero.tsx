@@ -78,17 +78,6 @@ export function Hero() {
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent" />
-                <div className="absolute bottom-6 right-6 left-6 p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
-                      <GraduationCap className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-headline font-bold">بدأت دورة جديدة</p>
-                      <p className="text-white/60 text-xs">تعلم تطوير الويب الشامل</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
