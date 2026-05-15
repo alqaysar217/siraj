@@ -101,10 +101,9 @@ export default function Home() {
             <div>
               <h4 className="font-headline font-bold mb-6">روابط سريعة</h4>
               <ul className="space-y-3 text-white/60 text-sm">
-                <li><a href="#" className="hover:text-secondary transition-colors">الكورسات</a></li>
-                <li><a href="#" className="hover:text-secondary transition-colors">المسارات التعليمية</a></li>
-                <li><a href="#" className="hover:text-secondary transition-colors">الكتب التعليمية</a></li>
-                <li><a href="#" className="hover:text-secondary transition-colors">التحقق من الشهادات</a></li>
+                <li><a href="/courses" className="hover:text-secondary transition-colors">الكورسات</a></li>
+                <li><a href="/books" className="hover:text-secondary transition-colors">الكتب التعليمية</a></li>
+                <li><a href="/verify" className="hover:text-secondary transition-colors">التحقق من الشهادات</a></li>
               </ul>
             </div>
             <div>

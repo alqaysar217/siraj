@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Play, Users, BookMarked, Award, Star, GraduationCap } from "lucide-react";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import Link from "next/link";
 
 export function Hero() {
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -42,14 +43,18 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-10 h-14 rounded-2xl text-lg font-headline shadow-lg gold-glow transition-all active:scale-95 group">
-                استكشف الكورسات
-                <ArrowLeft className="mr-2 w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary/20 bg-background/50 hover:bg-primary/5 px-8 h-14 rounded-2xl text-lg font-headline">
-                عرض المسارات
-                <Play className="mr-2 w-4 h-4 fill-primary" />
-              </Button>
+              <Link href="/courses">
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-10 h-14 rounded-2xl text-lg font-headline shadow-lg gold-glow transition-all active:scale-95 group">
+                  استكشف الكورسات
+                  <ArrowLeft className="mr-2 w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link href="/verify">
+                <Button size="lg" variant="outline" className="border-primary/20 bg-background/50 hover:bg-primary/5 px-8 h-14 rounded-2xl text-lg font-headline">
+                  تحقق من الشهادات
+                  <Award className="mr-2 w-4 h-4" />
+                </Button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-primary/5">
