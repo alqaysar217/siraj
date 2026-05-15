@@ -140,15 +140,6 @@ function InstructorCard({ instructor }: { instructor: any }) {
         <div className="space-y-2 mb-4">
           <h3 className="text-2xl font-headline font-bold text-primary group-hover:text-secondary transition-colors">{instructor.name}</h3>
           <p className="text-sm text-secondary font-bold uppercase tracking-wide px-3 py-1 bg-secondary/5 rounded-full inline-block">{instructor.title}</p>
-          
-          <div className="flex items-center justify-center gap-2 mt-4">
-            <div className="flex items-center gap-1 text-xs font-bold text-primary/60">
-              <Star className="w-4 h-4 text-secondary fill-current" />
-              <span>{instructor.rating}</span>
-            </div>
-            <span className="text-primary/10">|</span>
-            <span className="text-xs text-primary/40 font-bold">{instructor.students.toLocaleString()} طالب</span>
-          </div>
         </div>
 
         {/* Bio Snippet */}
@@ -166,14 +157,18 @@ function InstructorCard({ instructor }: { instructor: any }) {
 
         {/* Footer Stats & Button */}
         <div className="w-full pt-6 border-t border-primary/5 mt-auto">
-          <div className="flex items-center justify-between mb-6 text-xs text-primary/40 font-bold">
-            <div className="flex items-center gap-1.5">
-              <BookOpen className="w-4 h-4 text-secondary/60" />
+          <div className="flex items-center justify-between mb-6 text-[10px] text-primary/40 font-bold">
+            <div className="flex items-center gap-1">
+              <Star className="w-3.5 h-3.5 text-secondary fill-current" />
+              <span>{instructor.rating} تقييم</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <BookOpen className="w-3.5 h-3.5 text-secondary/60" />
               <span>{instructor.courses} دورة</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Users className="w-4 h-4 text-secondary/60" />
-              <span>خبير معتمد</span>
+            <div className="flex items-center gap-1">
+              <Users className="w-3.5 h-3.5 text-secondary/60" />
+              <span>{instructor.students.toLocaleString()} طالب</span>
             </div>
           </div>
           <Link href={`/instructors/${instructor.id}`} className="block">
@@ -195,4 +190,3 @@ function SocialIcon({ icon, href }: { icon: React.ReactNode; href: string }) {
     </Link>
   );
 }
-
