@@ -82,7 +82,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">استكشف مجالات <span className="text-secondary">المستقبل</span></h2>
             <p className="text-primary/60 max-w-2xl mx-auto">نغطي أهم التخصصات المطلوبة في سوق العمل الحديث بمعايير عالمية.</p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             <CategoryCard title="تطوير الويب" courses={24} icon={<Laptop className="w-8 h-8" />} />
             <CategoryCard title="الذكاء الاصطناعي" courses={12} icon={<Bot className="w-8 h-8" />} />
             <CategoryCard title="الأمن السيبراني" courses={9} icon={<Lock className="w-8 h-8" />} />
@@ -358,12 +358,12 @@ function FeatureItem({ icon, title, description }: { icon: React.ReactNode; titl
 
 function CategoryCard({ title, courses, icon }: { title: string; courses: number; icon: React.ReactNode }) {
   return (
-    <div className="bg-white border border-primary/5 luxury-shadow p-8 rounded-[32px] hover:border-secondary/20 hover:translate-y-[-4px] transition-all cursor-pointer group text-center">
-      <div className="w-14 h-14 bg-primary/5 rounded-2xl flex items-center justify-center text-primary/40 group-hover:bg-secondary/10 group-hover:text-secondary transition-all mb-6 mx-auto">
+    <div className="bg-white border border-primary/5 luxury-shadow p-5 md:p-8 rounded-[32px] hover:border-secondary/20 hover:translate-y-[-4px] transition-all cursor-pointer group text-center">
+      <div className="w-12 h-12 md:w-14 md:h-14 bg-primary/5 rounded-2xl flex items-center justify-center text-primary/40 group-hover:bg-secondary/10 group-hover:text-secondary transition-all mb-4 md:mb-6 mx-auto">
         {icon}
       </div>
-      <h3 className="text-lg font-headline font-bold text-primary mb-2">{title}</h3>
-      <p className="text-xs text-primary/40 font-bold">{courses} دورة تدريبية</p>
+      <h3 className="text-sm md:text-lg font-headline font-bold text-primary mb-1 md:mb-2">{title}</h3>
+      <p className="text-[10px] md:text-xs text-primary/40 font-bold">{courses} دورة تدريبية</p>
     </div>
   );
 }
