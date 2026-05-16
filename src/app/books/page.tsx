@@ -65,9 +65,10 @@ export default function BooksPage() {
         </div>
       </section>
 
+      {/* Search Bar - Sticky and Centered */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-4 py-2.5">
-          <div className="relative max-w-2xl mx-auto md:mr-0">
+        <div className="container mx-auto px-4 py-2">
+          <div className="relative max-w-2xl mx-auto w-full">
             <Input 
               placeholder="ابحث عن كتاب، مؤلف، أو تخصص..." 
               className="h-11 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"

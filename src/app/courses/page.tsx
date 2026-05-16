@@ -168,10 +168,11 @@ export default function CoursesPage() {
         </div>
       </section>
 
+      {/* Search and Filter Section - Sticky without gaps and Centered */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-4 py-2.5">
-          <div className="flex flex-col md:flex-row gap-2.5 items-center">
-            <div className="relative w-full">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex flex-col md:flex-row gap-3 items-center justify-center max-w-3xl mx-auto w-full">
+            <div className="relative w-full flex-1">
               <Input 
                 placeholder="ابحث باسم الكورس أو المجال..." 
                 className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
@@ -269,7 +270,7 @@ export default function CoursesPage() {
           </div>
           
           {activeFiltersCount > 0 && (
-            <div className="mt-2.5 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-1">
+            <div className="mt-2.5 flex flex-wrap gap-2 justify-center animate-in fade-in slide-in-from-top-1">
               {activeCategory !== "all" && <ActiveFilterBadge label={activeCategory} onClear={() => setActiveCategory("all")} />}
               {activePrice !== "all" && <ActiveFilterBadge label={activePrice} onClear={() => setActivePrice("all")} />}
               {activeCert !== "all" && <ActiveFilterBadge label={activeCert} onClear={() => setActiveCert("all")} />}

@@ -102,10 +102,10 @@ export default function InstructorsDirectoryPage() {
         </div>
       </section>
 
-      {/* Search and Filter Section - Sticky without gaps */}
+      {/* Search and Filter Section - Sticky without gaps and Centered */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-4 py-2.5">
-          <div className="flex flex-col md:flex-row gap-2.5 items-center">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex flex-col md:flex-row gap-3 items-center justify-center max-w-3xl mx-auto w-full">
             <div className="relative flex-1 w-full">
               <input 
                 type="text" 
@@ -125,7 +125,7 @@ export default function InstructorsDirectoryPage() {
               )}
             </div>
             
-            <div className="w-full md:w-60">
+            <div className="w-full md:w-56 shrink-0">
               <Select value={activeCategory} onValueChange={setActiveCategory}>
                 <SelectTrigger className="h-11 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70 text-xs">
                   <div className="flex items-center gap-2">
