@@ -90,7 +90,7 @@ export default function InstructorsDirectoryPage() {
       <Navbar />
 
       {/* Banner Section - Exact 3:1 ratio (1920/640) */}
-      <section className="pt-[92px] w-full overflow-hidden bg-white">
+      <section className="pt-[64px] w-full overflow-hidden bg-white">
         <div className="relative w-full aspect-[3/1]">
            <Image 
              src="/Instructors.png" 
@@ -102,15 +102,15 @@ export default function InstructorsDirectoryPage() {
         </div>
       </section>
 
-      {/* Search and Filter Section */}
-      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col md:flex-row gap-4 items-center">
+      {/* Search and Filter Section - Sticky without gaps */}
+      <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
+        <div className="container mx-auto px-4 py-2.5">
+          <div className="flex flex-col md:flex-row gap-2.5 items-center">
             <div className="relative flex-1 w-full">
               <input 
                 type="text" 
                 placeholder="ابحث عن مدرب أو تخصص..." 
-                className="w-full h-12 rounded-2xl pr-12 pl-4 border-primary/10 bg-white shadow-sm focus:ring-2 focus:ring-secondary/20 outline-none text-sm font-body transition-all"
+                className="w-full h-11 rounded-2xl pr-12 pl-4 border-primary/10 bg-white shadow-sm focus:ring-2 focus:ring-secondary/20 outline-none text-sm font-body transition-all"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -127,7 +127,7 @@ export default function InstructorsDirectoryPage() {
             
             <div className="w-full md:w-60">
               <Select value={activeCategory} onValueChange={setActiveCategory}>
-                <SelectTrigger className="h-12 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70">
+                <SelectTrigger className="h-11 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70 text-xs">
                   <div className="flex items-center gap-2">
                     <Filter className="w-4 h-4 text-secondary" />
                     <SelectValue placeholder="كل المجالات" />
@@ -145,9 +145,9 @@ export default function InstructorsDirectoryPage() {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="mb-12 text-center md:text-right">
+          <div className="mb-8 text-center md:text-right">
              <div className="flex items-center gap-2 text-primary/60 text-xs font-bold">
               <Users className="w-4 h-4 text-secondary" />
               <span>تم العثور على {filteredInstructors.length.toString()} مدرب خبير</span>
@@ -260,7 +260,7 @@ function InstructorCard({ instructor }: { instructor: any }) {
             </div>
           </div>
           <Link href={`/instructors/${instructor.id}`} className="block">
-            <Button variant="outline" className="w-full h-12 rounded-2xl border-primary/10 font-headline text-xs gap-2 group/btn hover:bg-primary hover:text-white transition-all shadow-sm">
+            <Button variant="outline" className="w-full h-11 rounded-2xl border-primary/10 font-headline text-xs gap-2 group/btn hover:bg-primary hover:text-white transition-all shadow-sm">
               عرض الملف الشخصي
               <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
             </Button>
