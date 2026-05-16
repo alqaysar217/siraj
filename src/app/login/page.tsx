@@ -20,19 +20,21 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8 relative overflow-hidden" dir="rtl">
-      {/* Background Decorations */}
+      {/* Smoky Background Decorations */}
       <div className="absolute top-0 right-0 w-full h-full bg-primary/5 -z-10" />
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full" />
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/10 blur-[120px] rounded-full" />
+      <div className="absolute -top-24 -right-24 w-[600px] h-[600px] bg-secondary/15 blur-[160px] rounded-full opacity-40 animate-pulse duration-[10s]" />
+      <div className="absolute -bottom-48 -left-48 w-[600px] h-[600px] bg-primary/20 blur-[160px] rounded-full opacity-30" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,hsl(var(--background))_70%)] opacity-50" />
 
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 bg-white rounded-[48px] overflow-hidden luxury-shadow border border-primary/5 min-h-[700px]">
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 bg-white rounded-[48px] overflow-hidden luxury-shadow border border-primary/5 min-h-[700px] relative z-10">
         
         {/* Left Side: Branding/Info (Hidden on Mobile) */}
-        <div className="hidden lg:flex flex-col justify-between p-16 bg-primary text-white relative">
+        <div className="hidden lg:flex flex-col justify-between p-16 bg-primary text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-secondary/30 -z-0" />
           
-          {/* Top Decorative Blur */}
-          <div className="absolute top-0 left-0 w-64 h-64 bg-secondary/20 blur-[80px] -translate-x-1/2 -translate-y-1/2" />
+          {/* Internal Smoky Gradient */}
+          <div className="absolute -top-32 -left-32 w-80 h-80 bg-secondary/20 blur-[90px] rounded-full" />
+          <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-white/10 blur-[90px] rounded-full" />
 
           <div className="relative z-10">
             <Link href="/" className="flex items-center gap-4 mb-20 group">
@@ -78,6 +80,12 @@ export default function LoginPage() {
 
           <div className="max-w-md mx-auto w-full space-y-10">
             <div className="space-y-4 text-center lg:text-right">
+              {/* Logo for Desktop within the form side optionally */}
+              <div className="hidden lg:flex justify-end mb-6">
+                <div className="relative w-12 h-12 overflow-hidden rounded-xl bg-primary/5 p-2 border border-primary/5">
+                  <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
+                </div>
+              </div>
               <h1 className="text-3xl md:text-5xl font-headline font-bold text-primary">تسجيل الدخول</h1>
               <p className="text-primary/40 text-base md:text-lg font-bold">نحن سعداء برؤيتك مرة أخرى!</p>
             </div>
