@@ -14,6 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,7 +26,6 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 10);
     };
     
-    // التحقق الفوري عند التحميل لحل مشكلة التأخر
     handleScroll();
     
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -89,8 +89,8 @@ export function Navbar() {
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px] font-body [&>button]:hidden">
-                <SheetHeader className="text-right border-b pb-6 mb-6">
+              <SheetContent side="right" className="w-[300px] sm:w-[350px] font-body p-0 [&>button]:hidden">
+                <SheetHeader className="text-right border-b p-6">
                   <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2">
                     <div className="relative w-8 h-8 overflow-hidden rounded-lg">
                       <Image src="/siraj.png" alt="سراج" fill className="object-cover" />
@@ -98,33 +98,40 @@ export function Navbar() {
                     <span>منصة سراج</span>
                   </SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col gap-4">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="flex items-center gap-4 p-4 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
-                    >
-                      <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
-                        {link.icon}
-                      </span>
-                      <span className="font-headline font-bold">{link.label}</span>
-                    </Link>
-                  ))}
-                  
-                  <div className="grid gap-3 mt-8 pt-8 border-t">
-                    <Link href="/signup">
-                      <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-12 rounded-xl font-headline shadow-md">
-                        ابدأ التعلم الآن
-                      </Button>
-                    </Link>
-                    <Link href="/login">
-                      <Button variant="outline" className="w-full h-12 rounded-xl font-headline border-primary/10">
-                        تسجيل الدخول
-                      </Button>
-                    </Link>
+                
+                <ScrollArea className="h-[calc(100vh-100px)] px-6">
+                  <div className="flex flex-col gap-1 py-6">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
+                      >
+                        <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
+                          {link.icon}
+                        </span>
+                        <span className="font-headline font-bold">{link.label}</span>
+                      </Link>
+                    ))}
+                    
+                    <div className="grid gap-3 mt-4 pt-6 border-t border-primary/5">
+                      <Link href="/signup">
+                        <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-12 rounded-xl font-headline shadow-md">
+                          ابدأ التعلم الآن
+                        </Button>
+                      </Link>
+                      <Link href="/login">
+                        <Button variant="outline" className="w-full h-12 rounded-xl font-headline border-primary/10">
+                          تسجيل الدخول
+                        </Button>
+                      </Link>
+                    </div>
+
+                    <div className="mt-8 mb-10 text-center">
+                      <p className="text-[10px] text-primary/30 font-bold uppercase tracking-widest">سراج — SIRAJ.IO</p>
+                    </div>
                   </div>
-                </div>
+                </ScrollArea>
               </SheetContent>
             </Sheet>
           ) : (
