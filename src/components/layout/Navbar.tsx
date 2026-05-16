@@ -89,7 +89,7 @@ export function Navbar() {
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] sm:w-[350px] font-body p-0 [&>button]:hidden" dir="rtl">
+              <SheetContent side="right" className="w-[300px] sm:w-[350px] font-body p-0 [&>button]:hidden" dir="rtl">
                 <SheetHeader className="text-right border-b p-6">
                   <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2">
                     <div className="relative w-8 h-8 overflow-hidden rounded-lg">
@@ -99,7 +99,7 @@ export function Navbar() {
                   </SheetTitle>
                 </SheetHeader>
                 
-                <ScrollArea className="h-[calc(100vh-100px)] px-6">
+                <ScrollArea className="h-[calc(100vh-100px)] px-6 text-right">
                   <div className="flex flex-col gap-1 py-6">
                     {navLinks.map((link) => (
                       <Link
