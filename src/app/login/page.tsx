@@ -7,8 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Mail, Lock, ArrowRight, Chrome, Github, ChevronRight } from "lucide-react";
+import { Mail, Lock, Chrome, ChevronRight } from "lucide-react";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +30,7 @@ export default function LoginPage() {
         
         {/* Left Side: Visual/Welcome (Hidden on Mobile) */}
         <div className="hidden lg:flex flex-col justify-between p-12 bg-primary text-white relative">
-          <div className="absolute inset-0 bg-secondary/5 -z-0" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary/20 -z-0" />
           <div className="relative z-10">
             <Link href="/" className="flex items-center gap-3 mb-16">
               <div className="relative w-12 h-12 overflow-hidden rounded-2xl bg-white p-1 shadow-lg">
@@ -63,21 +62,16 @@ export default function LoginPage() {
         </div>
 
         {/* Right Side: Login Form */}
-        <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+        <div className="p-6 md:p-12 lg:p-16 flex flex-col justify-center bg-white">
           <div className="max-w-md mx-auto w-full space-y-8">
-            <div className="space-y-2 text-center lg:text-right">
-              <h1 className="text-3xl font-headline font-bold text-primary">تسجيل الدخول</h1>
-              <p className="text-primary/40 text-sm font-bold">أدخل بياناتك للوصول إلى حسابك الشخصي</p>
+            <div className="space-y-3 text-center lg:text-right">
+              <h1 className="text-3xl md:text-4xl font-headline font-bold text-primary">تسجيل الدخول</h1>
+              <p className="text-primary/40 text-sm md:text-base font-bold">أدخل بياناتك للوصول إلى حسابك الشخصي</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <Button variant="outline" className="h-12 rounded-2xl border-primary/10 font-headline text-xs gap-3">
-                <Chrome className="w-4 h-4 text-red-500" /> جوجل
-              </Button>
-              <Button variant="outline" className="h-12 rounded-2xl border-primary/10 font-headline text-xs gap-3">
-                <Github className="w-4 h-4" /> جيت هاب
-              </Button>
-            </div>
+            <Button variant="outline" className="w-full h-14 rounded-2xl border-primary/10 font-headline text-sm gap-3 hover:bg-primary/5 transition-all">
+              <Chrome className="w-5 h-5 text-red-500" /> الدخول بواسطة جوجل
+            </Button>
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -88,14 +82,14 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-primary mr-1">البريد الإلكتروني</Label>
+                <Label className="text-sm font-bold text-primary mr-1">البريد الإلكتروني</Label>
                 <div className="relative">
                   <Input 
                     type="email" 
                     placeholder="example@mail.com" 
-                    className="h-14 rounded-2xl pr-12 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left" 
+                    className="h-14 md:h-16 rounded-2xl pr-12 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all" 
                     required 
                   />
                   <Mail className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
@@ -104,14 +98,14 @@ export default function LoginPage() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between px-1">
-                  <Label className="text-xs font-bold text-primary">كلمة المرور</Label>
-                  <Link href="/forgot-password" title="نسيت كلمة المرور" className="text-[10px] text-secondary font-bold hover:underline">نسيت كلمة المرور؟</Link>
+                  <Label className="text-sm font-bold text-primary">كلمة المرور</Label>
+                  <Link href="/forgot-password" title="نسيت كلمة المرور" className="text-xs text-secondary font-bold hover:underline">نسيت كلمة المرور؟</Link>
                 </div>
                 <div className="relative">
                   <Input 
                     type="password" 
                     placeholder="••••••••" 
-                    className="h-14 rounded-2xl pr-12 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left" 
+                    className="h-14 md:h-16 rounded-2xl pr-12 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all" 
                     required 
                   />
                   <Lock className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
@@ -120,15 +114,15 @@ export default function LoginPage() {
 
               <Button 
                 type="submit" 
-                className="w-full h-14 bg-secondary hover:bg-secondary/90 text-white rounded-2xl font-headline text-lg shadow-xl gold-glow transition-all active:scale-95"
+                className="w-full h-14 md:h-16 bg-secondary hover:bg-secondary/90 text-white rounded-2xl font-headline text-xl shadow-xl gold-glow transition-all active:scale-95"
                 disabled={isLoading}
               >
                 {isLoading ? "جاري الدخول..." : "تسجيل الدخول"}
-                {!isLoading && <ChevronRight className="mr-2 w-5 h-5 rotate-180" />}
+                {!isLoading && <ChevronRight className="mr-2 w-6 h-6 rotate-180" />}
               </Button>
             </form>
 
-            <p className="text-center text-sm text-primary/60 font-medium pt-4">
+            <p className="text-center text-sm md:text-base text-primary/60 font-medium pt-4">
               ليس لديك حساب؟{" "}
               <Link href="/signup" className="text-secondary font-bold hover:underline">إنشاء حساب جديد</Link>
             </p>
