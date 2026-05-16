@@ -156,14 +156,14 @@ export default function CoursesPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      {/* Header Banner Image - Fixed spacing and height */}
+      {/* Banner Section - Optimized for visibility and aspect ratio */}
       <section className="pt-[92px] w-full overflow-hidden bg-white">
-        <div className="relative w-full aspect-[16/6] md:aspect-[5/1]">
+        <div className="relative w-full aspect-[16/7] md:aspect-[16/5]">
            <Image 
              src="/Courses.png" 
              alt="Courses Banner" 
              fill 
-             className="object-cover"
+             className="object-cover object-top"
              priority
            />
         </div>
