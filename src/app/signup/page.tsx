@@ -42,43 +42,42 @@ export default function SignupPage() {
             </div>
 
             {/* Main Form */}
-            <form onSubmit={handleSubmit} className="space-y-3.5">
-              <div className="space-y-1.5">
-                <Label className="text-xs font-bold text-primary mr-1">الاسم الكامل</Label>
-                <div className="relative">
-                  <Input 
-                    type="text" 
-                    placeholder="أحمد محمد سالم" 
-                    className="h-11 rounded-xl pr-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-right text-sm" 
-                    required 
-                  />
-                  <User className="absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label className="text-xs font-bold text-primary flex items-center gap-2 mr-1">
+                  <User className="w-4 h-4 text-secondary" /> الاسم الكامل
+                </Label>
+                <Input 
+                  type="text" 
+                  placeholder="أحمد محمد سالم" 
+                  className="h-11 rounded-xl border-primary/10 bg-primary/5 focus-visible:ring-secondary text-right text-sm" 
+                  required 
+                />
               </div>
 
-              <div className="space-y-1.5">
-                <Label className="text-xs font-bold text-primary mr-1">البريد الإلكتروني</Label>
-                <div className="relative">
-                  <Input 
-                    type="email" 
-                    placeholder="name@example.com" 
-                    className="h-11 rounded-xl pr-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
-                    required 
-                  />
-                  <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
-                </div>
+              <div className="space-y-2">
+                <Label className="text-xs font-bold text-primary flex items-center gap-2 mr-1">
+                  <Mail className="w-4 h-4 text-secondary" /> البريد الإلكتروني
+                </Label>
+                <Input 
+                  type="email" 
+                  placeholder="name@example.com" 
+                  className="h-11 rounded-xl border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
+                  required 
+                />
               </div>
 
-              <div className="space-y-1.5">
-                <Label className="text-xs font-bold text-primary mr-1">كلمة المرور</Label>
+              <div className="space-y-2">
+                <Label className="text-xs font-bold text-primary flex items-center gap-2 mr-1">
+                  <Lock className="w-4 h-4 text-secondary" /> كلمة المرور
+                </Label>
                 <div className="relative">
                   <Input 
                     type={showPassword ? "text" : "password"} 
                     placeholder="••••••••" 
-                    className="h-11 rounded-xl pr-10 pl-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
+                    className="h-11 rounded-xl pl-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
                     required 
                   />
-                  <Lock className="absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
