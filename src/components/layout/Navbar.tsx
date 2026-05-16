@@ -225,10 +225,10 @@ export function Navbar() {
                         href={link.href}
                         className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5 text-right"
                       >
-                        <span className="font-headline font-bold text-sm">{link.label}</span>
                         <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors shrink-0">
                           {link.icon}
                         </span>
+                        <span className="font-headline font-bold text-sm">{link.label}</span>
                       </Link>
                     ))}
                   </div>
