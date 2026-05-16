@@ -3,7 +3,25 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Library, GraduationCap, Search, Menu, Home, Users, Trophy } from "lucide-react";
+import { 
+  BookOpen, 
+  Library, 
+  GraduationCap, 
+  Search, 
+  Menu, 
+  Home, 
+  Users, 
+  Trophy,
+  User,
+  Settings,
+  History,
+  LogOut,
+  UserPlus,
+  LogIn,
+  LayoutDashboard,
+  CheckCircle,
+  Clock
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -15,10 +33,22 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // محاكاة حالة تسجيل الدخول (تغييرها لـ false يظهر وضع الضيف)
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     setMounted(true);
@@ -72,15 +102,104 @@ export function Navbar() {
           </Button>
           
           <div className="hidden sm:flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="ghost" className="text-primary font-medium">تسجيل الدخول</Button>
-            </Link>
-            <Link href="/signup">
-              <Button className="bg-secondary hover:bg-secondary/90 text-white px-6 rounded-xl font-headline shadow-md transition-all active:scale-95">
-                ابدأ التعلم الآن
-              </Button>
-            </Link>
+            {!isLoggedIn ? (
+              <>
+                <Link href="/login">
+                  <Button variant="ghost" className="text-primary font-medium">تسجيل الدخول</Button>
+                </Link>
+                <Link href="/signup">
+                  <Button className="bg-secondary hover:bg-secondary/90 text-white px-6 rounded-xl font-headline shadow-md transition-all active:scale-95">
+                    ابدأ التعلم الآن
+                  </Button>
+                </Link>
+              </>
+            ) : null}
           </div>
+
+          {/* Profile Dropdown */}
+          {mounted && (
+            <DropdownMenu dir="rtl">
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full luxury-shadow border border-primary/10 p-0 overflow-hidden">
+                  <Avatar className="h-full w-full">
+                    {isLoggedIn ? (
+                      <>
+                        <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
+                        <AvatarFallback className="bg-primary/5 text-primary font-bold">ع</AvatarFallback>
+                      </>
+                    ) : (
+                      <AvatarFallback className="bg-primary/5 text-primary/30">
+                        <User className="w-5 h-5" />
+                      </AvatarFallback>
+                    )}
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-72 rounded-2xl p-2 font-body" align="end" forceMount>
+                {isLoggedIn ? (
+                  <>
+                    <DropdownMenuLabel className="font-normal p-4">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-bold text-primary">علي محمد السعيد</p>
+                        <p className="text-xs text-primary/40 leading-none">ali.mohamed@example.com</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                        <User className="ml-3 h-4 w-4 text-secondary" />
+                        <span className="font-headline font-bold text-xs">الملف الشخصي</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                        <LayoutDashboard className="ml-3 h-4 w-4 text-secondary" />
+                        <span className="font-headline font-bold text-xs">دوراتي التعليمية</span>
+                      </DropdownMenuItem>
+                      <div className="px-4 py-2 space-y-2">
+                        <div className="flex items-center justify-between text-[10px] text-primary/40 font-bold">
+                          <span className="flex items-center gap-1"><CheckCircle className="w-3 h-3 text-emerald-500" /> 5 مكتملة</span>
+                          <span className="flex items-center gap-1"><Clock className="w-3 h-3 text-amber-500" /> 3 قيد الدراسة</span>
+                        </div>
+                      </div>
+                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                        <History className="ml-3 h-4 w-4 text-secondary" />
+                        <span className="font-headline font-bold text-xs">سجل المشاهدة</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                        <Settings className="ml-3 h-4 w-4 text-secondary" />
+                        <span className="font-headline font-bold text-xs">الإعدادات</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="rounded-xl py-3 text-destructive focus:bg-destructive/5 cursor-pointer" onClick={() => setIsLoggedIn(false)}>
+                      <LogOut className="ml-3 h-4 w-4" />
+                      <span className="font-headline font-bold text-xs">تسجيل الخروج</span>
+                    </DropdownMenuItem>
+                  </>
+                ) : (
+                  <>
+                    <div className="p-6 text-center space-y-4">
+                      <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mx-auto text-primary/20">
+                        <User className="w-8 h-8" />
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-headline font-bold text-primary">أهلاً بك في سراج</p>
+                        <p className="text-xs text-primary/40 font-bold leading-relaxed">سجل دخولك الآن لمتابعة دروسك وحفظ تقدمك في المنصة.</p>
+                      </div>
+                    </div>
+                    <DropdownMenuSeparator />
+                    <div className="p-2 grid gap-2">
+                      <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-headline h-10 rounded-xl gap-2" asChild>
+                        <Link href="/login"><LogIn className="w-4 h-4" /> تسجيل الدخول</Link>
+                      </Button>
+                      <Button variant="outline" className="w-full border-primary/10 font-headline h-10 rounded-xl gap-2" asChild>
+                        <Link href="/signup"><UserPlus className="w-4 h-4 text-secondary" /> إنشاء حساب</Link>
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
 
           {mounted ? (
             <Sheet>
@@ -90,10 +209,10 @@ export function Navbar() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[350px] font-body p-0 [&>button]:hidden" dir="rtl">
-                <SheetHeader className="text-right border-b p-6">
-                  <SheetTitle className="text-2xl font-headline font-bold text-primary flex items-center gap-2">
-                    <div className="relative w-8 h-8 overflow-hidden rounded-lg">
-                      <Image src="/siraj.png" alt="سراج" fill className="object-cover" />
+                <SheetHeader className="text-right border-b p-6 bg-primary text-white">
+                  <SheetTitle className="text-2xl font-headline font-bold text-white flex items-center gap-2">
+                    <div className="relative w-8 h-8 overflow-hidden rounded-lg bg-white p-1">
+                      <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
                     </div>
                     <span>منصة سراج</span>
                   </SheetTitle>
@@ -101,31 +220,53 @@ export function Navbar() {
                 
                 <ScrollArea className="h-[calc(100vh-100px)] px-6 text-right">
                   <div className="flex flex-col gap-1 py-6">
+                    {/* User Mobile Section */}
+                    {isLoggedIn && (
+                      <div className="mb-6 p-4 rounded-2xl bg-primary/5 border border-primary/5 space-y-4">
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-12 w-12 border-2 border-white luxury-shadow">
+                            <AvatarImage src="https://picsum.photos/seed/user1/100/100" />
+                            <AvatarFallback>ع</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-headline font-bold text-sm text-primary">علي محمد</p>
+                            <p className="text-[10px] text-primary/40 font-bold uppercase">طالب متميز</p>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button variant="ghost" size="sm" className="h-10 rounded-xl text-[10px] font-headline gap-2 border border-primary/5 bg-white"><Settings className="w-3 h-3 text-secondary" /> الإعدادات</Button>
+                          <Button variant="ghost" size="sm" className="h-10 rounded-xl text-[10px] font-headline gap-2 border border-primary/5 bg-white text-destructive" onClick={() => setIsLoggedIn(false)}><LogOut className="w-3 h-3" /> خروج</Button>
+                        </div>
+                      </div>
+                    )}
+
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="flex items-center justify-end gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
+                        className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
                       >
-                        <span className="font-headline font-bold">{link.label}</span>
+                        <span className="font-headline font-bold text-sm">{link.label}</span>
                         <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
                           {link.icon}
                         </span>
                       </Link>
                     ))}
                     
-                    <div className="grid gap-3 mt-4 pt-6 border-t border-primary/5">
-                      <Link href="/signup">
-                        <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-12 rounded-xl font-headline shadow-md">
-                          ابدأ التعلم الآن
-                        </Button>
-                      </Link>
-                      <Link href="/login">
-                        <Button variant="outline" className="w-full h-12 rounded-xl font-headline border-primary/10">
-                          تسجيل الدخول
-                        </Button>
-                      </Link>
-                    </div>
+                    {!isLoggedIn && (
+                      <div className="grid gap-3 mt-4 pt-6 border-t border-primary/5">
+                        <Link href="/signup">
+                          <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-12 rounded-xl font-headline shadow-md">
+                            ابدأ التعلم الآن
+                          </Button>
+                        </Link>
+                        <Link href="/login">
+                          <Button variant="outline" className="w-full h-12 rounded-xl font-headline border-primary/10">
+                            تسجيل الدخول
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
 
                     <div className="mt-8 mb-10 text-center">
                       <p className="text-[10px] text-primary/30 font-bold uppercase tracking-widest">سراج — SIRAJ.IO</p>
@@ -149,7 +290,7 @@ function NavLink({ href, label, icon }: { href: string; label: string; icon: Rea
   return (
     <Link href={href} className="flex items-center gap-2 text-primary/70 hover:text-secondary font-medium transition-colors group">
       <span className="group-hover:scale-110 transition-transform">{icon}</span>
-      <span className="font-headline">{label}</span>
+      <span className="font-headline text-sm">{label}</span>
     </Link>
   );
 }
