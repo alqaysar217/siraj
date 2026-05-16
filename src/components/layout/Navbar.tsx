@@ -220,20 +220,19 @@ export function Navbar() {
                         href={link.href}
                         className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
                       >
-                        <span className="font-headline font-bold text-sm">{link.label}</span>
                         <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
                           {link.icon}
                         </span>
+                        <span className="font-headline font-bold text-sm">{link.label}</span>
                       </Link>
                     ))}
                   </div>
                 </ScrollArea>
 
-                {/* Mobile User Section - Compact 3 Lines - Start from Arabic Direction */}
+                {/* Mobile User Section - Compact 3 Lines */}
                 <div className="p-6 border-t border-primary/5 bg-primary/5 shrink-0 mt-auto">
                   {isLoggedIn ? (
                     <div className="space-y-4">
-                      {/* Line 1 & 2: Avatar on the Right, Name and Role on the Left */}
                       <div className="flex items-center gap-4 flex-row" dir="rtl">
                         <Avatar className="h-12 w-12 border-2 border-white shadow-sm shrink-0">
                           <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
@@ -245,7 +244,6 @@ export function Navbar() {
                         </div>
                       </div>
                       
-                      {/* Line 3: Logout Button */}
                       <Button 
                         variant="ghost" 
                         className="w-full h-10 rounded-xl text-xs font-headline gap-3 text-destructive hover:bg-destructive/5 hover:text-destructive border border-destructive/10 bg-destructive/10 justify-start px-4"
