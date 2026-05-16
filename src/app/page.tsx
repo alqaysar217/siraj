@@ -35,7 +35,8 @@ import {
   Library,
   GraduationCap,
   HelpCircle,
-  Rocket
+  Rocket,
+  Target
 } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
@@ -207,12 +208,22 @@ export default function Home() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="p-6 bg-primary/5 rounded-[32px] space-y-3 shadow-sm border border-primary/5">
-                  <h4 className="text-xl font-headline font-bold text-secondary">رؤية المنصة</h4>
+                <div className="p-6 bg-primary/5 rounded-[32px] space-y-3 shadow-sm border border-primary/5 group hover:border-secondary/20 transition-all">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary">
+                      <Eye className="w-5 h-5" />
+                    </div>
+                    <h4 className="text-xl font-headline font-bold text-secondary">رؤية المنصة</h4>
+                  </div>
                   <p className="text-sm text-primary/70 leading-relaxed">أن تصبح سراج واحدة من أبرز المنصات التعليمية والخدمية في العالم العربي، عبر تقديم تعليم عصري يساعد الشباب على دخول سوق العمل بمهارة واحترافية.</p>
                 </div>
-                <div className="p-6 bg-primary/5 rounded-[32px] space-y-3 shadow-sm border border-primary/5">
-                  <h4 className="text-xl font-headline font-bold text-secondary">رسالة المنصة</h4>
+                <div className="p-6 bg-primary/5 rounded-[32px] space-y-3 shadow-sm border border-primary/5 group hover:border-secondary/20 transition-all">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary">
+                      <Rocket className="w-5 h-5" />
+                    </div>
+                    <h4 className="text-xl font-headline font-bold text-secondary">رسالة المنصة</h4>
+                  </div>
                   <p className="text-sm text-primary/70 leading-relaxed">توفير بيئة تعليمية تجمع بين المعرفة والتطبيق العملي، تمنح المستخدمين تجربة احترافية بأسلوب بسيط وجودة عالية وأسعار مناسبة.</p>
                 </div>
               </div>
@@ -220,7 +231,10 @@ export default function Home() {
 
             <div className="bg-primary rounded-[48px] p-8 md:p-12 text-white space-y-8 relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 left-0 w-full h-full bg-secondary/5 -z-0" />
-              <h3 className="text-2xl font-headline font-bold border-b border-white/10 pb-4">أهدافنا الرئيسية</h3>
+              <h3 className="text-2xl font-headline font-bold border-b border-white/10 pb-4 flex items-center gap-3">
+                <Target className="w-6 h-6 text-secondary" />
+                أهدافنا الرئيسية
+              </h3>
               <div className="grid gap-4">
                 <GoalItem text="تقديم تعليم احترافي بجودة عالية وتطبيقي." />
                 <GoalItem text="مساعدة الشباب على اكتساب مهارات مطلوبة في سوق العمل." />
