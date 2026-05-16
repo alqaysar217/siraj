@@ -142,7 +142,7 @@ export default function SignupPage() {
         {/* Branding Side (Desktop Only) - Recommended Size: 1000x1400px */}
         <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative order-1 lg:order-2 overflow-hidden">
           <Image 
-            src="/Signup.png" 
+            src="/Signup.png?v=1" 
             alt="Signup Branding" 
             fill 
             className="object-cover object-center"

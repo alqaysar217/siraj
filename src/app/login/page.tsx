@@ -31,7 +31,7 @@ export default function LoginPage() {
         {/* Branding Side (Desktop Only) - Recommended Size: 1000x1400px */}
         <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative overflow-hidden">
           <Image 
-            src="/Login.png" 
+            src="/Login.png?v=1" 
             alt="Login Branding" 
             fill 
             className="object-cover object-center"
