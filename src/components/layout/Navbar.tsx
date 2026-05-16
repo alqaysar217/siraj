@@ -121,83 +121,85 @@ export function Navbar() {
             ) : null}
           </div>
 
-          {/* Profile Dropdown (Desktop) */}
+          {/* Profile Dropdown (Desktop Only) */}
           {mounted && (
-            <DropdownMenu dir="rtl">
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full luxury-shadow border border-primary/10 p-0 overflow-hidden">
-                  <Avatar className="h-full w-full">
-                    {isLoggedIn ? (
-                      <>
-                        <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
-                        <AvatarFallback className="bg-primary/5 text-primary">ع</AvatarFallback>
-                      </>
-                    ) : (
-                      <AvatarFallback className="bg-primary/5 text-primary/30">
-                        <User className="w-5 h-5" />
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-72 rounded-2xl p-2 font-body" align="end" forceMount>
-                {isLoggedIn ? (
-                  <>
-                    <DropdownMenuLabel className="font-normal p-4">
-                      <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-bold text-primary">علي محمد السعيد</p>
-                        <p className="text-xs text-primary/40 leading-none">ali.mohamed@example.com</p>
+            <div className="hidden lg:block">
+              <DropdownMenu dir="rtl">
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-10 w-10 rounded-full luxury-shadow border border-primary/10 p-0 overflow-hidden">
+                    <Avatar className="h-full w-full">
+                      {isLoggedIn ? (
+                        <>
+                          <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
+                          <AvatarFallback className="bg-primary/5 text-primary">ع</AvatarFallback>
+                        </>
+                      ) : (
+                        <AvatarFallback className="bg-primary/5 text-primary/30">
+                          <User className="w-5 h-5" />
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-72 rounded-2xl p-2 font-body" align="end" forceMount>
+                  {isLoggedIn ? (
+                    <>
+                      <DropdownMenuLabel className="font-normal p-4">
+                        <div className="flex flex-col space-y-1">
+                          <p className="text-sm font-bold text-primary">علي محمد السعيد</p>
+                          <p className="text-xs text-primary/40 leading-none">ali.mohamed@example.com</p>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                          <User className="ml-3 h-4 w-4 text-secondary" />
+                          <span className="font-headline font-bold text-xs">الملف الشخصي</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                          <LayoutDashboard className="ml-3 h-4 w-4 text-secondary" />
+                          <span className="font-headline font-bold text-xs">دوراتي التعليمية</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                          <History className="ml-3 h-4 w-4 text-secondary" />
+                          <span className="font-headline font-bold text-xs">سجل المشاهدة</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
+                          <Settings className="ml-3 h-4 w-4 text-secondary" />
+                          <span className="font-headline font-bold text-xs">الإعدادات</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="rounded-xl py-3 text-destructive focus:bg-destructive/5 cursor-pointer" onClick={() => setIsLoggedIn(false)}>
+                        <LogOut className="ml-3 h-4 w-4" />
+                        <span className="font-headline font-bold text-xs">تسجيل الخروج</span>
+                      </DropdownMenuItem>
+                    </>
+                  ) : (
+                    <>
+                      <div className="p-6 text-center space-y-4">
+                        <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mx-auto text-primary/20">
+                          <User className="w-8 h-8" />
+                        </div>
+                        <div className="space-y-1">
+                          <p className="font-headline font-bold text-primary">أهلاً بك في سراجم</p>
+                          <p className="text-xs text-primary/40 font-bold leading-relaxed">سجل دخولك الآن لمتابعة دروسك وحفظ تقدمك في المنصة.</p>
+                        </div>
                       </div>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
-                        <User className="ml-3 h-4 w-4 text-secondary" />
-                        <span className="font-headline font-bold text-xs">الملف الشخصي</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
-                        <LayoutDashboard className="ml-3 h-4 w-4 text-secondary" />
-                        <span className="font-headline font-bold text-xs">دوراتي التعليمية</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
-                        <History className="ml-3 h-4 w-4 text-secondary" />
-                        <span className="font-headline font-bold text-xs">سجل المشاهدة</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="rounded-xl py-3 focus:bg-primary/5 cursor-pointer">
-                        <Settings className="ml-3 h-4 w-4 text-secondary" />
-                        <span className="font-headline font-bold text-xs">الإعدادات</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="rounded-xl py-3 text-destructive focus:bg-destructive/5 cursor-pointer" onClick={() => setIsLoggedIn(false)}>
-                      <LogOut className="ml-3 h-4 w-4" />
-                      <span className="font-headline font-bold text-xs">تسجيل الخروج</span>
-                    </DropdownMenuItem>
-                  </>
-                ) : (
-                  <>
-                    <div className="p-6 text-center space-y-4">
-                      <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mx-auto text-primary/20">
-                        <User className="w-8 h-8" />
+                      <DropdownMenuSeparator />
+                      <div className="p-2 grid gap-2">
+                        <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-headline h-10 rounded-xl gap-2" asChild>
+                          <Link href="/login"><LogIn className="w-4 h-4" /> تسجيل الدخول</Link>
+                        </Button>
+                        <Button variant="outline" className="w-full border-primary/10 font-headline h-10 rounded-xl gap-2" asChild>
+                          <Link href="/signup"><UserPlus className="w-4 h-4 text-secondary" /> إنشاء حساب</Link>
+                        </Button>
                       </div>
-                      <div className="space-y-1">
-                        <p className="font-headline font-bold text-primary">أهلاً بك في سراج</p>
-                        <p className="text-xs text-primary/40 font-bold leading-relaxed">سجل دخولك الآن لمتابعة دروسك وحفظ تقدمك في المنصة.</p>
-                      </div>
-                    </div>
-                    <DropdownMenuSeparator />
-                    <div className="p-2 grid gap-2">
-                      <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-headline h-10 rounded-xl gap-2" asChild>
-                        <Link href="/login"><LogIn className="w-4 h-4" /> تسجيل الدخول</Link>
-                      </Button>
-                      <Button variant="outline" className="w-full border-primary/10 font-headline h-10 rounded-xl gap-2" asChild>
-                        <Link href="/signup"><UserPlus className="w-4 h-4 text-secondary" /> إنشاء حساب</Link>
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           )}
 
           {mounted ? (
@@ -234,36 +236,36 @@ export function Navbar() {
                   </div>
                 </ScrollArea>
 
-                {/* Mobile User Section - Foldable RTL */}
+                {/* Mobile User Section - Foldable Muted */}
                 <div className="p-4 border-t border-primary/5 bg-primary/5 shrink-0 mt-auto">
                   {isLoggedIn ? (
                     <div className="space-y-2">
                       <Collapsible open={userOptionsOpen} onOpenChange={setUserOptionsOpen}>
                         <CollapsibleTrigger asChild>
-                          <div className="flex items-center justify-between p-2 rounded-xl hover:bg-white/50 transition-all cursor-pointer" dir="rtl">
-                            <div className="flex items-center gap-3">
-                              <Avatar className="h-10 w-10 border-2 border-white shadow-sm shrink-0">
-                                <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
-                                <AvatarFallback className="bg-primary/5 text-primary font-bold">ع</AvatarFallback>
-                              </Avatar>
-                              <div className="flex flex-col text-right">
+                          <div className="flex items-center gap-4 p-2 rounded-xl hover:bg-white/50 transition-all cursor-pointer text-right" dir="rtl">
+                            <Avatar className="h-10 w-10 border-2 border-white shadow-sm shrink-0">
+                              <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
+                              <AvatarFallback className="bg-primary/5 text-primary font-bold">ع</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1 flex items-center justify-between">
+                              <div className="flex flex-col">
                                 <p className="font-headline font-bold text-xs text-primary leading-tight">علي محمد السعيد</p>
                                 <p className="text-[9px] text-secondary font-bold uppercase tracking-wider">طالب متميز</p>
                               </div>
+                              {userOptionsOpen ? <ChevronUp className="w-4 h-4 text-primary/30" /> : <ChevronDown className="w-4 h-4 text-primary/30" />}
                             </div>
-                            {userOptionsOpen ? <ChevronUp className="w-4 h-4 text-primary/30" /> : <ChevronDown className="w-4 h-4 text-primary/30" />}
                           </div>
                         </CollapsibleTrigger>
                         <CollapsibleContent className="space-y-1 pt-2">
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all" dir="rtl">
+                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
                             <User className="w-4 h-4 text-secondary/60" />
                             <span>الملف الشخصي</span>
                           </Link>
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all" dir="rtl">
+                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
                             <LayoutDashboard className="w-4 h-4 text-secondary/60" />
                             <span>دوراتي التعليمية</span>
                           </Link>
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all" dir="rtl">
+                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
                             <History className="w-4 h-4 text-secondary/60" />
                             <span>سجل المشاهدة</span>
                           </Link>
