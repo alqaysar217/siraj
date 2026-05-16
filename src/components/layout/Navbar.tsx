@@ -219,39 +219,21 @@ export function Navbar() {
                 </SheetHeader>
                 
                 <ScrollArea className="h-[calc(100vh-100px)] px-6 text-right">
-                  <div className="flex flex-col gap-1 py-6">
-                    {/* User Mobile Section */}
-                    {isLoggedIn && (
-                      <div className="mb-6 p-4 rounded-2xl bg-primary/5 border border-primary/5 space-y-4">
-                        <div className="flex items-center gap-3">
-                          <Avatar className="h-12 w-12 border-2 border-white luxury-shadow">
-                            <AvatarImage src="https://picsum.photos/seed/user1/100/100" />
-                            <AvatarFallback>ع</AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="font-headline font-bold text-sm text-primary">علي محمد</p>
-                            <p className="text-[10px] text-primary/40 font-bold uppercase">طالب متميز</p>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <Button variant="ghost" size="sm" className="h-10 rounded-xl text-[10px] font-headline gap-2 border border-primary/5 bg-white"><Settings className="w-3 h-3 text-secondary" /> الإعدادات</Button>
-                          <Button variant="ghost" size="sm" className="h-10 rounded-xl text-[10px] font-headline gap-2 border border-primary/5 bg-white text-destructive" onClick={() => setIsLoggedIn(false)}><LogOut className="w-3 h-3" /> خروج</Button>
-                        </div>
-                      </div>
-                    )}
-
-                    {navLinks.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
-                      >
-                        <span className="font-headline font-bold text-sm">{link.label}</span>
-                        <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
-                          {link.icon}
-                        </span>
-                      </Link>
-                    ))}
+                  <div className="flex flex-col min-h-[calc(100vh-100px)] py-6">
+                    <div className="flex flex-col gap-1 mb-auto">
+                      {navLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
+                        >
+                          <span className="font-headline font-bold text-sm">{link.label}</span>
+                          <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
+                            {link.icon}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
                     
                     {!isLoggedIn && (
                       <div className="grid gap-3 mt-4 pt-6 border-t border-primary/5">
@@ -268,7 +250,38 @@ export function Navbar() {
                       </div>
                     )}
 
-                    <div className="mt-8 mb-10 text-center">
+                    {/* User Mobile Section - Moved to bottom and redesigned vertically */}
+                    {isLoggedIn && (
+                      <div className="mt-8 pt-8 border-t border-primary/5 space-y-6">
+                        <div className="flex flex-col items-center text-center gap-4">
+                          <Avatar className="h-20 w-20 border-4 border-white luxury-shadow shadow-xl">
+                            <AvatarImage src="https://picsum.photos/seed/user1/100/100" />
+                            <AvatarFallback className="text-xl">ع</AvatarFallback>
+                          </Avatar>
+                          <div className="space-y-1">
+                            <p className="font-headline font-bold text-lg text-primary">علي محمد السعيد</p>
+                            <p className="text-[10px] text-secondary font-bold uppercase tracking-widest px-3 py-1 bg-secondary/5 rounded-full inline-block">طالب متميز</p>
+                          </div>
+                        </div>
+                        
+                        <div className="grid gap-2">
+                          <Button variant="ghost" className="w-full h-11 rounded-xl text-xs font-headline gap-3 border border-primary/5 bg-white justify-start px-4">
+                            <Settings className="w-4 h-4 text-secondary" />
+                            إعدادات الحساب
+                          </Button>
+                          <Button 
+                            variant="ghost" 
+                            className="w-full h-11 rounded-xl text-xs font-headline gap-3 text-destructive hover:bg-destructive/5 hover:text-destructive border border-destructive/10 bg-destructive/5 justify-start px-4"
+                            onClick={() => setIsLoggedIn(false)}
+                          >
+                            <LogOut className="w-4 h-4" />
+                            تسجيل الخروج
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="mt-8 mb-4 text-center">
                       <p className="text-[10px] text-primary/30 font-bold uppercase tracking-widest">سراج — SIRAJ.IO</p>
                     </div>
                   </div>
