@@ -4,11 +4,12 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, ShoppingCart, Eye, BookOpen, Users, FileText } from "lucide-react";
+import { Star, ShoppingCart, Eye, BookOpen, Users, FileText, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
 
 const BOOKS = [
   {
@@ -39,25 +40,72 @@ const BOOKS = [
 
 export default function BooksPage() {
   const [mounted, setMounted] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => setMounted(true), []);
+
+  const filteredBooks = BOOKS.filter(book => 
+    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    book.author.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
-      <div className="pt-32 pb-20">
+
+      {/* Banner Section - Consistent with Courses Page */}
+      <section className="pt-[92px] w-full overflow-hidden bg-white">
+        <div className="relative w-full aspect-[16/7] md:aspect-[16/5.3]">
+           <Image 
+             src="/Books.png" 
+             alt="Books Library Banner" 
+             fill 
+             className="object-cover object-top"
+             priority
+           />
+        </div>
+      </section>
+
+      {/* Search Bar Section */}
+      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="relative max-w-2xl mx-auto md:mr-0">
+            <Input 
+              placeholder="ابحث عن كتاب، مؤلف، أو تخصص..." 
+              className="h-12 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+          </div>
+        </div>
+      </section>
+
+      <div className="py-12">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
-            <div className="text-center md:text-right">
-              <h1 className="text-4xl font-headline font-bold text-primary mb-2">مكتبة سراج التعليمية</h1>
-              <p className="text-primary/60">اقتنِ أفضل الكتب التعليمية الورقية بنسخ فاخرة تصلك أينما كنت.</p>
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-2 text-primary/60 text-xs font-bold">
+              <BookOpen className="w-4 h-4 text-secondary" />
+              <span>تم العثور على {filteredBooks.length.toString()} كتاب</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {BOOKS.map((book) => (
+            {filteredBooks.map((book) => (
               <BookCard key={book.id} book={book} mounted={mounted} />
             ))}
           </div>
+
+          {filteredBooks.length === 0 && (
+            <div className="py-20 text-center">
+              <div className="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Search className="w-10 h-10 text-primary/20" />
+              </div>
+              <h3 className="text-xl font-headline font-bold text-primary mb-2">لا توجد نتائج</h3>
+              <p className="text-primary/60">لم نجد أي كتب تطابق بحثك الحالي.</p>
+              <Button onClick={() => setSearchQuery("")} variant="outline" className="mt-6 font-headline border-primary/10 rounded-xl px-8 h-12">عرض جميع الكتب</Button>
+            </div>
+          )}
         </div>
       </div>
     </main>
