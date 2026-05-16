@@ -15,7 +15,6 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // سيتم ربط الوظيفة فعلياً بـ Firebase لاحقاً
     setTimeout(() => setIsLoading(false), 2000);
   };
 
@@ -26,105 +25,121 @@ export default function LoginPage() {
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full" />
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/10 blur-[120px] rounded-full" />
 
-      <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-0 bg-white rounded-[40px] overflow-hidden luxury-shadow border border-primary/5">
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 bg-white rounded-[48px] overflow-hidden luxury-shadow border border-primary/5 min-h-[700px]">
         
-        {/* Left Side: Visual/Welcome (Hidden on Mobile) */}
-        <div className="hidden lg:flex flex-col justify-between p-12 bg-primary text-white relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary/20 -z-0" />
+        {/* Left Side: Branding/Info (Hidden on Mobile) */}
+        <div className="hidden lg:flex flex-col justify-between p-16 bg-primary text-white relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-secondary/30 -z-0" />
+          
+          {/* Top Decorative Blur */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-secondary/20 blur-[80px] -translate-x-1/2 -translate-y-1/2" />
+
           <div className="relative z-10">
-            <Link href="/" className="flex items-center gap-3 mb-16">
-              <div className="relative w-12 h-12 overflow-hidden rounded-2xl bg-white p-1 shadow-lg">
+            <Link href="/" className="flex items-center gap-4 mb-20 group">
+              <div className="relative w-14 h-14 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl transition-transform group-hover:scale-105">
                 <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
               </div>
-              <span className="text-3xl font-headline font-bold">سراج</span>
+              <span className="text-4xl font-headline font-bold tracking-tight">سراج</span>
             </Link>
             
-            <div className="space-y-6">
-              <h2 className="text-4xl font-headline font-bold leading-tight">مرحباً بك مجدداً في <br /><span className="text-secondary">رحلة المعرفة</span></h2>
-              <p className="text-white/60 text-lg leading-relaxed max-w-sm font-medium">
-                سجل دخولك لتكمل ما بدأته، وتصل إلى أحدث الدروس والكتب في مكتبتك الخاصة.
+            <div className="space-y-8">
+              <h2 className="text-5xl font-headline font-bold leading-[1.2]">
+                مرحباً بك مجدداً في <br />
+                <span className="text-secondary">عالم سراج</span>
+              </h2>
+              <p className="text-white/60 text-xl leading-relaxed max-w-sm font-medium">
+                سجل دخولك لتكمل رحلتك التعليمية وتصل إلى أحدث الدروس والكتب في مكتبتك الخاصة.
               </p>
             </div>
           </div>
 
           <div className="relative z-10 pt-12 border-t border-white/10">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <div className="flex -space-x-4 space-x-reverse">
                 {[1, 2, 3].map(i => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-primary overflow-hidden relative">
-                    <Image src={`https://picsum.photos/seed/${i+10}/100/100`} alt="user" fill />
+                  <div key={i} className="w-12 h-12 rounded-full border-4 border-primary overflow-hidden relative shadow-xl">
+                    <Image src={`https://picsum.photos/seed/${i+20}/100/100`} alt="user" fill />
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-white/40 font-bold">انضم إلى +10,000 طالب وطالبة</p>
+              <p className="text-sm text-white/50 font-bold">انضم إلى أكثر من <span className="text-secondary text-lg">+10,000</span> طموح</p>
             </div>
           </div>
         </div>
 
         {/* Right Side: Login Form */}
-        <div className="p-6 md:p-12 lg:p-16 flex flex-col justify-center bg-white">
-          <div className="max-w-md mx-auto w-full space-y-8">
-            <div className="space-y-3 text-center lg:text-right">
-              <h1 className="text-3xl md:text-4xl font-headline font-bold text-primary">تسجيل الدخول</h1>
-              <p className="text-primary/40 text-sm md:text-base font-bold">أدخل بياناتك للوصول إلى حسابك الشخصي</p>
+        <div className="p-8 md:p-16 flex flex-col justify-center bg-white relative">
+          {/* Mobile Logo */}
+          <div className="lg:hidden flex justify-center mb-10">
+             <div className="relative w-16 h-16 overflow-hidden rounded-2xl bg-primary/5 p-2 shadow-inner">
+                <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
+             </div>
+          </div>
+
+          <div className="max-w-md mx-auto w-full space-y-10">
+            <div className="space-y-4 text-center lg:text-right">
+              <h1 className="text-3xl md:text-5xl font-headline font-bold text-primary">تسجيل الدخول</h1>
+              <p className="text-primary/40 text-base md:text-lg font-bold">نحن سعداء برؤيتك مرة أخرى!</p>
             </div>
 
-            <Button variant="outline" className="w-full h-14 rounded-2xl border-primary/10 font-headline text-sm gap-3 hover:bg-primary/5 transition-all">
-              <Chrome className="w-5 h-5 text-red-500" /> الدخول بواسطة جوجل
-            </Button>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-primary/5"></span>
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-4 text-primary/20 font-bold">أو عبر البريد</span>
-              </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label className="text-sm font-bold text-primary mr-1">البريد الإلكتروني</Label>
-                <div className="relative">
-                  <Input 
-                    type="email" 
-                    placeholder="example@mail.com" 
-                    className="h-14 md:h-16 rounded-2xl pr-12 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all" 
-                    required 
-                  />
-                  <Mail className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between px-1">
-                  <Label className="text-sm font-bold text-primary">كلمة المرور</Label>
-                  <Link href="/forgot-password" title="نسيت كلمة المرور" className="text-xs text-secondary font-bold hover:underline">نسيت كلمة المرور؟</Link>
-                </div>
-                <div className="relative">
-                  <Input 
-                    type="password" 
-                    placeholder="••••••••" 
-                    className="h-14 md:h-16 rounded-2xl pr-12 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all" 
-                    required 
-                  />
-                  <Lock className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
-                </div>
-              </div>
-
-              <Button 
-                type="submit" 
-                className="w-full h-14 md:h-16 bg-secondary hover:bg-secondary/90 text-white rounded-2xl font-headline text-xl shadow-xl gold-glow transition-all active:scale-95"
-                disabled={isLoading}
-              >
-                {isLoading ? "جاري الدخول..." : "تسجيل الدخول"}
-                {!isLoading && <ChevronRight className="mr-2 w-6 h-6 rotate-180" />}
+            <div className="space-y-6">
+              <Button variant="outline" className="w-full h-16 rounded-[24px] border-primary/10 font-headline text-base gap-4 hover:bg-primary/5 transition-all shadow-sm">
+                <Chrome className="w-6 h-6 text-red-500" /> المتابعة بواسطة جوجل
               </Button>
-            </form>
 
-            <p className="text-center text-sm md:text-base text-primary/60 font-medium pt-4">
-              ليس لديك حساب؟{" "}
-              <Link href="/signup" className="text-secondary font-bold hover:underline">إنشاء حساب جديد</Link>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-primary/5"></span>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-white px-6 text-primary/20 font-bold tracking-widest">أو عبر البريد</span>
+                </div>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-3">
+                  <Label className="text-sm font-bold text-primary mr-2">البريد الإلكتروني</Label>
+                  <div className="relative group">
+                    <Input 
+                      type="email" 
+                      placeholder="name@example.com" 
+                      className="h-16 rounded-[20px] pr-14 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all text-lg" 
+                      required 
+                    />
+                    <Mail className="absolute right-5 top-1/2 -translate-y-1/2 text-primary/30 w-6 h-6 group-focus-within:text-secondary transition-colors" />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between px-2">
+                    <Label className="text-sm font-bold text-primary">كلمة المرور</Label>
+                    <Link href="#" className="text-xs text-secondary font-bold hover:underline">نسيت كلمة المرور؟</Link>
+                  </div>
+                  <div className="relative group">
+                    <Input 
+                      type="password" 
+                      placeholder="••••••••" 
+                      className="h-16 rounded-[20px] pr-14 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all text-lg" 
+                      required 
+                    />
+                    <Lock className="absolute right-5 top-1/2 -translate-y-1/2 text-primary/30 w-6 h-6 group-focus-within:text-secondary transition-colors" />
+                  </div>
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full h-16 bg-secondary hover:bg-secondary/90 text-white rounded-[24px] font-headline text-xl shadow-2xl gold-glow transition-all active:scale-95 mt-4"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "جاري التحقق..." : "دخول إلى المنصة"}
+                  {!isLoading && <ChevronRight className="mr-2 w-6 h-6 rotate-180" />}
+                </Button>
+              </form>
+            </div>
+
+            <p className="text-center text-base text-primary/60 font-medium">
+              جديد في سراج؟{" "}
+              <Link href="/signup" className="text-secondary font-bold hover:underline transition-all hover:pr-1">أنشئ حسابك الآن</Link>
             </p>
           </div>
         </div>
