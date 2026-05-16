@@ -194,7 +194,7 @@ export default function CoursesPage() {
                   )}
                 </Button>
               </DialogTrigger>
-              <DialogContent className="w-[95vw] max-w-[450px] rounded-[28px] p-6 font-body bg-white border-none shadow-2xl overflow-y-auto max-h-[90vh]">
+              <DialogContent className="w-[95vw] max-w-[450px] rounded-[28px] p-6 font-body bg-white border-none shadow-2xl overflow-y-auto max-h-[90vh] [&>button]:right-auto [&>button]:left-4" dir="rtl">
                 <DialogHeader className="text-right border-b pb-4 mb-5">
                   <DialogTitle className="text-xl font-headline font-bold text-primary">تصفية النتائج</DialogTitle>
                 </DialogHeader>
