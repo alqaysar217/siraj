@@ -39,9 +39,9 @@ export default function ElitePage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
 
-      {/* Banner Section - Consistent with other pages */}
+      {/* Banner Section - Adjusted aspect ratio to 3:1 (16/5.33) */}
       <section className="pt-[92px] w-full overflow-hidden bg-white">
-        <div className="relative w-full aspect-[16/7] md:aspect-[16/5.3]">
+        <div className="relative w-full aspect-[16/7] md:aspect-[16/5.33]">
            <Image 
              src="/Elite.png" 
              alt="Elite Leaderboard Banner" 

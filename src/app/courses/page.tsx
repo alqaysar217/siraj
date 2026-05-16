@@ -156,9 +156,9 @@ export default function CoursesPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      {/* Banner Section - Optimized for visibility and aspect ratio */}
+      {/* Banner Section - Adjusted aspect ratio to 3:1 (16/5.33) */}
       <section className="pt-[92px] w-full overflow-hidden bg-white">
-        <div className="relative w-full aspect-[16/7] md:aspect-[16/5]">
+        <div className="relative w-full aspect-[16/7] md:aspect-[16/5.33]">
            <Image 
              src="/Courses.png" 
              alt="Courses Banner" 
