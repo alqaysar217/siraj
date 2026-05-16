@@ -168,25 +168,25 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* Search and Filter Section - Sticky without gaps and Centered */}
+      {/* Search and Filter Section - Centered and Single Row on Mobile */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
         <div className="container mx-auto px-4 py-2">
-          <div className="flex flex-col md:flex-row gap-3 items-center justify-center max-w-3xl mx-auto w-full">
-            <div className="relative w-full flex-1">
+          <div className="flex flex-row gap-2 items-center justify-center max-w-3xl mx-auto w-full">
+            <div className="relative flex-1">
               <Input 
-                placeholder="ابحث باسم الكورس أو المجال..." 
-                className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
+                placeholder="ابحث باسم الكورس..." 
+                className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-xs"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
             </div>
             
             <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="h-11 w-full md:w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all text-xs">
+                <Button variant="outline" className="h-11 w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all text-xs px-3">
                   <SlidersHorizontal className="w-4 h-4 text-secondary" />
-                  تصفية
+                  <span className="hidden xs:inline">تصفية</span>
                   {activeFiltersCount > 0 && (
                     <Badge className="bg-secondary text-white w-5 h-5 p-0 flex items-center justify-center rounded-full text-[10px] font-bold border-none">
                       {activeFiltersCount.toString()}

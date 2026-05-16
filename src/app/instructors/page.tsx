@@ -102,35 +102,35 @@ export default function InstructorsDirectoryPage() {
         </div>
       </section>
 
-      {/* Search and Filter Section - Sticky without gaps and Centered */}
+      {/* Search and Filter Section - Centered and Single Row on Mobile */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
         <div className="container mx-auto px-4 py-2">
-          <div className="flex flex-col md:flex-row gap-3 items-center justify-center max-w-3xl mx-auto w-full">
-            <div className="relative flex-1 w-full">
+          <div className="flex flex-row gap-2 items-center justify-center max-w-3xl mx-auto w-full">
+            <div className="relative flex-1">
               <input 
                 type="text" 
-                placeholder="ابحث عن مدرب أو تخصص..." 
-                className="w-full h-11 rounded-2xl pr-12 pl-4 border-primary/10 bg-white shadow-sm focus:ring-2 focus:ring-secondary/20 outline-none text-sm font-body transition-all"
+                placeholder="ابحث عن مدرب..." 
+                className="w-full h-11 rounded-2xl pr-10 pl-4 border-primary/10 bg-white shadow-sm focus:ring-2 focus:ring-secondary/20 outline-none text-xs font-body transition-all"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery("")}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/20 hover:text-primary/40 transition-colors"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/20 hover:text-primary/40 transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
             
-            <div className="w-full md:w-56 shrink-0">
+            <div className="w-32 xs:w-44 md:w-56 shrink-0">
               <Select value={activeCategory} onValueChange={setActiveCategory}>
-                <SelectTrigger className="h-11 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70 text-xs">
-                  <div className="flex items-center gap-2">
-                    <Filter className="w-4 h-4 text-secondary" />
-                    <SelectValue placeholder="كل المجالات" />
+                <SelectTrigger className="h-11 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70 text-xs px-2">
+                  <div className="flex items-center gap-1">
+                    <Filter className="w-3.5 h-3.5 text-secondary hidden xs:block" />
+                    <SelectValue placeholder="المجال" />
                   </div>
                 </SelectTrigger>
                 <SelectContent className="font-body" dir="rtl">
