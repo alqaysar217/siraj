@@ -89,57 +89,57 @@ export default function InstructorsDirectoryPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
 
-      <section className="pt-32 pb-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full bg-primary/5 -z-10" />
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-8 text-center md:text-right">
-            <div className="space-y-4">
-              <Badge className="bg-secondary/10 text-secondary border-none px-4 py-1.5 rounded-full text-xs font-headline">نخبة الخبراء</Badge>
-              <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary leading-tight">
-                تعرف على <span className="text-secondary">صنّاع</span> المعرفة
-              </h1>
-              <p className="text-lg text-primary/60 leading-relaxed max-w-2xl mx-auto md:mr-0">
-                نحن نختار مدربينا بعناية لضمان حصولك على تجربة تعليمية حقيقية مبنية على خبرات عملية.
-              </p>
-            </div>
+      {/* Banner Section - Consistent with Courses and Books Page */}
+      <section className="pt-[92px] w-full overflow-hidden bg-white">
+        <div className="relative w-full aspect-[16/7] md:aspect-[16/5.3]">
+           <Image 
+             src="/Instructors.png" 
+             alt="Instructors Banner" 
+             fill 
+             className="object-cover object-top"
+             priority
+           />
+        </div>
+      </section>
 
-            {/* Search and Filter Area */}
-            <div className="flex flex-col md:flex-row gap-4 items-stretch max-w-3xl mx-auto md:mr-0">
-              <div className="relative flex-1">
-                <input 
-                  type="text" 
-                  placeholder="ابحث عن مدرب أو تخصص..." 
-                  className="w-full h-14 rounded-2xl pr-14 pl-4 border-primary/10 bg-white shadow-xl focus:ring-2 focus:ring-secondary/20 outline-none text-sm font-body transition-all"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <Search className="absolute right-5 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
-                {searchQuery && (
-                  <button 
-                    onClick={() => setSearchQuery("")}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/20 hover:text-primary/40 transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                )}
-              </div>
-              
-              <div className="w-full md:w-60">
-                <Select value={activeCategory} onValueChange={setActiveCategory}>
-                  <SelectTrigger className="h-14 rounded-2xl bg-white border-primary/10 shadow-xl focus:ring-secondary text-right font-headline text-primary/70">
-                    <div className="flex items-center gap-2">
-                      <Filter className="w-4 h-4 text-secondary" />
-                      <SelectValue placeholder="كل المجالات" />
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent className="font-body" dir="rtl">
-                    <SelectItem value="all">كل المجالات</SelectItem>
-                    {SPECIALTIES.map(spec => (
-                      <SelectItem key={spec} value={spec}>{spec}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+      {/* Search and Filter Section */}
+      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            <div className="relative flex-1 w-full">
+              <input 
+                type="text" 
+                placeholder="ابحث عن مدرب أو تخصص..." 
+                className="w-full h-12 rounded-2xl pr-12 pl-4 border-primary/10 bg-white shadow-sm focus:ring-2 focus:ring-secondary/20 outline-none text-sm font-body transition-all"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+              {searchQuery && (
+                <button 
+                  onClick={() => setSearchQuery("")}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/20 hover:text-primary/40 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+            
+            <div className="w-full md:w-60">
+              <Select value={activeCategory} onValueChange={setActiveCategory}>
+                <SelectTrigger className="h-12 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70">
+                  <div className="flex items-center gap-2">
+                    <Filter className="w-4 h-4 text-secondary" />
+                    <SelectValue placeholder="كل المجالات" />
+                  </div>
+                </SelectTrigger>
+                <SelectContent className="font-body" dir="rtl">
+                  <SelectItem value="all">كل المجالات</SelectItem>
+                  {SPECIALTIES.map(spec => (
+                    <SelectItem key={spec} value={spec}>{spec}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
@@ -147,6 +147,13 @@ export default function InstructorsDirectoryPage() {
 
       <section className="py-20">
         <div className="container mx-auto px-4">
+          <div className="mb-12 text-center md:text-right">
+             <div className="flex items-center gap-2 text-primary/60 text-xs font-bold">
+              <Users className="w-4 h-4 text-secondary" />
+              <span>تم العثور على {filteredInstructors.length.toString()} مدرب خبير</span>
+            </div>
+          </div>
+
           {filteredInstructors.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 justify-center">
               {filteredInstructors.map((instructor) => (
