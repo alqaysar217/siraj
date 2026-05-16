@@ -39,18 +39,16 @@ export default function ElitePage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 relative overflow-hidden bg-primary/5">
-        <div className="container mx-auto px-4 text-center">
-          <Badge className="bg-secondary/10 text-secondary border-none px-6 py-1.5 rounded-full text-xs font-headline font-bold mb-6">
-            نادي النخبة المتصدرين
-          </Badge>
-          <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-6">
-            لوحة <span className="text-secondary">الشرف</span> بسراج
-          </h1>
-          <p className="text-lg text-primary/60 max-w-2xl mx-auto leading-relaxed">
-            تعرف على الطلاب الأكثر تميزاً ونشاطاً في المنصة. تنافس مع زملائك، أجب على الأسئلة بعد الدروس، واجمع النقاط لتتصدر القائمة.
-          </p>
+      {/* Banner Section - Consistent with other pages */}
+      <section className="pt-[92px] w-full overflow-hidden bg-white">
+        <div className="relative w-full aspect-[16/7] md:aspect-[16/5.3]">
+           <Image 
+             src="/Elite.png" 
+             alt="Elite Leaderboard Banner" 
+             fill 
+             className="object-cover object-top"
+             priority
+           />
         </div>
       </section>
 
