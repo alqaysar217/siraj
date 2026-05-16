@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { GraduationCap, Search, QrCode, Camera, CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function VerifyCertificate() {
   const [certId, setCertId] = useState("");
@@ -23,25 +24,35 @@ export default function VerifyCertificate() {
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      <div className="pt-32 pb-20">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center space-y-4 mb-12">
-            <div className="w-20 h-20 bg-secondary/10 rounded-3xl flex items-center justify-center mx-auto border border-secondary/20">
-              <GraduationCap className="w-10 h-10 text-secondary" />
-            </div>
-            <h1 className="text-4xl font-headline font-bold text-primary">التحقق من الشهادات</h1>
-            <p className="text-primary/60 max-w-xl mx-auto">
-              تأكد من صحة الشهادات الصادرة عن منصة سراج من خلال إدخال رقم الشهادة أو مسح رمز الـ QR.
-            </p>
-          </div>
+      {/* Banner Section - Consistent with other pages */}
+      <section className="pt-[92px] w-full overflow-hidden bg-white">
+        <div className="relative w-full aspect-[16/7] md:aspect-[16/5.3]">
+           <Image 
+             src="/Verify.png" 
+             alt="Verify Certificates Banner" 
+             fill 
+             className="object-cover object-top"
+             priority
+           />
+        </div>
+      </section>
 
-          <Card className="rounded-[32px] luxury-shadow border-primary/5 overflow-hidden">
+      <div className="py-12">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <Card className="rounded-[32px] luxury-shadow border-primary/5 overflow-hidden bg-white">
             <CardContent className="p-8 md:p-12">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
+                  <div className="space-y-4">
+                    <h1 className="text-3xl font-headline font-bold text-primary">التحقق من الشهادات</h1>
+                    <p className="text-sm text-primary/60 leading-relaxed font-bold">
+                      أدخل رقم الشهادة أو استخدم الـ QR للتأكد من صحة الاعتماد الصادر من منصة سراج.
+                    </p>
+                  </div>
+
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-primary mr-1">رقم الشهادة</label>
                     <div className="relative">
@@ -66,7 +77,7 @@ export default function VerifyCertificate() {
 
                   <div className="flex items-center gap-4 py-4">
                     <div className="h-px flex-1 bg-primary/10" />
-                    <span className="text-xs text-primary/30 font-bold uppercase">أو من خلال</span>
+                    <span className="text-[10px] text-primary/30 font-bold uppercase">أو من خلال</span>
                     <div className="h-px flex-1 bg-primary/10" />
                   </div>
 
@@ -86,7 +97,7 @@ export default function VerifyCertificate() {
                   {status === 'idle' && (
                     <div className="text-center space-y-4 px-12">
                       <QrCode className="w-16 h-16 text-primary/10 mx-auto" />
-                      <p className="text-sm text-primary/30 font-medium">نتائج التحقق ستظهر هنا بمجرد إدخال البيانات</p>
+                      <p className="text-[11px] text-primary/30 font-bold">نتائج التحقق ستظهر هنا بمجرد إدخال البيانات</p>
                     </div>
                   )}
 
@@ -99,13 +110,13 @@ export default function VerifyCertificate() {
 
                   {status === 'success' && (
                     <div className="p-8 w-full animate-in zoom-in-95 duration-300">
-                       <div className="bg-success-green/10 border border-success-green/20 rounded-3xl p-8 text-center space-y-6">
-                          <CheckCircle2 className="w-16 h-16 text-success-green mx-auto" />
+                       <div className="bg-white border border-secondary/20 rounded-3xl p-8 text-center space-y-6 luxury-shadow">
+                          <CheckCircle2 className="w-16 h-16 text-secondary mx-auto" />
                           <div className="space-y-1">
-                            <p className="text-success-green font-bold text-xl">شهادة معتمدة</p>
-                            <p className="text-primary/60 text-sm">تم التحقق من صحة هذه الشهادة</p>
+                            <p className="text-secondary font-bold text-xl">شهادة معتمدة</p>
+                            <p className="text-primary/60 text-[10px] font-bold">تم التحقق من صحة هذه الشهادة</p>
                           </div>
-                          <div className="space-y-3 pt-4 border-t border-success-green/10 text-right">
+                          <div className="space-y-3 pt-4 border-t border-primary/5 text-right">
                             <InfoLine label="اسم الطالب" value="محمد عبدالله سالم" />
                             <InfoLine label="اسم الكورس" value="تطوير الويب الشامل" />
                             <InfoLine label="تاريخ الإصدار" value="15 مايو 2024" />
@@ -120,7 +131,7 @@ export default function VerifyCertificate() {
                        <XCircle className="w-16 h-16 text-destructive mx-auto" />
                        <div className="space-y-1">
                           <p className="text-destructive font-bold text-xl">عذراً، رقم غير صحيح</p>
-                          <p className="text-primary/60 text-sm">لم نتمكن من العثور على أي شهادة مرتبطة بهذا الرقم في سجلاتنا.</p>
+                          <p className="text-primary/60 text-[11px] font-bold">لم نتمكن من العثور على أي شهادة مرتبطة بهذا الرقم في سجلاتنا.</p>
                        </div>
                        <Button variant="ghost" className="text-secondary font-headline" onClick={() => setStatus('idle')}>حاول مرة أخرى</Button>
                     </div>
@@ -137,8 +148,8 @@ export default function VerifyCertificate() {
 
 function InfoLine({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between text-sm">
-      <span className="text-primary/40">{label}:</span>
+    <div className="flex items-center justify-between text-xs">
+      <span className="text-primary/40 font-bold">{label}:</span>
       <span className="text-primary font-bold">{value}</span>
     </div>
   );
