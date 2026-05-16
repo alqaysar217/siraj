@@ -140,7 +140,7 @@ export default function SignupPage() {
         </div>
 
         {/* Branding Side (Desktop Only) */}
-        <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative order-1 lg:order-2">
+        <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative order-1 lg:order-2 overflow-hidden">
           <Image 
             src="/Signup.png" 
             alt="Signup Branding" 
@@ -149,16 +149,6 @@ export default function SignupPage() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-bl from-primary/80 via-primary/40 to-secondary/20 -z-0" />
-          <div className="relative z-10 space-y-6 text-right">
-            <Link href="/" className="flex items-center justify-end gap-3 mb-12">
-              <span className="text-3xl font-headline font-bold">سراج</span>
-              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white p-1.5 shadow-xl">
-                <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
-              </div>
-            </Link>
-            <h2 className="text-4xl font-headline font-bold leading-tight">ابدأ رحلتك نحو <br /><span className="text-secondary">الاحتراف</span></h2>
-            <p className="text-white/80 text-lg leading-relaxed max-w-sm ml-auto">انضم إلى آلاف الطلاب المبدعين، وابدأ بتعلم المهارات التي يطلبها سوق العمل اليوم.</p>
-          </div>
         </div>
       </div>
     </main>

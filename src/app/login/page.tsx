@@ -29,7 +29,7 @@ export default function LoginPage() {
       <div className="w-full max-w-[1000px] grid lg:grid-cols-2 bg-white rounded-[32px] overflow-hidden shadow-2xl border border-primary/5 min-h-[600px] relative z-10">
         
         {/* Branding Side (Desktop Only) */}
-        <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative">
+        <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative overflow-hidden">
           <Image 
             src="/Login.png" 
             alt="Login Branding" 
@@ -38,16 +38,6 @@ export default function LoginPage() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/40 to-secondary/20 -z-0" />
-          <div className="relative z-10 space-y-6 text-right">
-            <Link href="/" className="flex items-center justify-end gap-3 mb-12">
-              <span className="text-3xl font-headline font-bold">سراج</span>
-              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white p-1.5 shadow-xl">
-                <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
-              </div>
-            </Link>
-            <h2 className="text-4xl font-headline font-bold leading-tight">مرحباً بك في <br /><span className="text-secondary">مجتمعنا التعليمي</span></h2>
-            <p className="text-white/80 text-lg leading-relaxed max-w-sm ml-auto">سجل دخولك لتكمل رحلتك في تعلم مهارات المستقبل بأحدث الأساليب العالمية.</p>
-          </div>
         </div>
 
         {/* Form Side */}
