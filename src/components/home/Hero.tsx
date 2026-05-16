@@ -31,7 +31,7 @@ export function Hero() {
               <span className="text-[10px] md:text-sm font-bold font-headline">أنر طريقك نحو الاحتراف الحقيقي</span>
             </div>
             
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-headline font-bold text-primary leading-[1.2] lg:leading-[1.1] animate-in fade-in slide-in-from-right-4 duration-1000">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-headline font-bold text-primary leading-[1.2] lg:leading-[1.1] animate-in fade-in slide-in-from-right-4 duration-1000">
               بوابة الشباب العربي <br />
               <span className="text-secondary text-glow">للمستقبل الرقمي</span>
             </h1>
