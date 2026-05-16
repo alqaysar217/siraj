@@ -168,27 +168,27 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* Search and Filter Section - Centered and Single Row on Mobile */}
+      {/* Search and Filter Section - Ultra Compact Mobile UI */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
         <div className="container mx-auto px-4 py-2">
-          <div className="flex flex-row gap-2 items-center justify-center max-w-3xl mx-auto w-full">
+          <div className="flex flex-row flex-nowrap gap-2 items-center justify-center max-w-3xl mx-auto w-full">
             <div className="relative flex-1">
               <Input 
-                placeholder="ابحث باسم الكورس..." 
-                className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-xs"
+                placeholder="ابحث..." 
+                className="h-10 rounded-2xl pr-9 border-primary/10 bg-white focus-visible:ring-secondary text-right text-xs"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-3.5 h-3.5" />
             </div>
             
             <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="h-11 w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all text-xs px-3">
-                  <SlidersHorizontal className="w-4 h-4 text-secondary" />
+                <Button variant="outline" className="h-10 w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all text-[10px] px-3">
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-secondary" />
                   <span className="hidden xs:inline">تصفية</span>
                   {activeFiltersCount > 0 && (
-                    <Badge className="bg-secondary text-white w-5 h-5 p-0 flex items-center justify-center rounded-full text-[10px] font-bold border-none">
+                    <Badge className="bg-secondary text-white w-4 h-4 p-0 flex items-center justify-center rounded-full text-[8px] font-bold border-none">
                       {activeFiltersCount.toString()}
                     </Badge>
                   )}
@@ -270,7 +270,7 @@ export default function CoursesPage() {
           </div>
           
           {activeFiltersCount > 0 && (
-            <div className="mt-2.5 flex flex-wrap gap-2 justify-center animate-in fade-in slide-in-from-top-1">
+            <div className="mt-2 flex flex-wrap gap-1.5 justify-center animate-in fade-in slide-in-from-top-1">
               {activeCategory !== "all" && <ActiveFilterBadge label={activeCategory} onClear={() => setActiveCategory("all")} />}
               {activePrice !== "all" && <ActiveFilterBadge label={activePrice} onClear={() => setActivePrice("all")} />}
               {activeCert !== "all" && <ActiveFilterBadge label={activeCert} onClear={() => setActiveCert("all")} />}
@@ -283,16 +283,16 @@ export default function CoursesPage() {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2 text-primary/60 text-xs font-bold">
-              <BookOpen className="w-4 h-4 text-secondary" />
+            <div className="flex items-center gap-2 text-primary/60 text-[10px] font-bold">
+              <BookOpen className="w-3.5 h-3.5 text-secondary" />
               <span>تم العثور على {filteredCourses.length.toString()} كورس</span>
             </div>
             <div className="flex gap-1">
-              <Button variant="ghost" size="icon" onClick={() => setViewMode("grid")} className={cn("h-8 w-8", viewMode === "grid" ? "text-secondary" : "text-primary/30")}>
-                <LayoutGrid className="w-4 h-4" />
+              <Button variant="ghost" size="icon" onClick={() => setViewMode("grid")} className={cn("h-7 w-7", viewMode === "grid" ? "text-secondary" : "text-primary/30")}>
+                <LayoutGrid className="w-3.5 h-3.5" />
               </Button>
-              <Button variant="ghost" size="icon" onClick={() => setViewMode("list")} className={cn("h-8 w-8", viewMode === "list" ? "text-secondary" : "text-primary/30")}>
-                <List className="w-4 h-4" />
+              <Button variant="ghost" size="icon" onClick={() => setViewMode("list")} className={cn("h-7 w-7", viewMode === "list" ? "text-secondary" : "text-primary/30")}>
+                <List className="w-3.5 h-3.5" />
               </Button>
             </div>
           </div>
@@ -324,9 +324,9 @@ export default function CoursesPage() {
 
 function ActiveFilterBadge({ label, onClear }: { label: string, onClear: () => void }) {
   return (
-    <Badge className="bg-secondary/10 text-secondary border-secondary/20 font-bold text-[9px] gap-1 px-2.5 py-0.5 hover:bg-secondary/20 transition-colors">
+    <Badge className="bg-secondary/10 text-secondary border-secondary/20 font-bold text-[8px] gap-1 px-2 py-0.5 hover:bg-secondary/20 transition-colors">
       {label}
-      <X className="w-2.5 h-2.5 cursor-pointer hover:text-primary transition-colors" onClick={onClear} />
+      <X className="w-2 h-2 cursor-pointer hover:text-primary transition-colors" onClick={onClear} />
     </Badge>
   );
 }
@@ -396,7 +396,7 @@ function CourseListingCard({ course }: { course: any }) {
           </div>
           <div className="flex flex-col items-center gap-1.5">
             <User className="w-3.5 h-3.5 text-secondary" />
-            <span>{course.students.toLocaleString('en-US')}</span>
+            <span>{mounted ? course.students.toLocaleString('en-US') : ""}</span>
           </div>
         </div>
 

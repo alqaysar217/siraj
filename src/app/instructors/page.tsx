@@ -103,33 +103,33 @@ export default function InstructorsDirectoryPage() {
         </div>
       </section>
 
-      {/* Search and Filter Section - Centered and Single Row on Mobile */}
+      {/* Search and Filter Section - Compact Single Row */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
         <div className="container mx-auto px-4 py-2">
-          <div className="flex flex-row gap-2 items-center justify-center max-w-3xl mx-auto w-full">
+          <div className="flex flex-row flex-nowrap gap-2 items-center justify-center max-w-3xl mx-auto w-full">
             <div className="relative flex-1">
               <Input 
-                placeholder="ابحث عن مدرب..." 
-                className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-xs"
+                placeholder="ابحث..." 
+                className="h-10 rounded-2xl pr-9 border-primary/10 bg-white focus-visible:ring-secondary text-right text-xs"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-3.5 h-3.5" />
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery("")}
                   className="absolute left-10 top-1/2 -translate-y-1/2 text-primary/20 hover:text-primary/40 transition-colors"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
             
-            <div className="w-32 xs:w-44 md:w-56 shrink-0">
+            <div className="w-[100px] xs:w-44 md:w-56 shrink-0">
               <Select value={activeCategory} onValueChange={setActiveCategory}>
-                <SelectTrigger className="h-11 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70 text-xs px-2">
+                <SelectTrigger className="h-10 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70 text-[10px] px-2">
                   <div className="flex items-center gap-1">
-                    <Filter className="w-3.5 h-3.5 text-secondary hidden xs:block" />
+                    <Filter className="w-3 h-3 text-secondary hidden xs:block" />
                     <SelectValue placeholder="المجال" />
                   </div>
                 </SelectTrigger>
@@ -148,8 +148,8 @@ export default function InstructorsDirectoryPage() {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="mb-8 text-center md:text-right">
-             <div className="flex items-center gap-2 text-primary/60 text-xs font-bold">
-              <Users className="w-4 h-4 text-secondary" />
+             <div className="flex items-center gap-2 text-primary/60 text-[10px] font-bold">
+              <Users className="w-3.5 h-3.5 text-secondary" />
               <span>تم العثور على {filteredInstructors.length.toString()} مدرب خبير</span>
             </div>
           </div>
