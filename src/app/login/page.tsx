@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, Chrome, ChevronRight } from "lucide-react";
+import { Mail, Lock, Chrome, MessageCircle, ArrowLeft } from "lucide-react";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,135 +19,112 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8 relative overflow-hidden" dir="rtl">
-      {/* Smoky Background Decorations */}
+    <main className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden" dir="rtl">
+      {/* Background Decorations */}
       <div className="absolute top-0 right-0 w-full h-full bg-primary/5 -z-10" />
-      <div className="absolute -top-24 -right-24 w-[600px] h-[600px] bg-secondary/15 blur-[160px] rounded-full opacity-40 animate-pulse duration-[10s]" />
-      <div className="absolute -bottom-48 -left-48 w-[600px] h-[600px] bg-primary/20 blur-[160px] rounded-full opacity-30" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,hsl(var(--background))_70%)] opacity-50" />
+      <div className="absolute -top-24 -right-24 w-80 h-80 bg-secondary/10 blur-[120px] rounded-full" />
+      <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-primary/10 blur-[120px] rounded-full" />
 
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 bg-white rounded-[48px] overflow-hidden luxury-shadow border border-primary/5 min-h-[700px] relative z-10">
+      <div className="w-full max-w-[1000px] grid lg:grid-cols-2 bg-white rounded-[32px] overflow-hidden shadow-2xl border border-primary/5 min-h-[600px] relative z-10">
         
-        {/* Left Side: Branding/Info (Hidden on Mobile) */}
-        <div className="hidden lg:flex flex-col justify-between p-16 bg-primary text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-secondary/30 -z-0" />
-          
-          {/* Internal Smoky Gradient */}
-          <div className="absolute -top-32 -left-32 w-80 h-80 bg-secondary/20 blur-[90px] rounded-full" />
-          <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-white/10 blur-[90px] rounded-full" />
-
-          <div className="relative z-10">
-            <Link href="/" className="flex items-center gap-4 mb-20 group">
-              <div className="relative w-14 h-14 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl transition-transform group-hover:scale-105">
+        {/* Branding Side (Desktop Only) */}
+        <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-secondary/20 -z-0" />
+          <div className="relative z-10 space-y-6 text-right">
+            <Link href="/" className="flex items-center justify-end gap-3 mb-12">
+              <span className="text-3xl font-headline font-bold">سراج</span>
+              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white p-1.5 shadow-xl">
                 <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
               </div>
-              <span className="text-4xl font-headline font-bold tracking-tight">سراج</span>
             </Link>
-            
-            <div className="space-y-8">
-              <h2 className="text-5xl font-headline font-bold leading-[1.2]">
-                مرحباً بك مجدداً في <br />
-                <span className="text-secondary">عالم سراج</span>
-              </h2>
-              <p className="text-white/60 text-xl leading-relaxed max-w-sm font-medium">
-                سجل دخولك لتكمل رحلتك التعليمية وتصل إلى أحدث الدروس والكتب في مكتبتك الخاصة.
-              </p>
-            </div>
-          </div>
-
-          <div className="relative z-10 pt-12 border-t border-white/10">
-            <div className="flex items-center gap-6">
-              <div className="flex -space-x-4 space-x-reverse">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="w-12 h-12 rounded-full border-4 border-primary overflow-hidden relative shadow-xl">
-                    <Image src={`https://picsum.photos/seed/${i+20}/100/100`} alt="user" fill />
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm text-white/50 font-bold">انضم إلى أكثر من <span className="text-secondary text-lg">+10,000</span> طموح</p>
-            </div>
+            <h2 className="text-4xl font-headline font-bold leading-tight">مرحباً بك في <br /><span className="text-secondary">مجتمعنا التعليمي</span></h2>
+            <p className="text-white/60 text-lg leading-relaxed max-w-sm ml-auto">سجل دخولك لتكمل رحلتك في تعلم مهارات المستقبل بأحدث الأساليب العالمية.</p>
           </div>
         </div>
 
-        {/* Right Side: Login Form */}
-        <div className="p-8 md:p-16 flex flex-col justify-center bg-white relative">
-          {/* Mobile Logo */}
-          <div className="lg:hidden flex justify-center mb-10">
-             <div className="relative w-16 h-16 overflow-hidden rounded-2xl bg-primary/5 p-2 shadow-inner">
+        {/* Form Side */}
+        <div className="p-6 md:p-12 flex flex-col justify-center bg-white relative">
+          <div className="max-w-sm mx-auto w-full space-y-8">
+            {/* Logo & Header */}
+            <div className="text-center space-y-3">
+              <div className="relative w-12 h-12 overflow-hidden rounded-xl bg-primary/5 p-2 border border-primary/5 mx-auto">
                 <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
-             </div>
-          </div>
-
-          <div className="max-w-md mx-auto w-full space-y-10">
-            <div className="space-y-4 text-center lg:text-right">
-              {/* Logo for Desktop within the form side optionally */}
-              <div className="hidden lg:flex justify-end mb-6">
-                <div className="relative w-12 h-12 overflow-hidden rounded-xl bg-primary/5 p-2 border border-primary/5">
-                  <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
-                </div>
               </div>
-              <h1 className="text-3xl md:text-5xl font-headline font-bold text-primary">تسجيل الدخول</h1>
-              <p className="text-primary/40 text-base md:text-lg font-bold">نحن سعداء برؤيتك مرة أخرى!</p>
+              <h1 className="text-2xl font-headline font-bold text-primary">تسجيل الدخول</h1>
+              <p className="text-xs font-bold text-primary/40">أهلاً بك مجدداً في منصة سراج</p>
             </div>
 
-            <div className="space-y-6">
-              <Button variant="outline" className="w-full h-16 rounded-[24px] border-primary/10 font-headline text-base gap-4 hover:bg-primary/5 transition-all shadow-sm">
-                <Chrome className="w-6 h-6 text-red-500" /> المتابعة بواسطة جوجل
-              </Button>
+            {/* Main Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-1.5">
+                <Label className="text-xs font-bold text-primary mr-1">البريد الإلكتروني</Label>
+                <div className="relative">
+                  <Input 
+                    type="email" 
+                    placeholder="name@example.com" 
+                    className="h-11 rounded-xl pr-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
+                    required 
+                  />
+                  <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
+                </div>
+              </div>
 
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between px-1">
+                  <Label className="text-xs font-bold text-primary">كلمة المرور</Label>
+                  <Link href="#" className="text-[10px] text-secondary font-bold hover:underline">نسيت كلمة المرور؟</Link>
+                </div>
+                <div className="relative">
+                  <Input 
+                    type="password" 
+                    placeholder="••••••••" 
+                    className="h-11 rounded-xl pr-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
+                    required 
+                  />
+                  <Lock className="absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
+                </div>
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full h-11 bg-secondary hover:bg-secondary/90 text-white rounded-xl font-headline text-base shadow-lg transition-all active:scale-[0.98] mt-2"
+                disabled={isLoading}
+              >
+                {isLoading ? "جاري التحقق..." : "دخول"}
+              </Button>
+            </form>
+
+            {/* Social Login */}
+            <div className="space-y-4 pt-2">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-primary/5"></span>
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-6 text-primary/20 font-bold tracking-widest">أو عبر البريد</span>
+                <div className="relative flex justify-center text-[10px] uppercase">
+                  <span className="bg-white px-4 text-primary/20 font-bold tracking-widest">أو</span>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-3">
-                  <Label className="text-sm font-bold text-primary mr-2">البريد الإلكتروني</Label>
-                  <div className="relative group">
-                    <Input 
-                      type="email" 
-                      placeholder="name@example.com" 
-                      className="h-16 rounded-[20px] pr-14 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all text-lg" 
-                      required 
-                    />
-                    <Mail className="absolute right-5 top-1/2 -translate-y-1/2 text-primary/30 w-6 h-6 group-focus-within:text-secondary transition-colors" />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between px-2">
-                    <Label className="text-sm font-bold text-primary">كلمة المرور</Label>
-                    <Link href="#" className="text-xs text-secondary font-bold hover:underline">نسيت كلمة المرور؟</Link>
-                  </div>
-                  <div className="relative group">
-                    <Input 
-                      type="password" 
-                      placeholder="••••••••" 
-                      className="h-16 rounded-[20px] pr-14 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left transition-all text-lg" 
-                      required 
-                    />
-                    <Lock className="absolute right-5 top-1/2 -translate-y-1/2 text-primary/30 w-6 h-6 group-focus-within:text-secondary transition-colors" />
-                  </div>
-                </div>
-
-                <Button 
-                  type="submit" 
-                  className="w-full h-16 bg-secondary hover:bg-secondary/90 text-white rounded-[24px] font-headline text-xl shadow-2xl gold-glow transition-all active:scale-95 mt-4"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "جاري التحقق..." : "دخول إلى المنصة"}
-                  {!isLoading && <ChevronRight className="mr-2 w-6 h-6 rotate-180" />}
-                </Button>
-              </form>
+              <Button variant="outline" className="w-full h-11 rounded-xl border-primary/10 font-headline text-sm gap-3 hover:bg-primary/5 shadow-sm">
+                <Chrome className="w-5 h-5 text-red-500" /> الدخول بواسطة جوجل
+              </Button>
             </div>
 
-            <p className="text-center text-base text-primary/60 font-medium">
+            {/* Support Link */}
+            <div className="text-center">
+               <Link 
+                href="https://wa.me/967735952927" 
+                target="_blank"
+                className="inline-flex items-center gap-2 text-[11px] text-primary/50 hover:text-secondary transition-colors font-bold"
+              >
+                <MessageCircle className="w-4 h-4" /> تواجه مشكلة؟ تواصل معنا واتساب
+              </Link>
+            </div>
+
+            {/* Footer Link */}
+            <p className="text-center text-xs text-primary/60 font-medium">
               جديد في سراج؟{" "}
-              <Link href="/signup" className="text-secondary font-bold hover:underline transition-all hover:pr-1">أنشئ حسابك الآن</Link>
+              <Link href="/signup" className="text-secondary font-bold hover:underline">أنشئ حسابك الآن</Link>
             </p>
           </div>
         </div>
