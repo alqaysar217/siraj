@@ -28,13 +28,13 @@ export default function LoginPage() {
 
       <div className="w-full max-w-[1000px] grid lg:grid-cols-2 bg-white rounded-[32px] overflow-hidden shadow-2xl border border-primary/5 min-h-[600px] relative z-10">
         
-        {/* Branding Side (Desktop Only) */}
+        {/* Branding Side (Desktop Only) - Recommended Size: 1000x1400px */}
         <div className="hidden lg:flex flex-col justify-center p-12 bg-primary text-white relative overflow-hidden">
           <Image 
             src="/Login.png" 
             alt="Login Branding" 
             fill 
-            className="object-cover"
+            className="object-cover object-center"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/40 to-secondary/20 -z-0" />
