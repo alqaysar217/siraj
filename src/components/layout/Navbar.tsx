@@ -250,38 +250,32 @@ export function Navbar() {
                       </div>
                     )}
 
-                    {/* User Mobile Section - Moved to bottom and redesigned vertically */}
+                    {/* Compact User Mobile Section - Compact 3-row layout */}
                     {isLoggedIn && (
-                      <div className="mt-8 pt-8 border-t border-primary/5 space-y-6">
-                        <div className="flex flex-col items-center text-center gap-4">
-                          <Avatar className="h-20 w-20 border-4 border-white luxury-shadow shadow-xl">
-                            <AvatarImage src="https://picsum.photos/seed/user1/100/100" />
-                            <AvatarFallback className="text-xl">ع</AvatarFallback>
+                      <div className="mt-auto pt-6 border-t border-primary/5 space-y-4 pb-4">
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-12 w-12 border-2 border-white shadow-sm shrink-0">
+                            <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
+                            <AvatarFallback className="bg-primary/5 text-primary">ع</AvatarFallback>
                           </Avatar>
-                          <div className="space-y-1">
-                            <p className="font-headline font-bold text-lg text-primary">علي محمد السعيد</p>
-                            <p className="text-[10px] text-secondary font-bold uppercase tracking-widest px-3 py-1 bg-secondary/5 rounded-full inline-block">طالب متميز</p>
+                          <div className="flex flex-col text-right">
+                            <p className="font-headline font-bold text-sm text-primary leading-tight">علي محمد السعيد</p>
+                            <p className="text-[10px] text-secondary font-bold uppercase tracking-wider">طالب متميز</p>
                           </div>
                         </div>
                         
-                        <div className="grid gap-2">
-                          <Button variant="ghost" className="w-full h-11 rounded-xl text-xs font-headline gap-3 border border-primary/5 bg-white justify-start px-4">
-                            <Settings className="w-4 h-4 text-secondary" />
-                            إعدادات الحساب
-                          </Button>
-                          <Button 
-                            variant="ghost" 
-                            className="w-full h-11 rounded-xl text-xs font-headline gap-3 text-destructive hover:bg-destructive/5 hover:text-destructive border border-destructive/10 bg-destructive/5 justify-start px-4"
-                            onClick={() => setIsLoggedIn(false)}
-                          >
-                            <LogOut className="w-4 h-4" />
-                            تسجيل الخروج
-                          </Button>
-                        </div>
+                        <Button 
+                          variant="ghost" 
+                          className="w-full h-10 rounded-xl text-xs font-headline gap-3 text-destructive hover:bg-destructive/5 hover:text-destructive border border-destructive/10 bg-destructive/5 justify-start px-4"
+                          onClick={() => setIsLoggedIn(false)}
+                        >
+                          <LogOut className="w-4 h-4" />
+                          تسجيل الخروج
+                        </Button>
                       </div>
                     )}
 
-                    <div className="mt-8 mb-4 text-center">
+                    <div className="mt-4 mb-4 text-center">
                       <p className="text-[10px] text-primary/30 font-bold uppercase tracking-widest">سراج — SIRAJ.IO</p>
                     </div>
                   </div>
