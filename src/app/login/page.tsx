@@ -7,10 +7,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, Chrome, MessageCircle, ArrowLeft } from "lucide-react";
+import { Mail, Lock, Chrome, MessageCircle, Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,18 +71,22 @@ export default function LoginPage() {
               </div>
 
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between px-1">
-                  <Label className="text-xs font-bold text-primary">كلمة المرور</Label>
-                  <Link href="#" className="text-[10px] text-secondary font-bold hover:underline">نسيت كلمة المرور؟</Link>
-                </div>
+                <Label className="text-xs font-bold text-primary mr-1">كلمة المرور</Label>
                 <div className="relative">
                   <Input 
-                    type="password" 
+                    type={showPassword ? "text" : "password"} 
                     placeholder="••••••••" 
-                    className="h-11 rounded-xl pr-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
+                    className="h-11 rounded-xl pr-10 pl-10 border-primary/10 bg-primary/5 focus-visible:ring-secondary text-left text-sm" 
                     required 
                   />
                   <Lock className="absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/30 hover:text-secondary transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
               </div>
 
