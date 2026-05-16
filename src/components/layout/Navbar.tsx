@@ -22,9 +22,13 @@ export function Navbar() {
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener("scroll", handleScroll);
+    
+    // التحقق الفوري عند التحميل لحل مشكلة التأخر
+    handleScroll();
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -39,8 +43,10 @@ export function Navbar() {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-background/80 backdrop-blur-md border-b shadow-sm py-3" : "bg-transparent py-5"
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out",
+      isScrolled 
+        ? "bg-background/95 backdrop-blur-md border-b border-primary/5 shadow-sm py-3" 
+        : "bg-transparent py-6"
     )}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-10">
