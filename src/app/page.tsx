@@ -32,7 +32,10 @@ import {
   MessageCircle,
   FileText,
   Eye,
-  Library
+  Library,
+  GraduationCap,
+  HelpCircle,
+  Rocket
 } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
@@ -284,11 +287,11 @@ export default function Home() {
                 <BookOpen className="w-4 h-4" /> روابط التعليم
               </h4>
               <ul className="space-y-4 text-white/60 text-sm font-medium">
-                <li><Link href="/courses" className="hover:text-secondary transition-colors">الدورات التدريبية</Link></li>
-                <li><Link href="/books" className="hover:text-secondary transition-colors">المكتبة الورقية</Link></li>
-                <li><Link href="/instructors" className="hover:text-secondary transition-colors">نخبة المدربين</Link></li>
-                <li><Link href="/verify" className="hover:text-secondary transition-colors">التحقق من الشهادات</Link></li>
-                <li><Link href="/elite" className="hover:text-secondary transition-colors">نادي النخبة</Link></li>
+                <li><Link href="/courses" className="hover:text-secondary transition-colors flex items-center gap-2"><BookOpen className="w-4 h-4" /> الدورات التدريبية</Link></li>
+                <li><Link href="/books" className="hover:text-secondary transition-colors flex items-center gap-2"><Library className="w-4 h-4" /> المكتبة الورقية</Link></li>
+                <li><Link href="/instructors" className="hover:text-secondary transition-colors flex items-center gap-2"><Users className="w-4 h-4" /> نخبة المدربين</Link></li>
+                <li><Link href="/verify" className="hover:text-secondary transition-colors flex items-center gap-2"><GraduationCap className="w-4 h-4" /> التحقق من الشهادات</Link></li>
+                <li><Link href="/elite" className="hover:text-secondary transition-colors flex items-center gap-2"><Trophy className="w-4 h-4" /> نادي النخبة</Link></li>
               </ul>
             </div>
             <div>
@@ -296,11 +299,11 @@ export default function Home() {
                 <Users className="w-4 h-4" /> الدعم والخدمات
               </h4>
               <ul className="space-y-4 text-white/60 text-sm font-medium">
-                <li><Link href="/instructors/join" className="hover:text-secondary transition-colors">كن مدرباً معنا</Link></li>
-                <li><Link href="#" className="hover:text-secondary transition-colors">مركز المساعدة</Link></li>
-                <li><Link href="#" className="hover:text-secondary transition-colors">اتصل بنا</Link></li>
-                <li><Link href="#" className="hover:text-secondary transition-colors">سياسة الخصوصية</Link></li>
-                <li><Link href="#" className="hover:text-secondary transition-colors">الشروط والأحكام</Link></li>
+                <li><Link href="/instructors/join" className="hover:text-secondary transition-colors flex items-center gap-2"><Rocket className="w-4 h-4" /> كن مدرباً معنا</Link></li>
+                <li><Link href="#" className="hover:text-secondary transition-colors flex items-center gap-2"><HelpCircle className="w-4 h-4" /> مركز المساعدة</Link></li>
+                <li><Link href="#" className="hover:text-secondary transition-colors flex items-center gap-2"><MessageCircle className="w-4 h-4" /> اتصل بنا</Link></li>
+                <li><Link href="#" className="hover:text-secondary transition-colors flex items-center gap-2"><Shield className="w-4 h-4" /> سياسة الخصوصية</Link></li>
+                <li><Link href="#" className="hover:text-secondary transition-colors flex items-center gap-2"><FileText className="w-4 h-4" /> الشروط والأحكام</Link></li>
               </ul>
             </div>
             <div>
