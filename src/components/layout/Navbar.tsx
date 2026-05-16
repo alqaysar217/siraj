@@ -218,17 +218,17 @@ export function Navbar() {
                 </SheetHeader>
                 
                 <ScrollArea className="flex-1 px-4 text-right">
-                  <div className="flex flex-col gap-1 py-6">
+                  <div className="flex flex-col gap-1 py-6" dir="rtl">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
                         className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5 text-right"
                       >
+                        <span className="font-headline font-bold text-sm">{link.label}</span>
                         <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors shrink-0">
                           {link.icon}
                         </span>
-                        <span className="font-headline font-bold text-sm">{link.label}</span>
                       </Link>
                     ))}
                   </div>
@@ -240,7 +240,7 @@ export function Navbar() {
                     <div className="space-y-2">
                       <Collapsible open={userOptionsOpen} onOpenChange={setUserOptionsOpen}>
                         <CollapsibleTrigger asChild>
-                          <div className="flex items-center justify-between p-2 rounded-xl hover:bg-white/50 transition-all cursor-pointer">
+                          <div className="flex items-center justify-between p-2 rounded-xl hover:bg-white/50 transition-all cursor-pointer" dir="rtl">
                             <div className="flex items-center gap-3">
                               <Avatar className="h-10 w-10 border-2 border-white shadow-sm shrink-0">
                                 <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
@@ -255,15 +255,15 @@ export function Navbar() {
                           </div>
                         </CollapsibleTrigger>
                         <CollapsibleContent className="space-y-1 pt-2">
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all">
+                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all" dir="rtl">
                             <User className="w-4 h-4 text-secondary/60" />
                             <span>الملف الشخصي</span>
                           </Link>
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all">
+                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all" dir="rtl">
                             <LayoutDashboard className="w-4 h-4 text-secondary/60" />
                             <span>دوراتي التعليمية</span>
                           </Link>
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all">
+                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all" dir="rtl">
                             <History className="w-4 h-4 text-secondary/60" />
                             <span>سجل المشاهدة</span>
                           </Link>
