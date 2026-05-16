@@ -218,9 +218,9 @@ export function Navbar() {
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5"
+                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5 text-right"
                       >
-                        <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors">
+                        <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors shrink-0">
                           {link.icon}
                         </span>
                         <span className="font-headline font-bold text-sm">{link.label}</span>
@@ -229,7 +229,7 @@ export function Navbar() {
                   </div>
                 </ScrollArea>
 
-                {/* Mobile User Section - Compact 3 Lines */}
+                {/* Mobile User Section - Compact 3 Lines - RTL Start */}
                 <div className="p-6 border-t border-primary/5 bg-primary/5 shrink-0 mt-auto">
                   {isLoggedIn ? (
                     <div className="space-y-4">
