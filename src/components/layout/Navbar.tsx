@@ -209,64 +209,64 @@ export function Navbar() {
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[350px] font-body p-0 [&>button]:hidden flex flex-col" dir="rtl">
-                <SheetHeader className="text-right border-b p-6 bg-primary text-white shrink-0">
-                  <SheetTitle className="text-2xl font-headline font-bold text-white flex items-center gap-2">
-                    <div className="relative w-8 h-8 overflow-hidden rounded-lg bg-white p-1">
+              <SheetContent side="right" className="w-[280px] font-body p-0 [&>button]:hidden flex flex-col" dir="rtl">
+                <SheetHeader className="text-right border-b p-4 bg-primary text-white shrink-0">
+                  <SheetTitle className="text-xl font-headline font-bold text-white flex items-center gap-2">
+                    <div className="relative w-7 h-7 overflow-hidden rounded-lg bg-white p-1">
                       <Image src="/siraj.png" alt="سراج" fill className="object-contain" />
                     </div>
                     <span>منصة سراج</span>
                   </SheetTitle>
                 </SheetHeader>
                 
-                <ScrollArea className="flex-1 px-4 text-right">
-                  <div className="flex flex-col gap-1 py-6" dir="rtl">
+                <ScrollArea className="flex-1 px-3 text-right">
+                  <div className="flex flex-col gap-0.5 py-4" dir="rtl">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5 text-right"
+                        className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5 text-right"
                       >
-                        <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors shrink-0">
+                        <span className="p-1.5 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors shrink-0">
                           {link.icon}
                         </span>
-                        <span className="font-headline font-bold text-sm">{link.label}</span>
+                        <span className="font-headline font-bold text-xs">{link.label}</span>
                       </Link>
                     ))}
                   </div>
                 </ScrollArea>
 
-                {/* Mobile User Section - Foldable Muted */}
-                <div className="p-4 border-t border-primary/5 bg-primary/5 shrink-0 mt-auto">
+                {/* Mobile User Section - Highly Compact & Foldable */}
+                <div className="p-3 border-t border-primary/5 bg-primary/5 shrink-0 mt-auto">
                   {isLoggedIn ? (
-                    <div className="space-y-2">
+                    <div className="space-y-1.5">
                       <Collapsible open={userOptionsOpen} onOpenChange={setUserOptionsOpen}>
                         <CollapsibleTrigger asChild>
-                          <div className="flex items-center gap-4 p-2 rounded-xl hover:bg-white/50 transition-all cursor-pointer text-right" dir="rtl">
-                            <Avatar className="h-10 w-10 border-2 border-white shadow-sm shrink-0">
+                          <div className="flex items-center gap-3 p-1.5 rounded-xl hover:bg-white/50 transition-all cursor-pointer text-right" dir="rtl">
+                            <Avatar className="h-8 w-8 border border-white shadow-sm shrink-0">
                               <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
-                              <AvatarFallback className="bg-primary/5 text-primary font-bold">ع</AvatarFallback>
+                              <AvatarFallback className="bg-primary/5 text-primary text-[10px] font-bold">ع</AvatarFallback>
                             </Avatar>
                             <div className="flex-1 flex items-center justify-between">
                               <div className="flex flex-col">
-                                <p className="font-headline font-bold text-xs text-primary leading-tight">علي محمد السعيد</p>
-                                <p className="text-[9px] text-secondary font-bold uppercase tracking-wider">طالب متميز</p>
+                                <p className="font-headline font-bold text-[10px] text-primary leading-tight">علي محمد السعيد</p>
+                                <p className="text-[8px] text-secondary font-bold uppercase tracking-wider">طالب متميز</p>
                               </div>
-                              {userOptionsOpen ? <ChevronUp className="w-4 h-4 text-primary/30" /> : <ChevronDown className="w-4 h-4 text-primary/30" />}
+                              {userOptionsOpen ? <ChevronUp className="w-3 h-3 text-primary/30" /> : <ChevronDown className="w-3 h-3 text-primary/30" />}
                             </div>
                           </div>
                         </CollapsibleTrigger>
-                        <CollapsibleContent className="space-y-1 pt-2">
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
-                            <User className="w-4 h-4 text-secondary/60" />
+                        <CollapsibleContent className="space-y-0.5 pt-1">
+                          <Link href="#" className="flex items-center gap-2.5 p-1.5 rounded-lg text-[10px] font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
+                            <User className="w-3.5 h-3.5 text-secondary/60" />
                             <span>الملف الشخصي</span>
                           </Link>
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
-                            <LayoutDashboard className="w-4 h-4 text-secondary/60" />
+                          <Link href="#" className="flex items-center gap-2.5 p-1.5 rounded-lg text-[10px] font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
+                            <LayoutDashboard className="w-3.5 h-3.5 text-secondary/60" />
                             <span>دوراتي التعليمية</span>
                           </Link>
-                          <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
-                            <History className="w-4 h-4 text-secondary/60" />
+                          <Link href="#" className="flex items-center gap-2.5 p-1.5 rounded-lg text-[10px] font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all text-right" dir="rtl">
+                            <History className="w-3.5 h-3.5 text-secondary/60" />
                             <span>سجل المشاهدة</span>
                           </Link>
                         </CollapsibleContent>
@@ -274,19 +274,19 @@ export function Navbar() {
                       
                       <Button 
                         variant="ghost" 
-                        className="w-full h-9 rounded-xl text-xs font-headline gap-3 text-destructive hover:bg-destructive/5 hover:text-destructive border border-destructive/10 bg-destructive/5 justify-start px-3"
+                        className="w-full h-8 rounded-lg text-[10px] font-headline gap-2 text-destructive hover:bg-destructive/5 hover:text-destructive border border-destructive/5 bg-destructive/5 justify-start px-2.5"
                         onClick={() => setIsLoggedIn(false)}
                       >
-                        <LogOut className="w-4 h-4" />
+                        <LogOut className="w-3.5 h-3.5" />
                         <span>تسجيل الخروج</span>
                       </Button>
                     </div>
                   ) : (
-                    <div className="grid gap-2">
-                      <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-10 rounded-xl font-headline shadow-md text-xs" asChild>
+                    <div className="grid gap-1.5">
+                      <Button className="w-full bg-secondary hover:bg-secondary/90 text-white h-9 rounded-xl font-headline shadow-md text-[11px]" asChild>
                         <Link href="/signup">ابدأ التعلم الآن</Link>
                       </Button>
-                      <Button variant="outline" className="w-full h-10 rounded-xl font-headline border-primary/10 text-xs" asChild>
+                      <Button variant="outline" className="w-full h-9 rounded-xl font-headline border-primary/10 text-[11px]" asChild>
                         <Link href="/login">تسجيل الدخول</Link>
                       </Button>
                     </div>

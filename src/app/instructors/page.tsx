@@ -22,6 +22,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -107,10 +108,9 @@ export default function InstructorsDirectoryPage() {
         <div className="container mx-auto px-4 py-2">
           <div className="flex flex-row gap-2 items-center justify-center max-w-3xl mx-auto w-full">
             <div className="relative flex-1">
-              <input 
-                type="text" 
+              <Input 
                 placeholder="ابحث عن مدرب..." 
-                className="w-full h-11 rounded-2xl pr-10 pl-4 border-primary/10 bg-white shadow-sm focus:ring-2 focus:ring-secondary/20 outline-none text-xs font-body transition-all"
+                className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-xs"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -118,7 +118,7 @@ export default function InstructorsDirectoryPage() {
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery("")}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/20 hover:text-primary/40 transition-colors"
+                  className="absolute left-10 top-1/2 -translate-y-1/2 text-primary/20 hover:text-primary/40 transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>

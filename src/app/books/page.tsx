@@ -4,12 +4,19 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, ShoppingCart, Eye, BookOpen, Users, FileText, Search } from "lucide-react";
+import { Star, ShoppingCart, Eye, BookOpen, Users, FileText, Search, Filter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const BOOKS = [
   {
@@ -38,16 +45,22 @@ const BOOKS = [
   }
 ];
 
+const CATEGORIES = ["برمجة", "علوم حاسوب", "تصميم", "إدارة"];
+
 export default function BooksPage() {
   const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => setMounted(true), []);
 
-  const filteredBooks = BOOKS.filter(book => 
-    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    book.author.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredBooks = BOOKS.filter(book => {
+    const matchesSearch = 
+      book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = activeCategory === "all" || book.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <main className="min-h-screen bg-background text-right" dir="rtl">
@@ -65,17 +78,36 @@ export default function BooksPage() {
         </div>
       </section>
 
-      {/* Search Bar - Sticky and Centered */}
+      {/* Search and Filter Bar - Centered & Single Row on Mobile */}
       <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
         <div className="container mx-auto px-4 py-2">
-          <div className="relative max-w-2xl mx-auto w-full">
-            <Input 
-              placeholder="ابحث عن كتاب، مؤلف، أو تخصص..." 
-              className="h-11 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
+          <div className="flex flex-row gap-2 items-center justify-center max-w-3xl mx-auto w-full">
+            <div className="relative flex-1">
+              <Input 
+                placeholder="ابحث عن كتاب..." 
+                className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-xs"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-4 h-4" />
+            </div>
+            
+            <div className="w-32 xs:w-44 md:w-56 shrink-0">
+              <Select value={activeCategory} onValueChange={setActiveCategory}>
+                <SelectTrigger className="h-11 rounded-2xl bg-white border-primary/10 shadow-sm focus:ring-secondary text-right font-headline text-primary/70 text-xs px-2">
+                  <div className="flex items-center gap-1">
+                    <Filter className="w-3.5 h-3.5 text-secondary hidden xs:block" />
+                    <SelectValue placeholder="التصنيف" />
+                  </div>
+                </SelectTrigger>
+                <SelectContent className="font-body" dir="rtl">
+                  <SelectItem value="all">كل الكتب</SelectItem>
+                  {CATEGORIES.map(cat => (
+                    <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </section>
@@ -102,7 +134,7 @@ export default function BooksPage() {
               </div>
               <h3 className="text-xl font-headline font-bold text-primary mb-2">لا توجد نتائج</h3>
               <p className="text-primary/60">لم نجد أي كتب تطابق بحثك الحالي.</p>
-              <Button onClick={() => setSearchQuery("")} variant="outline" className="mt-6 font-headline border-primary/10 rounded-xl px-8 h-12">عرض جميع الكتب</Button>
+              <Button onClick={() => {setSearchQuery(""); setActiveCategory("all");}} variant="outline" className="mt-6 font-headline border-primary/10 rounded-xl px-8 h-12">عرض جميع الكتب</Button>
             </div>
           )}
         </div>
