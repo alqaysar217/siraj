@@ -156,8 +156,7 @@ export default function CoursesPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
       
-      {/* Banner Section - Exact 3:1 ratio (1920/640) */}
-      <section className="pt-[92px] w-full overflow-hidden bg-white">
+      <section className="pt-[64px] w-full overflow-hidden bg-white">
         <div className="relative w-full aspect-[3/1]">
            <Image 
              src="/Courses.png" 
@@ -169,45 +168,41 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* Search & Combined Filter Button */}
-      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-            {/* Search Bar */}
+      <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
+        <div className="container mx-auto px-4 py-2.5">
+          <div className="flex flex-col md:flex-row gap-2.5 items-center">
             <div className="relative w-full">
               <Input 
                 placeholder="ابحث باسم الكورس أو المجال..." 
-                className="h-12 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
+                className="h-11 rounded-2xl pr-10 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5" />
             </div>
             
-            {/* Filter Trigger Button using Dialog */}
             <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="h-12 w-full md:w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all">
-                  <SlidersHorizontal className="w-5 h-5 text-secondary" />
-                  تصفية الكورسات
+                <Button variant="outline" className="h-11 w-full md:w-auto rounded-2xl border-primary/10 gap-2 font-headline bg-white shrink-0 shadow-sm hover:border-secondary/30 transition-all text-xs">
+                  <SlidersHorizontal className="w-4 h-4 text-secondary" />
+                  تصفية
                   {activeFiltersCount > 0 && (
-                    <Badge className="bg-secondary text-white w-6 h-6 p-0 flex items-center justify-center rounded-full text-xs font-bold border-none">
+                    <Badge className="bg-secondary text-white w-5 h-5 p-0 flex items-center justify-center rounded-full text-[10px] font-bold border-none">
                       {activeFiltersCount.toString()}
                     </Badge>
                   )}
                 </Button>
               </DialogTrigger>
-              <DialogContent className="w-[90vw] max-w-[500px] rounded-[32px] p-6 font-body bg-white border-none shadow-2xl">
-                <DialogHeader className="text-right border-b pb-4 mb-6">
-                  <DialogTitle className="text-2xl font-headline font-bold text-primary">تصفية النتائج</DialogTitle>
+              <DialogContent className="w-[95vw] max-w-[450px] rounded-[28px] p-6 font-body bg-white border-none shadow-2xl overflow-y-auto max-h-[90vh]">
+                <DialogHeader className="text-right border-b pb-4 mb-5">
+                  <DialogTitle className="text-xl font-headline font-bold text-primary">تصفية النتائج</DialogTitle>
                 </DialogHeader>
                 
-                <div className="space-y-6">
-                  {/* Category Select */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary block">مجال الدراسة</label>
+                <div className="space-y-5">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-primary block pr-1">مجال الدراسة</label>
                     <Select value={activeCategory} onValueChange={setActiveCategory}>
-                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                      <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="اختر المجال" />
                       </SelectTrigger>
                       <SelectContent className="font-body" dir="rtl">
@@ -219,11 +214,10 @@ export default function CoursesPage() {
                     </Select>
                   </div>
 
-                  {/* Price Select */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary block">نوع الدفع</label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-primary block pr-1">نوع الدفع</label>
                     <Select value={activePrice} onValueChange={setActivePrice}>
-                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                      <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="اختر نوع الدفع" />
                       </SelectTrigger>
                       <SelectContent className="font-body" dir="rtl">
@@ -235,11 +229,10 @@ export default function CoursesPage() {
                     </Select>
                   </div>
 
-                  {/* Certificate Select */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary block">الشهادة</label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-primary block pr-1">الشهادة</label>
                     <Select value={activeCert} onValueChange={setActiveCert}>
-                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                      <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="شهادة إتمام؟" />
                       </SelectTrigger>
                       <SelectContent className="font-body" dir="rtl">
@@ -251,11 +244,10 @@ export default function CoursesPage() {
                     </Select>
                   </div>
 
-                  {/* Status Select */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary block">حالة الكورس</label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-primary block pr-1">حالة الكورس</label>
                     <Select value={activeStatus} onValueChange={setActiveStatus}>
-                      <SelectTrigger className="h-12 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right">
+                      <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="جديد أو مميز؟" />
                       </SelectTrigger>
                       <SelectContent className="font-body" dir="rtl">
@@ -268,18 +260,16 @@ export default function CoursesPage() {
                   </div>
                 </div>
 
-                <div className="pt-8 flex gap-4 mt-6">
-                  <Button variant="outline" className="flex-1 h-12 rounded-xl border-primary/10 font-headline" onClick={() => { resetFilters(); setIsFilterOpen(false); }}>إعادة تعيين</Button>
-                  <Button className="flex-1 h-12 rounded-xl bg-secondary text-white font-headline shadow-lg hover:bg-secondary/90" onClick={() => setIsFilterOpen(false)}>تطبيق الفلاتر</Button>
+                <div className="pt-6 flex gap-3 mt-4">
+                  <Button variant="outline" className="flex-1 h-11 rounded-xl border-primary/10 font-headline text-xs" onClick={() => { resetFilters(); setIsFilterOpen(false); }}>إعادة تعيين</Button>
+                  <Button className="flex-1 h-11 rounded-xl bg-secondary text-white font-headline text-xs shadow-lg hover:bg-secondary/90" onClick={() => setIsFilterOpen(false)}>تطبيق</Button>
                 </div>
               </DialogContent>
             </Dialog>
           </div>
           
-          {/* Active Filters Display */}
           {activeFiltersCount > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-2">
-              <span className="text-xs text-primary/40 flex items-center gap-1 ml-2 self-center">الفلاتر النشطة:</span>
+            <div className="mt-2.5 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-1">
               {activeCategory !== "all" && <ActiveFilterBadge label={activeCategory} onClear={() => setActiveCategory("all")} />}
               {activePrice !== "all" && <ActiveFilterBadge label={activePrice} onClear={() => setActivePrice("all")} />}
               {activeCert !== "all" && <ActiveFilterBadge label={activeCert} onClear={() => setActiveCert("all")} />}
@@ -333,9 +323,9 @@ export default function CoursesPage() {
 
 function ActiveFilterBadge({ label, onClear }: { label: string, onClear: () => void }) {
   return (
-    <Badge className="bg-secondary/10 text-secondary border-secondary/20 font-bold text-[10px] gap-1 px-3 py-1 hover:bg-secondary/20 transition-colors">
+    <Badge className="bg-secondary/10 text-secondary border-secondary/20 font-bold text-[9px] gap-1 px-2.5 py-0.5 hover:bg-secondary/20 transition-colors">
       {label}
-      <X className="w-3 h-3 cursor-pointer hover:text-primary transition-colors" onClick={onClear} />
+      <X className="w-2.5 h-2.5 cursor-pointer hover:text-primary transition-colors" onClick={onClear} />
     </Badge>
   );
 }

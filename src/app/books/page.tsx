@@ -53,8 +53,7 @@ export default function BooksPage() {
     <main className="min-h-screen bg-background text-right" dir="rtl">
       <Navbar />
 
-      {/* Banner Section - Exact 3:1 ratio (1920/640) */}
-      <section className="pt-[92px] w-full overflow-hidden bg-white">
+      <section className="pt-[64px] w-full overflow-hidden bg-white">
         <div className="relative w-full aspect-[3/1]">
            <Image 
              src="/Books.png" 
@@ -66,13 +65,12 @@ export default function BooksPage() {
         </div>
       </section>
 
-      {/* Search Bar Section */}
-      <section className="sticky top-[72px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-4 py-4">
+      <section className="sticky top-[64px] z-40 bg-background/95 backdrop-blur-md border-b shadow-sm">
+        <div className="container mx-auto px-4 py-2.5">
           <div className="relative max-w-2xl mx-auto md:mr-0">
             <Input 
               placeholder="ابحث عن كتاب، مؤلف، أو تخصص..." 
-              className="h-12 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
+              className="h-11 rounded-2xl pr-12 border-primary/10 bg-white focus-visible:ring-secondary text-right text-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
