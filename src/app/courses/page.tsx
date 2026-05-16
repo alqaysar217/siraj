@@ -202,7 +202,7 @@ export default function CoursesPage() {
                 <div className="space-y-5">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-primary block pr-1">مجال الدراسة</label>
-                    <Select value={activeCategory} onValueChange={setActiveCategory}>
+                    <Select value={activeCategory} onValueChange={setActiveCategory} dir="rtl">
                       <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="اختر المجال" />
                       </SelectTrigger>
@@ -217,7 +217,7 @@ export default function CoursesPage() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-primary block pr-1">نوع الدفع</label>
-                    <Select value={activePrice} onValueChange={setActivePrice}>
+                    <Select value={activePrice} onValueChange={setActivePrice} dir="rtl">
                       <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="اختر نوع الدفع" />
                       </SelectTrigger>
@@ -232,7 +232,7 @@ export default function CoursesPage() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-primary block pr-1">الشهادة</label>
-                    <Select value={activeCert} onValueChange={setActiveCert}>
+                    <Select value={activeCert} onValueChange={setActiveCert} dir="rtl">
                       <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="شهادة إتمام؟" />
                       </SelectTrigger>
@@ -247,7 +247,7 @@ export default function CoursesPage() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-primary block pr-1">حالة الكورس</label>
-                    <Select value={activeStatus} onValueChange={setActiveStatus}>
+                    <Select value={activeStatus} onValueChange={setActiveStatus} dir="rtl">
                       <SelectTrigger className="h-11 rounded-xl bg-primary/5 border-none focus:ring-secondary text-right text-xs">
                         <SelectValue placeholder="جديد أو مميز؟" />
                       </SelectTrigger>
