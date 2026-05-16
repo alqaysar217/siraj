@@ -212,13 +212,13 @@ export function Navbar() {
                   </SheetTitle>
                 </SheetHeader>
                 
-                <ScrollArea className="flex-1 px-6 text-right">
+                <ScrollArea className="flex-1 px-4 text-right">
                   <div className="flex flex-col gap-1 py-6">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5 text-right"
+                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-primary/70 hover:text-secondary transition-all group border border-transparent hover:border-primary/5 text-right flex-row"
                       >
                         <span className="p-2 bg-primary/5 rounded-lg group-hover:bg-secondary/10 transition-colors shrink-0">
                           {link.icon}
@@ -229,14 +229,15 @@ export function Navbar() {
                   </div>
                 </ScrollArea>
 
-                {/* Mobile User Section - Compact 3 Lines - RTL Start */}
+                {/* Mobile User Section - Compact RTL */}
                 <div className="p-6 border-t border-primary/5 bg-primary/5 shrink-0 mt-auto">
                   {isLoggedIn ? (
                     <div className="space-y-4">
-                      <div className="flex items-center gap-4 flex-row" dir="rtl">
+                      {/* Line 1 & 2: User Header */}
+                      <div className="flex items-center gap-4 flex-row">
                         <Avatar className="h-12 w-12 border-2 border-white shadow-sm shrink-0">
                           <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
-                          <AvatarFallback className="bg-primary/5 text-primary">ع</AvatarFallback>
+                          <AvatarFallback className="bg-primary/5 text-primary font-bold">ع</AvatarFallback>
                         </Avatar>
                         <div className="flex flex-col text-right">
                           <p className="font-headline font-bold text-sm text-primary leading-tight">علي محمد السعيد</p>
@@ -244,6 +245,23 @@ export function Navbar() {
                         </div>
                       </div>
                       
+                      {/* User Specific Links */}
+                      <div className="grid gap-1 py-3 border-y border-primary/10">
+                        <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all">
+                          <User className="w-4 h-4 text-secondary/60" />
+                          <span>الملف الشخصي</span>
+                        </Link>
+                        <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all">
+                          <LayoutDashboard className="w-4 h-4 text-secondary/60" />
+                          <span>دوراتي التعليمية</span>
+                        </Link>
+                        <Link href="#" className="flex items-center gap-3 p-2 rounded-xl text-xs font-headline font-bold text-primary/60 hover:text-secondary hover:bg-white transition-all">
+                          <History className="w-4 h-4 text-secondary/60" />
+                          <span>سجل المشاهدة</span>
+                        </Link>
+                      </div>
+
+                      {/* Line 3: Logout Button */}
                       <Button 
                         variant="ghost" 
                         className="w-full h-10 rounded-xl text-xs font-headline gap-3 text-destructive hover:bg-destructive/5 hover:text-destructive border border-destructive/10 bg-destructive/10 justify-start px-4"
